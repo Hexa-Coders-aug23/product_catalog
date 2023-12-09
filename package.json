@@ -42,5 +42,7 @@
       "autoprefixer": {}
     }
   },
-  "lint-staged": {"*.tsx": "npm run fix-style"}
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": "npm run fix-style"
+  }
 }
