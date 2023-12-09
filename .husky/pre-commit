@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-npx fix-style
+npm run fix-style
