@@ -32,6 +32,7 @@
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "lint-staged": "^13.0.0",
     "prettier": "^3.1.0",
     "typescript": "^5.3.3"
   },
@@ -40,5 +41,10 @@
     "plugins": {
       "autoprefixer": {}
     }
+  },
+  "lint-staged": {
+    "*.ts": "npm run fix-style",
+    "*.tsx": "npm run fix-style",
+    "*.scss": "npm run fix-style"
   }
 }
