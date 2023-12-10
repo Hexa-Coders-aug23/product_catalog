@@ -1,8 +1,15 @@
+import './App.module.scss';
 import React from 'react';
-import './App.scss';
-
-// import cn from 'classnames';
+import { Outlet } from 'react-router-dom';
+import { Footer } from './modules/shared/components/footer';
+import { Header } from './modules/shared/components/header';
 
 export const App: React.FC = () => {
-  return <h1 className="title">Nice Gadgets!</h1>;
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
 };

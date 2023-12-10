@@ -1,0 +1,13 @@
+// Utils
+@import './styles/reset';
+@import './styles/typography';
+
+// Blocks
+@import './styles/blocks/container';
+@import './styles/blocks/grid';
+@import './styles/blocks/page';
+
+:root {
+  font-family: 'Mont', sans-serif;
+  scroll-behavior: smooth;
+}
