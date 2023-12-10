@@ -14,7 +14,7 @@ import { CartPage } from './modules/CartPage';
 import { FavouritesPage } from './modules/FavouritesPage';
 import { PhonesProvider } from './context/GlobalProvider';
 
-export const Root = () => (
+export const Root: React.FC = () => (
   <PhonesProvider>
     <Router>
       <Routes>
