@@ -13,7 +13,7 @@ jobs:
       - name: Identify
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ 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 }}
+          github_token: ${{ secrets.PERSON_ACCESS_TOKEN }}
 
       - name: Checkout Repository
         uses: actions/checkout@v2
