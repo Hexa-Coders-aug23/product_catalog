@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Identify
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.PERSON_ACCESS_TOKEN }}
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -22,7 +17,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # your node version
-          node-version: 14.21.3
+          node-version: 14
 
       - name: Install Dependencies
         run: npm install
