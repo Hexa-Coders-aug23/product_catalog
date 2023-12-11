@@ -1,12 +1,108 @@
 @import '../../styles/blocks/container';
+@import '../../styles/colors';
+@import '../../styles/blocks/grid';
 
 .title {
+  display: block;
   font-weight: 800;
   font-size: 32px;
-  grid-column: span 4;
+  margin-bottom: 8px;
 
   @include onTablet {
-    grid-column: span 8;
     font-size: 48px;
   }
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.step {
+  font-size: 12px;
+  color: $color__secondary;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.homeIcon {
+  background-image: url(./Home.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.iconNext {
+  background-image: url(./ChevronArrowRight.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.amount {
+  display: block;
+  color: $color__secondary;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 32px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.selects {
+  display: flex;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sort {
+  width: 136px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid $color__icons;
+  background-color: $color__hover-and-bg;
+  padding-inline: 12px;
+  appearance: none;
+  background-image: url(./ChevronArrowDown.svg);
+  background-repeat: no-repeat;
+  background-position: right 1em top 50%;
+
+  @include onTablet {
+    width: 187px;
+  }
+
+  @include onDesktop {
+    width: 176px;
+  }
+}
+
+.selectLabel {
+  color: $color__secondary;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card {
+  height: 440px;
+  background-color: $color__secondary;
+
+  @include onTablet {
+    height: 506px;
+  }
+}
+
+.itemsContainer {
+  @include pageGrid;
 }
