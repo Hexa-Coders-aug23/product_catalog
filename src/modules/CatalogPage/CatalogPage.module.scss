@@ -1,0 +1,12 @@
+@import '../../styles/blocks/container';
+
+.title {
+  font-weight: 800;
+  font-size: 32px;
+  grid-column: span 4;
+
+  @include onTablet {
+    grid-column: span 8;
+    font-size: 48px;
+  }
+}

@@ -1,6 +1,10 @@
 import React from 'react';
-import './CatalogPage.module.scss';
+import styles from './CatalogPage.module.scss';
 
 export const CatalogPage: React.FC = () => {
-  return <h1>CatalogPage</h1>;
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.title}>Mobile phones</h1>
+    </div>
+  );
 };
