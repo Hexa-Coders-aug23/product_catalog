@@ -32,13 +32,13 @@
 }
 
 .homeIcon {
-  background-image: url(./Home.svg);
+  background-image: url(../../static/icons/Home.svg);
   width: 16px;
   height: 16px;
 }
 
 .iconNext {
-  background-image: url(./ChevronArrowRight.svg);
+  background-image: url(../../static/icons/Chevron_Arrow_Right.svg);
   width: 16px;
   height: 16px;
 }
@@ -74,7 +74,7 @@
   background-color: $color__hover-and-bg;
   padding-inline: 12px;
   appearance: none;
-  background-image: url(./ChevronArrowDown.svg);
+  background-image: url(../../static/icons/Chevron_Arrow_Down.svg);
   background-repeat: no-repeat;
   background-position: right 1em top 50%;
 
@@ -85,6 +85,10 @@
   @include onDesktop {
     width: 176px;
   }
+
+  &:focus {
+    outline: none;
+}
 }
 
 .selectLabel {
