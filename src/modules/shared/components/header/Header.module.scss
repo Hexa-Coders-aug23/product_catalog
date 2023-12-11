@@ -1,0 +1,113 @@
+@import '../../../../App.module.scss';
+
+.header {
+  @include onDesktop {
+    height: 64px;
+    gap: 24px;
+  }
+
+  @include onTablet {
+    height: 48px;
+    gap: 16px;
+  }
+
+  display: flex;
+  flex-direction: row;
+  background-color: $color__white;
+  border-bottom: 1px solid $color__elements;
+
+  &__logo {
+    @include onDesktop {
+      margin: 19px 24px;
+    }
+
+    @include onTablet {
+      margin: 14px 16px;
+    }
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.navbar {
+  &__block {
+    height: 100%;
+    max-width: 425px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    @include onDesktop {
+      gap: 64px;
+    }
+
+    @include onTablet {
+      gap: 32px;
+    }
+  }
+
+  &__item {
+    font-family: 'Mont', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: $color__elements;
+    justify-content: center;
+
+    &__name {
+      display: flex;
+      align-items: center;
+
+      @include onDesktop {
+        height: 64px;
+      }
+
+      @include onTablet {
+        height: 48px;
+      }
+    }
+
+    &__active {
+      color: $color__primary;
+      border-bottom: 2px solid $color__primary;
+    }
+  }
+
+  &__icons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 1px solid $color__elements;
+    border-bottom: none;
+
+    @include onDesktop {
+      width: 64px;
+    }
+
+    @include onTablet {
+      width: 48px;
+    }
+
+    &__active {
+      box-sizing: border-box;
+      color: $color__primary;
+      border-bottom: 2px solid $color__primary;
+    }
+  }
+}
