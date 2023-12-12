@@ -1,0 +1,73 @@
+@import '../../../../styles/mixins';
+
+.container {
+  border-top: 1px solid rgba(226, 230, 233, 1);
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+  color: rgba(137, 147, 154, 1);
+  font-size: 12px;
+  font-weight: 700;
+
+  @include onTablet {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footerLogo {
+  display: block;
+  text-align: center;
+  width: 89px;
+  height: 32px;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include onTablet {
+    margin: 10.5px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footerNavLink {
+  color: rgba(137, 147, 154, 1);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.footerButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.circleWithChevrone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: black;
+  border: 1px solid rgba(180, 189, 195, 1);
+
+  &:hover {
+    background-color: lightgray;
+  }
+}
