@@ -1,0 +1,128 @@
+@import '../../../../App.module.scss';
+
+@mixin displayPosition {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@mixin pageNamePosition {
+  display: flex;
+  align-items: center;
+  font-family: 'Mont', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@mixin iconPosition {
+  display: none;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @include onTablet {
+    display: block;
+    width: 48px;
+  }
+
+  @include onDesktop {
+    display: block;
+    width: 64px;
+  }
+}
+
+.header {
+  height: 48px;
+  gap: 16px;
+  @include displayPosition;
+  background-color: $color__white;
+  border-bottom: 1px solid $color__elements;
+
+  @include onDesktop {
+    height: 64px;
+    gap: 24px;
+  }
+}
+
+.logo {
+  margin: 14px 16px;
+
+  @include onDesktop {
+    margin: 19px 24px;
+  }
+}
+
+.navbar {
+  height: 100%;
+  @include displayPosition;
+
+  @include onTablet {
+    gap: 32px;
+  }
+
+  @include onDesktop {
+    gap: 64px;
+  }
+}
+
+.page {
+  text-decoration: none;
+  color: $color__elements;
+  @include displayPosition;
+}
+
+.pageName {
+  display: none;
+
+  @include onTablet {
+    @include pageNamePosition;
+  }
+
+  @include onDesktop {
+    height: 100%;
+    @include pageNamePosition;
+  }
+}
+
+.icons {
+  width: 100%;
+  @include displayPosition;
+  justify-content: flex-end;
+}
+
+.icon {
+  width: 48px;
+  @include displayPosition;
+  border-left: 1px solid $color__elements;
+}
+
+.favourites {
+  background-image: url(../../../../static/icons/Favourites_Heart.svg);
+  @include iconPosition;
+}
+
+.cart {
+  background-image: url(../../../../static/icons/Shopping_bag_Cart.svg);
+  @include iconPosition;
+}
+
+.menu {
+  display: block;
+  background-image: url(../../../../static/icons/Menu.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @include onTablet {
+    display: none;
+  }
+
+  @include onDesktop {
+    display: none;
+  }
+}
+
+.active {
+  box-sizing: border-box;
+  color: $color__primary;
+  border-bottom: 3px solid $color__primary;
+}
