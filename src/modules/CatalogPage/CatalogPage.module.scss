@@ -1,0 +1,106 @@
+@import '../../styles/blocks/container';
+@import '../../styles/colors';
+@import '../../styles/blocks/grid';
+
+.title {
+  display: block;
+  font-weight: 800;
+  font-size: 32px;
+  margin-bottom: 8px;
+
+  @include onTablet {
+    font-size: 48px;
+  }
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.step {
+  color: $color__secondary;
+  text-decoration: none;
+}
+
+.homeIcon {
+  background-image: url(../../static/icons/Home.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.iconNext {
+  background-image: url(../../static/icons/Chevron_Arrow_Right.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.amount {
+  display: block;
+  color: $color__secondary;
+  font-size: 14px;
+  margin-bottom: 32px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.selects {
+  display: flex;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sort {
+  width: 136px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid $color__icons;
+  background-color: $color__hover-and-bg;
+  padding-inline: 12px;
+  appearance: none;
+  background: url(../../static/icons/Chevron_Arrow_Down.svg) no-repeat right 1em top 50%;
+
+  @include onTablet {
+    width: 187px;
+  }
+
+  @include onDesktop {
+    width: 176px;
+  }
+
+  &:focus {
+    outline: none;
+}
+}
+
+.selectLabel {
+  color: $color__secondary;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card {
+  height: 440px;
+  background-color: $color__secondary;
+
+  @include onTablet {
+    height: 506px;
+  }
+}
+
+.itemsContainer {
+  @include pageGrid;
+}
