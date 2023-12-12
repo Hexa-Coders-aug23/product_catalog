@@ -1,89 +1,92 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import cn from 'classnames';
 import styles from './Card.module.scss';
+import defaultIcon from './Favourites.png';
+import favoritedIcon from './Union.png';
 
-// eslint-disable-next-line max-len
-const image = require('../../../../static/phones/apple-iphone-11-pro-max/gold/00.jpg');
-const defaultIcon = require('./Favourites.png');
-// const favoritedIcon = require('./Union.png');
+type Props = {
+  itemId: string;
+  image: string;
+  name: string;
+  price: number;
+  fullPrice: number;
+  screen: string;
+  capacity: string;
+  ram: string;
+};
 
-// type Props = {
-//   image: string;
-//   productName: string;
-//   price: number;
-//   fullPrice: number;
-//   screen: string;
-//   capacity: number;
-//   ram: number;
-// };
-
-export const Card: React.FC = () => {
-  // eslint-disable-next-line max-len
-  const isAlreadyAddedToCart = true;
+export const Card: React.FC<Props> = ({
+  itemId,
+  image,
+  capacity,
+  screen,
+  ram,
+  fullPrice,
+  price,
+  name,
+}) => {
+  const isAlreadyAddedToCart = false;
+  const isAlreadyFavorited = false;
 
   return (
-    <article className={styles.card} data-qa="card">
-      <img
-        className={styles.image}
-        // eslint-disable-next-line max-len
-        src={image}
-        alt="Apple iPhone 14 Pro 128GB Silver (MQ023)"
-      />
+    <>
+      <article className={styles.card} data-qa="card">
+        <img className={styles.image} src={image} alt={name} />
 
-      <p className={styles.name}>Apple iPhone 14 Pro 128GB Silver (MQ023)</p>
+        <p className={styles.name}>{name}</p>
 
-      <div className={styles.prices}>
-        <h2 className={styles.price}>$999</h2>
+        <div className={styles.prices}>
+          <h2 className={styles.price}>{`$${price}`}</h2>
 
-        {/* // { {fullPrice !== price && ( */}
-        <h2 className={styles.oldPrice}>$1000</h2>
-        {/* )} } */}
-      </div>
-
-      <hr className={styles.solid} />
-
-      <div className={styles.description}>
-        <div className={styles.screen}>
-          <p className={styles.screenName}>Screen</p>
-
-          <p className={styles.screenValue}>6.1” OLED</p>
+          {fullPrice !== price && (
+            <h2 className={styles.oldPrice}>{`$${fullPrice}`}</h2>
+          )}
         </div>
 
-        <div className={styles.capacity}>
-          <p className={styles.capacityName}>Capacity</p>
+        <hr className={styles.solid} />
 
-          <p className={styles.screenValue}>128 GB</p>
+        <div className={styles.description}>
+          <div className={styles.screen}>
+            <p className={styles.screenName}>Screen</p>
+
+            <p className={styles.screenValue}>{screen}</p>
+          </div>
+
+          <div className={styles.capacity}>
+            <p className={styles.capacityName}>Capacity</p>
+
+            <p className={styles.screenValue}>{capacity}</p>
+          </div>
+
+          <div className={styles.ram}>
+            <p className={styles.ramName}>RAM</p>
+
+            <p className={styles.screenValue}>{ram}</p>
+          </div>
         </div>
 
-        <div className={styles.ram}>
-          <p className={styles.ramName}>RAM</p>
+        <div className={styles.buttons}>
+          <button
+            type="button"
+            className={cn(styles.addToCartButton, {
+              [styles.alreadyAddedToCartButton]: isAlreadyAddedToCart,
+            })}
+            data-qa="hover"
+          >
+            {isAlreadyAddedToCart ? 'Added to cart' : 'Add to cart'}
+          </button>
 
-          <p className={styles.screenValue}>6 GB</p>
+          <button className={styles.addToCompareButton} type="button">
+            <img
+              className={styles.addToCompareIcon}
+              src={isAlreadyFavorited ? favoritedIcon : defaultIcon} // Checks if added to favorites and conditional render
+              alt="iconToCompare"
+            />
+          </button>
         </div>
-      </div>
+      </article>
 
-      <div className={styles.buttons}>
-        <button
-          type="button"
-          // className={styles.addToCartButton}
-          className={cn(styles.addToCartButton, {
-            [styles.alreadyAddedToCartButton]: isAlreadyAddedToCart,
-          })}
-          data-qa="hover"
-        >
-          {isAlreadyAddedToCart ? 'Added to cart' : 'Add to cart'}
-        </button>
-
-        <button className={styles.addToCompareButton} type="button">
-          <img
-            className={styles.addToCompareIcon}
-            src={defaultIcon}
-            // src={isAlreadyFavorited ? favoritedIcon : defaultIcon} // Checks if added to favorites and conditional render
-            alt="iconToCompare"
-          />
-        </button>
-      </div>
-    </article>
+      <p>{`Do something with itemId ${itemId}`}</p>
+    </>
   );
 };
