@@ -25,10 +25,8 @@
 }
 
 .step {
-  font-size: 12px;
   color: $color__secondary;
   text-decoration: none;
-  font-weight: 600;
 }
 
 .homeIcon {
@@ -47,7 +45,6 @@
   display: block;
   color: $color__secondary;
   font-size: 14px;
-  font-weight: 600;
   margin-bottom: 32px;
 
   @include onTablet {
@@ -74,9 +71,7 @@
   background-color: $color__hover-and-bg;
   padding-inline: 12px;
   appearance: none;
-  background-image: url(../../static/icons/Chevron_Arrow_Down.svg);
-  background-repeat: no-repeat;
-  background-position: right 1em top 50%;
+  background: url(../../static/icons/Chevron_Arrow_Down.svg) no-repeat right 1em top 50%;
 
   @include onTablet {
     width: 187px;
@@ -93,7 +88,6 @@
 
 .selectLabel {
   color: $color__secondary;
-  font-size: 12px;
   font-weight: 700;
   margin-bottom: 4px;
 }

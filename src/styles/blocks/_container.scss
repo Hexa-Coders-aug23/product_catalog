@@ -2,14 +2,12 @@
 @import '../colors';
 
 .container {
-  padding-top: 24px;
-  padding-bottom: 56px;
-  padding-inline: 16px;
+  padding: 24px 16px 56px;
+  font-size: 12px;
+  font-weight: 600;
 
   @include onTablet() {
-    padding-top: 40px;
-    padding-bottom: 64px;
-    padding-inline: 24px;
+    padding: 40px 24px 64px;
   }
 
   @include onDesktop() {

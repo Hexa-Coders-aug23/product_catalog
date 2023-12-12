@@ -4,7 +4,7 @@ import styles from './CatalogPage.module.scss';
 
 export const CatalogPage: React.FC = () => {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <div className={styles.breadcrumbs}>
         <NavLink to="/" className={styles.homeIcon} />
         <div className={styles.iconNext} />
@@ -39,6 +39,6 @@ export const CatalogPage: React.FC = () => {
         <div className={styles.card} />
         <div className={styles.card} />
       </div>
-    </div>
+    </main>
   );
 };
