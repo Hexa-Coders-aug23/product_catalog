@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
+import { Phone } from '../../types/Phone';
 
 export const CatalogPage: React.FC = () => {
+  const [phones, setPhones] = useState<Phone[]>([]);
+
+  const getPhones = async () => {
+    const data = await phoneService.getPhones();
+
+    setPhones(data);
+  };
+
+  useEffect(() => {
+    getPhones();
+  }, []);
+
   return (
     <main className={styles.container}>
       <div className={styles.breadcrumbs}>
@@ -11,7 +25,7 @@ export const CatalogPage: React.FC = () => {
         <NavLink to="phones" className={styles.step}>Phones</NavLink>
       </div>
       <h1 className={styles.title}>Mobile phones</h1>
-      <p className={styles.amount}>95 models</p>
+      <p className={styles.amount}>{`${phones.length} models`}</p>
       <div className={styles.selects}>
         <div className={styles.selectWrapper}>
           <label htmlFor="sort" className={styles.selectLabel}>
