@@ -3,6 +3,8 @@ module.exports = {
   extends: ['@mate-academy/eslint-config-react-typescript'],
   plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
   parserOptions: {
+    project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
