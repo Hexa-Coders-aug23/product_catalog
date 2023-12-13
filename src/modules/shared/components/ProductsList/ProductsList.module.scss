@@ -1,0 +1,5 @@
+@import '../../../../styles/blocks/grid';
+
+.itemsContainer {
+  @include pageGrid;
+}

@@ -1,6 +1,5 @@
 @import '../../styles/blocks/container';
 @import '../../styles/colors';
-@import '../../styles/blocks/grid';
 
 .title {
   display: block;
@@ -109,8 +108,4 @@
   @include onTablet {
     height: 506px;
   }
-}
-
-.itemsContainer {
-  @include pageGrid;
 }

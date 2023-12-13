@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
 import { Phone } from '../../types/Phone';
-import { Card } from '../shared/components/Card';
+import { ProductsList } from '../shared/components/ProductsList';
 
 export const CatalogPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
@@ -50,31 +50,7 @@ export const CatalogPage: React.FC = () => {
           </select>
         </div>
       </div>
-      <div className={styles.itemsContainer}>
-        {phones.map(({
-          // itemId,
-          image,
-          name,
-          price,
-          fullPrice,
-          screen,
-          capacity,
-          ram,
-        }) => {
-          return (
-            <Card
-              // itemId={itemId}
-              image={image}
-              name={name}
-              price={price}
-              fullPrice={fullPrice}
-              screen={screen}
-              capacity={capacity}
-              ram={ram}
-            />
-          );
-        })}
-      </div>
+      <ProductsList phones={phones} />
     </main>
   );
 };
