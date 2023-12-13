@@ -23,7 +23,9 @@ export const CatalogPage: React.FC = () => {
       <div className={styles.breadcrumbs}>
         <NavLink to="/" className={styles.homeIcon} />
         <div className={styles.iconNext} />
-        <NavLink to="phones" className={styles.step}>Phones</NavLink>
+        <NavLink to="phones" className={styles.step}>
+          Phones
+        </NavLink>
       </div>
       <h1 className={styles.title}>Mobile phones</h1>
       <p className={styles.amount}>{`${phones.length} models`}</p>

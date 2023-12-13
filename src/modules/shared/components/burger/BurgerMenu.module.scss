@@ -1,0 +1,164 @@
+@import '../../../../App.module.scss';
+
+@mixin displayPosition {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.menu {
+  width: 100%;
+  position: fixed;
+  box-sizing: border-box;
+  top: 0;
+  bottom: 0;
+
+  color: $color__secondary;
+  background-color: $color__white;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  height: 48px;
+  gap: 16px;
+  @include displayPosition;
+  background-color: $color__white;
+  border-bottom: 1px solid $color__elements;
+}
+
+.logo {
+  margin: 14px 16px;
+  @include hoverEffect(transform, scale(1.2));
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px auto;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pageName {
+  position: relative;
+  color: $color__secondary;
+  padding: 8px 0;
+  @include pageNamePosition;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: $color__primary;
+    transition: transform 0.3s;
+    transform: scale(0);
+  }
+
+  &:hover {
+    color: $color__primary;
+  }
+
+  &:hover::after {
+    transform: scale(1);
+  }
+}
+
+.containers {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 64px;
+}
+
+.container {
+  width: 50%;
+  padding: 0;
+  border-top: 1px solid $color__elements;
+  border-left: 1px solid $color__elements;
+}
+
+.icon {
+  height: 100%;
+  display: flex;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom: 3px solid transparent;
+}
+.icon:hover {
+  border-bottom-color: $color__primary;
+  box-sizing: border-box;
+  transition: all 0.5s ease-in-out;
+}
+
+.favourites {
+  background-image: url(../../../../static/icons/Favourites_Heart.svg);
+}
+
+.cart {
+  background-image: url(../../../../static/icons/Shopping_bag_Cart.svg);
+}
+
+.iconCloseContainer {
+  width: 48px;
+  background-color: $color__white;
+  border: none;
+  border-left: 1px solid $color__elements;
+  border-bottom: 3px solid transparent;
+}
+
+.menuClose {
+  background-image: url(../../../../static/icons/Close.svg);
+  @include hoverEffect(transform, scale(1.2));
+  &:hover {
+    border-bottom: 0 solid transparent;
+  }
+}
+
+.mobile {
+  width: 48px;
+  background-color: $color__white;
+  border: none;
+  border-left: 1px solid $color__elements;
+  border-bottom: 3px solid transparent;
+
+  @include onTablet {
+    display: none;
+  }
+
+  @include onDesktop {
+    display: none;
+  }
+}
+
+.iconMenu {
+  height: 48px;
+  display: flex;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.mobile:hover,
+.iconCloseContainer:hover {
+  border-bottom-color: $color__primary;
+  box-sizing: border-box;
+  transition: all 0.5s ease-in-out;
+}
+
+.menuOpen {
+  background-image: url(../../../../static/icons/Menu.svg);
+  @include hoverEffect(transform, scale(1.2));
+}

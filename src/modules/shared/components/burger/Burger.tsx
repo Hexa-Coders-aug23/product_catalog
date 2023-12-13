@@ -1,28 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
-import styles from './Header.module.scss';
+import logo from '../../../../static/logo/Nice_Gadgets_logo_combined.svg';
+import styles from './BurgerMenu.module.scss';
 
-export const Header: React.FC = () => {
-  const tabs = [
-    { to: '/', title: 'home' },
-    { to: '/phones', title: 'phones' },
-    { to: '/tablets', title: 'tablets' },
-    { to: '/accessories', title: 'accessories' },
-  ];
+type Tab = {
+  to: string;
+  title: string;
+};
+
+type Props = {
+  tabs: Tab[];
+};
+
+export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <aside className={styles.menu}>
-      {tabs.map((tab) => (
-        <NavLink
-          to={tab.to}
-          className={({ isActive }) => cn(styles.page, {
-            [styles.page__active]: isActive,
-          })}
+    <>
+      {isOpen ? (
+        <aside className={styles.menu}>
+          <div className={styles.header}>
+            <NavLink to="/" className={styles.logo}>
+              <img src={logo} alt="nice_gadgets_logo" />
+            </NavLink>
+
+            <button
+              type="button"
+              aria-label="Close Burger menu"
+              onClick={() => setIsOpen(false)}
+              className={styles.iconCloseContainer}
+            >
+              <i className={`${styles.icon} ${styles.menuClose}`} />
+            </button>
+          </div>
+
+          <div className={styles.navigation} data-cy="Nav">
+            {tabs.map((tab) => (
+              <NavLink
+                key={tab.title}
+                to={tab.to}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) => cn(styles.page, {
+                  [styles.active]: isActive,
+                })}
+              >
+                <div className={styles.pageName}>{tab.title}</div>
+              </NavLink>
+            ))}
+          </div>
+
+          <div className={styles.containers}>
+            <NavLink
+              to="favourites"
+              className={({ isActive }) => cn([styles.container], {
+                [styles.active]: isActive,
+              })}
+            >
+              <i className={`${styles.icon} ${styles.favourites}`} />
+            </NavLink>
+
+            <NavLink
+              to="cart"
+              className={({ isActive }) => cn([styles.container], {
+                [styles.active]: isActive,
+              })}
+            >
+              <i className={`${styles.icon} ${styles.cart}`} />
+            </NavLink>
+          </div>
+        </aside>
+      ) : (
+        <button
+          type="button"
+          aria-label="Open Burger menu"
+          className={styles.mobile}
+          onClick={() => setIsOpen(true)}
         >
-          <div className={styles.page_name}>{tab.title}</div>
-        </NavLink>
-      ))}
-    </aside>
+          <i className={`${styles.iconMenu} ${styles.menuOpen}`} />
+        </button>
+      )}
+    </>
   );
 };
