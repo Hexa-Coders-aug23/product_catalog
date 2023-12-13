@@ -3,5 +3,6 @@
 @mixin pageGrid {
   display: grid;
   gap: 40px 16px;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 288px));
 }
