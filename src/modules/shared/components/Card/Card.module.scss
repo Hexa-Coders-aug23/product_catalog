@@ -1,0 +1,156 @@
+@import '/src/styles/colors';
+@import '/src/styles/reset';
+@import '/src/styles/typography';
+@import '/src/styles/mixins';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  width: 288px;
+  border: 1px solid $color__elements;
+  border-radius: 8px;
+  padding: 32px;
+
+  gap: 8px;
+
+  @include onDesktop {
+    width: 272px;
+  }
+}
+
+.card:hover {
+  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  object-fit: scale-down;
+  height: 130px;
+
+  @include onTablet {
+    height: 196px;
+  }
+}
+
+.name {
+  height: 42px;
+  margin-top: 24px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.prices {
+  display: flex;
+  gap: 8px;
+}
+
+.price,
+.oldPrice {
+  height: 31px;
+  margin-top: 8px;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 140%;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: $color__secondary;
+  font-weight: 600;
+}
+
+.solid {
+  margin-top: 8px;
+  height: 1px;
+  background-color: $color__elements;
+  width: 100%;
+  border: none;
+}
+
+.description {
+  margin-top: 8px;
+}
+
+.screen,
+.capacity {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  height: 15px;
+}
+
+.ram {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 8px;
+  height: 15px;
+}
+
+.screenName,
+.capacityName,
+.ramName,
+.screenValue,
+.capacityValue,
+.ramValue {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+}
+
+.screenName,
+.capacityName,
+.ramName {
+  color: $color__secondary;
+}
+
+.buttons {
+  box-sizing: border-box;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  height: 40px;
+}
+
+.addToCartButton {
+  border-radius: 8px;
+  border-color: transparent;
+  background-color: $color__accent;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+}
+
+.alreadyAddedToCartButton {
+  border: 1px solid $color__elements;
+  border-color: $color__elements;
+  background-color: white;
+  color: $color__accent;
+}
+
+.addToCompareButton {
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: 1px solid $color__icons;
+  border-radius: 48px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.addToCompareIcon {
+  display: flex;
+  margin: auto;
+}
+
+.isFavoritedIcon {
+  background-color: #476df4;
+}
