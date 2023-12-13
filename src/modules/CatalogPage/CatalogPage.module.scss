@@ -27,6 +27,11 @@
 .step {
   color: $color__secondary;
   text-decoration: none;
+
+  &:hover {
+    color: $color__primary;
+    font-weight: 700;
+  }
 }
 
 .homeIcon {
@@ -81,7 +86,12 @@
     width: 176px;
   }
 
+  &:hover {
+    border-color: $color__secondary;
+  }
+
   &:focus {
+    border-color: $color__primary;
     outline: none;
 }
 }

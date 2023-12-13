@@ -33,6 +33,8 @@ export const CatalogPage: React.FC = () => {
           </label>
           <select id="sort" className={styles.sort}>
             <option>Newest</option>
+            <option>Alphabetically</option>
+            <option>Cheapest</option>
           </select>
         </div>
         <div className={styles.selectWrapper}>
@@ -40,7 +42,10 @@ export const CatalogPage: React.FC = () => {
             Items on page
           </label>
           <select id="sort" className={styles.sort}>
+            <option>4</option>
+            <option>8</option>
             <option>16</option>
+            <option>all</option>
           </select>
         </div>
       </div>
