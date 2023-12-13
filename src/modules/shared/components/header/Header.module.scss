@@ -8,13 +8,15 @@
 
 .header {
   position: sticky;
+  width: 100%;
+  right: 0;
   top: 0;
   height: 48px;
   gap: 16px;
   @include displayPosition;
   background-color: $color__white;
   border-bottom: 1px solid $color__elements;
-
+  // overflow: hidden;
   @include onDesktop {
     height: 64px;
     gap: 24px;
@@ -68,7 +70,7 @@
   }
 }
 
-.containers {
+.buttonWrapper {
   width: 100%;
   @include displayPosition;
   justify-content: flex-end;
@@ -105,7 +107,7 @@
   }
 }
 
-.container {
+.wrapper {
   height: 100%;
   padding: 0;
   display: flex;
@@ -122,10 +124,6 @@
 
 .cart {
   background-image: url(../../../../static/icons/Shopping_bag_Cart.svg);
-}
-
-.menu {
-  background-image: url(../../../../static/icons/Menu.svg);
 }
 
 .active {

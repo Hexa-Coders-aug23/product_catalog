@@ -34,14 +34,14 @@ export const Header: React.FC = () => {
         ))}
       </nav>
 
-      <div className={styles.containers}>
+      <div className={styles.buttonWrapper}>
         <NavLink
           to="favourites"
           className={({ isActive }) => cn([styles.fullscreen], {
             [styles.active]: isActive,
           })}
         >
-          <i className={`${styles.container} ${styles.favourites}`} />
+          <i className={`${styles.wrapper} ${styles.favourites}`} />
         </NavLink>
 
         <NavLink
@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
             [styles.active]: isActive,
           })}
         >
-          <i className={`${styles.container} ${styles.cart}`} />
+          <i className={`${styles.wrapper} ${styles.cart}`} />
         </NavLink>
 
         <BurgerMenu tabs={tabs} />
