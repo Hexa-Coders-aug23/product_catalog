@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import cn from 'classnames';
 import logo from '../../../../static/logo/Nice_Gadgets_logo_combined.svg';
 import styles from './Header.module.scss';
+import { BurgerMenu } from '../burger';
 
 export const Header: React.FC = () => {
   const tabs = [
@@ -32,27 +34,26 @@ export const Header: React.FC = () => {
         ))}
       </nav>
 
-      <div className={styles.icons}>
+      <div className={styles.containers}>
         <NavLink
-          to="/favourites"
-          className={({ isActive }) => cn([styles.icon], [styles.favourites], {
+          to="favourites"
+          className={({ isActive }) => cn([styles.fullscreen], {
             [styles.active]: isActive,
           })}
-        />
+        >
+          <i className={`${styles.container} ${styles.favourites}`} />
+        </NavLink>
 
         <NavLink
-          to="/cart"
-          className={({ isActive }) => cn([styles.icon], [styles.cart], {
+          to="cart"
+          className={({ isActive }) => cn([styles.fullscreen], {
             [styles.active]: isActive,
           })}
-        />
+        >
+          <i className={`${styles.container} ${styles.cart}`} />
+        </NavLink>
 
-        <NavLink
-          to="/menu"
-          className={({ isActive }) => cn([styles.icon], [styles.menu], {
-            [styles.active]: isActive,
-          })}
-        />
+        <BurgerMenu tabs={tabs} />
       </div>
     </header>
   );

@@ -6,32 +6,9 @@
   justify-content: center;
 }
 
-@mixin pageNamePosition {
-  display: flex;
-  align-items: center;
-  font-family: 'Mont', sans-serif;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-@mixin iconPosition {
-  display: none;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  @include onTablet {
-    display: block;
-    width: 48px;
-  }
-
-  @include onDesktop {
-    display: block;
-    width: 64px;
-  }
-}
-
 .header {
+  position: sticky;
+  top: 0;
   height: 48px;
   gap: 16px;
   @include displayPosition;
@@ -46,6 +23,7 @@
 
 .logo {
   margin: 14px 16px;
+  @include hoverEffect(transform, scale(1.2));
 
   @include onDesktop {
     margin: 19px 24px;
@@ -74,43 +52,49 @@
 .pageName {
   display: none;
 
+  &:hover {
+    text-shadow: 1px 2px 2px $color__hover-and-bg;
+  }
+
   @include onTablet {
     @include pageNamePosition;
+    @include hoverEffect(transform, scale(1.1));
   }
 
   @include onDesktop {
     height: 100%;
     @include pageNamePosition;
+    @include hoverEffect(transform, scale(1.1));
   }
 }
 
-.icons {
+.containers {
   width: 100%;
   @include displayPosition;
   justify-content: flex-end;
 }
 
-.icon {
-  width: 48px;
-  @include displayPosition;
+.fullscreen {
+  display: none;
   border-left: 1px solid $color__elements;
+
+  @include onTablet {
+    display: block;
+    width: 48px;
+  }
+
+  @include onDesktop {
+    display: block;
+    width: 64px;
+  }
 }
 
-.favourites {
-  background-image: url(../../../../static/icons/Favourites_Heart.svg);
-  @include iconPosition;
-}
-
-.cart {
-  background-image: url(../../../../static/icons/Shopping_bag_Cart.svg);
-  @include iconPosition;
-}
-
-.menu {
+.mobile {
+  width: 48px;
   display: block;
-  background-image: url(../../../../static/icons/Menu.svg);
   background-repeat: no-repeat;
   background-position: center;
+  border-left: 1px solid $color__elements;
 
   @include onTablet {
     display: none;
@@ -121,8 +105,32 @@
   }
 }
 
+.container {
+  height: 100%;
+  padding: 0;
+  display: flex;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-items: center;
+  @include displayPosition;
+  @include hoverEffect(transform, scale(1.2));
+}
+
+.favourites {
+  background-image: url(../../../../static/icons/Favourites_Heart.svg);
+}
+
+.cart {
+  background-image: url(../../../../static/icons/Shopping_bag_Cart.svg);
+}
+
+.menu {
+  background-image: url(../../../../static/icons/Menu.svg);
+}
+
 .active {
   box-sizing: border-box;
   color: $color__primary;
+  transition: all 0.5s ease-in-out;
   border-bottom: 3px solid $color__primary;
 }

@@ -9,3 +9,19 @@
     @content;
   }
 }
+
+@mixin hoverEffect($property, $toValue) {
+  transition: #{$property} 0.5s;
+  &:hover {
+    #{$property}: $toValue;
+  }
+}
+
+@mixin pageNamePosition {
+  display: flex;
+  align-items: center;
+  font-family: 'Mont', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
