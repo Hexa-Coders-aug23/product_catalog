@@ -50,10 +50,10 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
             ))}
           </div>
 
-          <div className={styles.containers}>
+          <div className={styles.buttonWrapper}>
             <NavLink
               to="favourites"
-              className={({ isActive }) => cn([styles.container], {
+              className={({ isActive }) => cn([styles.iconWrapper], {
                 [styles.active]: isActive,
               })}
             >
@@ -62,7 +62,7 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
 
             <NavLink
               to="cart"
-              className={({ isActive }) => cn([styles.container], {
+              className={({ isActive }) => cn([styles.iconWrapper], {
                 [styles.active]: isActive,
               })}
             >
