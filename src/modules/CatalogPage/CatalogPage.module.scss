@@ -62,45 +62,6 @@
   gap: 16px;
 }
 
-.selectWrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.sort {
-  width: 136px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid $color__icons;
-  background-color: $color__hover-and-bg;
-  padding-inline: 12px;
-  appearance: none;
-  background: url(../../static/icons/Chevron_Arrow_Down.svg) no-repeat right 1em top 50%;
-
-  @include onTablet {
-    width: 187px;
-  }
-
-  @include onDesktop {
-    width: 176px;
-  }
-
-  &:hover {
-    border-color: $color__secondary;
-  }
-
-  &:focus {
-    border-color: $color__primary;
-    outline: none;
-}
-}
-
-.selectLabel {
-  color: $color__secondary;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
 .card {
   height: 440px;
   background-color: $color__secondary;
