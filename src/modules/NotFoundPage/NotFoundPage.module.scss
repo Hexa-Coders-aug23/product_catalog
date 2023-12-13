@@ -1,0 +1,92 @@
+@import '../../styles/mixins';
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.error {
+  margin-top: 50px;
+  font-family: 'Mont', sans-serif;
+
+  &_type {
+    display: flex;
+    justify-content: center;
+    font-weight: 700px;
+    font-size: 20px;
+    color: $color__primary;
+
+    @include onTablet {
+      font-size: 32px;
+    }
+
+    @include onDesktop {
+      font-size: 48px;
+    }
+  }
+
+  &_discription {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: $color__primary;
+
+    @include onTablet {
+      font-size: 18px;
+    }
+
+    @include onDesktop {
+      font-size: 32px;
+    }
+  }
+
+  &_fix {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: $color__accent;
+
+    &:hover {
+      color: $color__secondary-accent;
+      transform: scale(1.03);
+    }
+  }
+
+  &_suggestion {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 7px;
+    font-size: 14px;
+    color: $color__primary;
+    flex-wrap: wrap;
+
+    @include onTablet {
+      font-size: 18px;
+    }
+
+    @include onDesktop {
+      font-size: 32px;
+    }
+  }
+
+  &_image {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 25%;
+    height: 200px;
+    width: 300px;
+
+    @include onTablet {
+      height: 400px;
+      width: 600px;
+    }
+
+    @include onDesktop {
+      height: 600px;
+      width: 800px;
+    }
+  }
+}
