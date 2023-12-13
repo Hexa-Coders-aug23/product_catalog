@@ -1,16 +1,25 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.c65dad69.css",
-    "main.js": "/product_catalog/static/js/main.66e4e18f.js",
+    "main.css": "/product_catalog/static/css/main.0a3f2bf2.css",
+    "main.js": "/product_catalog/static/js/main.bb8c436f.js",
+    "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
+    "static/media/error_image.jpeg": "/product_catalog/static/media/error_image.157dafded0d0a46866a8.jpeg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
     "static/media/Mont-SemiBold.ttf": "/product_catalog/static/media/Mont-SemiBold.0b5e68ebb36ca4006e21.ttf",
     "static/media/Mont-Bold.ttf": "/product_catalog/static/media/Mont-Bold.3675b597d3ffb2b75168.ttf",
+    "static/media/Shopping_bag_Cart.svg": "/product_catalog/static/media/Shopping_bag_Cart.df23e4fbb25ff3701b16.svg",
+    "static/media/Favourites_Heart.svg": "/product_catalog/static/media/Favourites_Heart.cc696932b63c19f48776.svg",
+    "static/media/Home.svg": "/product_catalog/static/media/Home.9a24a70540404ccecd05.svg",
+    "static/media/Menu.svg": "/product_catalog/static/media/Menu.73ddde2c093f9fb313b9.svg",
+    "static/media/Chevron_Arrow_Right.svg": "/product_catalog/static/media/Chevron_Arrow_Right.e028d3889646e0b5e56c.svg",
+    "static/media/Chevron_Arrow_Down.svg": "/product_catalog/static/media/Chevron_Arrow_Down.98c9dd6d98b47f2f1977.svg",
+    "static/media/Chevron_Arrow_Up.svg": "/product_catalog/static/media/Chevron_Arrow_Up.1ea6958a07717117d3d583ab6fe7dcbd.svg",
     "index.html": "/product_catalog/index.html",
-    "main.c65dad69.css.map": "/product_catalog/static/css/main.c65dad69.css.map",
-    "main.66e4e18f.js.map": "/product_catalog/static/js/main.66e4e18f.js.map"
+    "main.0a3f2bf2.css.map": "/product_catalog/static/css/main.0a3f2bf2.css.map",
+    "main.bb8c436f.js.map": "/product_catalog/static/js/main.bb8c436f.js.map"
   },
   "entrypoints": [
-    "static/css/main.c65dad69.css",
-    "static/js/main.66e4e18f.js"
+    "static/css/main.0a3f2bf2.css",
+    "static/js/main.bb8c436f.js"
   ]
 }
