@@ -2,23 +2,24 @@
 @import '../../styles/reset.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/typography.scss';
+@import '../../styles/blocks/container';
 
-.container {
-  padding-inline: 16px;
-  margin-top: 24px;
-  margin-bottom: 56px;
+// .container {
+//   padding-inline: 16px;
+//   margin-top: 24px;
+//   margin-bottom: 56px;
 
-  @include onTablet {
-    padding-inline: 24px;
-    margin-top: 40px;
-    margin-bottom: 64px;
-  }
+//   @include onTablet {
+//     padding-inline: 24px;
+//     margin-top: 40px;
+//     margin-bottom: 64px;
+//   }
 
-  @include onDesktop {
-    padding-inline: 32px;
-    margin-bottom: 80px;
-  }
-}
+//   @include onDesktop {
+//     padding-inline: 32px;
+//     margin-bottom: 80px;
+//   }
+// }
 
 .goBackButton {
   margin-top: 24px;
@@ -45,7 +46,7 @@
   color: $color__secondary;
 
   &:hover {
-    color: black;
+    color: $color__primary;
   }
 }
 
@@ -115,7 +116,7 @@
   width: 100%;
   border-radius: 8px;
   border: none;
-  color: white;
+  color: $color__white;
   background-color: $color__accent;
   font-size: 14px;
   font-weight: 500;
@@ -127,7 +128,7 @@
   }
 
   &:active {
-    background-color: white;
+    background-color: $color__white;
     color: $color__accent;
     border: 1px solid $color__elements;
   }
