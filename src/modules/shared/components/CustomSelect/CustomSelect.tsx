@@ -1,4 +1,4 @@
-import Select from 'react-select';
+import Select, { OnChangeValue } from 'react-select';
 import styles from './CustomSelect.module.scss';
 import { Option } from '../../../../types/Option';
 
@@ -6,6 +6,7 @@ type Props = {
   label: string;
   options: Option[];
   defaultOptionId: number;
+  onSelectAmount?: (selectedOption: OnChangeValue<Option, false>) => void;
 };
 
 const customStyles = {
@@ -52,6 +53,7 @@ export const CustomSelect:React.FC<Props> = ({
   label,
   options,
   defaultOptionId,
+  onSelectAmount = () => {},
 }) => {
   return (
     <div className={styles.selectWrapper}>
@@ -63,6 +65,7 @@ export const CustomSelect:React.FC<Props> = ({
         styles={customStyles}
         options={options}
         defaultValue={options[defaultOptionId]}
+        onChange={onSelectAmount}
       />
     </div>
   );

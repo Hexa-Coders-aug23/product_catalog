@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
+import { OnChangeValue } from 'react-select';
 import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
 import { Phone } from '../../types/Phone';
@@ -22,6 +24,8 @@ const amountOptions: Option[] = [
 
 export const CatalogPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
+  const [first, setFirst] = useState(0);
+  const [itemsCount, setItemsCount] = useState(16);
 
   const getPhones = async () => {
     const data = await phoneService.getPhones();
@@ -32,6 +36,21 @@ export const CatalogPage: React.FC = () => {
   useEffect(() => {
     getPhones();
   }, []);
+
+  const onPageChange = (event: PaginatorPageChangeEvent) => {
+    setFirst(event.first);
+    setItemsCount(event.rows);
+  };
+
+  const onSelectAmount = (selectedOption: OnChangeValue<Option, false>) => {
+    if (selectedOption) {
+      const newValue = selectedOption.value === 'all'
+        ? phones.length
+        : +selectedOption.value;
+
+      setItemsCount(newValue);
+    }
+  };
 
   return (
     <main className={styles.container}>
@@ -54,9 +73,16 @@ export const CatalogPage: React.FC = () => {
           label="Items on page"
           options={amountOptions}
           defaultOptionId={2}
+          onSelectAmount={onSelectAmount}
         />
       </div>
-      <ProductsList phones={phones} />
+      <ProductsList phones={phones.slice(first, first + itemsCount)} />
+      <Paginator
+        first={first}
+        rows={itemsCount}
+        totalRecords={phones.length * 4}
+        onPageChange={onPageChange}
+      />
     </main>
   );
 };
