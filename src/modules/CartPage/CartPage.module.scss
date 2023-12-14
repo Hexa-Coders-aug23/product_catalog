@@ -20,6 +20,25 @@
 //     margin-bottom: 80px;
 //   }
 // }
+.emptyCart {
+
+  width: 51%;
+  margin: auto;
+  text-align: center;
+}
+
+.emptyCartTitle {
+  margin-top: 24px;
+  font-family: 'Mont';
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.emptyCartText {
+  margin-top: 24px;
+  font-weight: 500;
+  font-size: 13px;
+}
 
 .goBackButton {
   margin-top: 24px;
@@ -118,6 +137,7 @@
   border: none;
   color: $color__white;
   background-color: $color__accent;
+  font-family: 'Mont';
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
