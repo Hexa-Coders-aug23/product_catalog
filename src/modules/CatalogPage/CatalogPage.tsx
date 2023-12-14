@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { OnChangeValue } from 'react-select';
@@ -24,31 +24,33 @@ const amountOptions: Option[] = [
 
 export const CatalogPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
-  const [first, setFirst] = useState(0);
-  const [itemsCount, setItemsCount] = useState(16);
+  const [itemsCount, setItemsCount] = useState<string | number>(16);
+  const [totalCount, setTotalCount] = useState(0);
+  const [page, setPage] = useState(1);
 
-  const getPhones = async () => {
-    const data = await phoneService.getPhones();
+  const newRows = itemsCount === 'all' ? totalCount : itemsCount;
 
-    setPhones(data);
-  };
+  const getPhones = useCallback(async () => {
+    const { count, rows } = await phoneService.getPhones(page, itemsCount);
+
+    setTotalCount(count);
+    setPhones(rows);
+  }, [itemsCount, page]);
 
   useEffect(() => {
     getPhones();
-  }, []);
+  }, [page, itemsCount, getPhones]);
 
   const onPageChange = (event: PaginatorPageChangeEvent) => {
-    setFirst(event.first);
-    setItemsCount(event.rows);
+    const newItems = event.rows === totalCount ? 'all' : event.rows;
+
+    setPage(event.page + 1);
+    setItemsCount(newItems);
   };
 
   const onSelectAmount = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      const newValue = selectedOption.value === 'all'
-        ? phones.length
-        : +selectedOption.value;
-
-      setItemsCount(newValue);
+      setItemsCount(selectedOption.value);
     }
   };
 
@@ -62,7 +64,7 @@ export const CatalogPage: React.FC = () => {
         </NavLink>
       </div>
       <h1 className={styles.title}>Mobile phones</h1>
-      <p className={styles.amount}>{`${phones.length} models`}</p>
+      <p className={styles.amount}>{`${totalCount} models`}</p>
       <div className={styles.selects}>
         <CustomSelect
           label="Sort by"
@@ -76,11 +78,10 @@ export const CatalogPage: React.FC = () => {
           onSelectAmount={onSelectAmount}
         />
       </div>
-      <ProductsList phones={phones.slice(first, first + itemsCount)} />
+      <ProductsList phones={phones} />
       <Paginator
-        first={first}
-        rows={itemsCount}
-        totalRecords={phones.length * 4}
+        rows={newRows as number}
+        totalRecords={totalCount}
         onPageChange={onPageChange}
       />
     </main>
