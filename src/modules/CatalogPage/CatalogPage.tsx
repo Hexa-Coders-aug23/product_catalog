@@ -1,17 +1,15 @@
 /* eslint-disable max-len */
 import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
+import { PaginatorPageChangeEvent } from 'primereact/paginator';
 import { OnChangeValue } from 'react-select';
-import classNames from 'classnames';
 import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
 import { Phone } from '../../types/Phone';
 import { Option } from '../../types/Option';
 import { ProductsList } from '../shared/components/ProductsList';
 import { CustomSelect } from '../shared/components/CustomSelect/CustomSelect';
-import prevArrow from '../../static/icons/Chevron_Arrow_Left.svg';
-import nextArrow from '../../static/icons/Chevron_Arrow_Right.svg';
+import { Pagination } from '../shared/components/Pagination/Pagination';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -69,55 +67,6 @@ export const CatalogPage: React.FC = () => {
     }
   };
 
-  const template = {
-    layout: 'PrevPageLink PageLinks NextPageLink',
-    PrevPageLink: (options: any) => {
-      return (
-        <button
-          type="button"
-          className={styles.circleWithChevrone}
-          onClick={options.onClick}
-          disabled={options.disabled}
-        >
-          <img
-            alt="Prev"
-            src={prevArrow}
-            className={styles.arrow}
-          />
-        </button>
-      );
-    },
-    NextPageLink: (options: any) => {
-      return (
-        <button
-          type="button"
-          className={styles.circleWithChevrone}
-          onClick={options.onClick}
-          disabled={options.disabled}
-        >
-          <img
-            alt="Next"
-            src={nextArrow}
-            className={styles.arrow}
-          />
-        </button>
-      );
-    },
-    PageLinks: (options: any) => {
-      return (
-        <button
-          type="button"
-          className={classNames(styles.circleButton, {
-            [styles.activeButton]: options.page === page,
-          })}
-          onClick={options.onClick}
-        >
-          {options.page + 1}
-        </button>
-      );
-    },
-  };
-
   return (
     <main className={styles.container}>
       <div className={styles.breadcrumbs}>
@@ -143,11 +92,11 @@ export const CatalogPage: React.FC = () => {
         />
       </div>
       <ProductsList phones={phones} />
-      <Paginator
-        template={template}
-        first={offset}
-        rows={newRows as number}
-        totalRecords={totalCount}
+      <Pagination
+        page={page}
+        offset={offset}
+        newRows={newRows}
+        totalCount={totalCount}
         onPageChange={onPageChange}
       />
     </main>
