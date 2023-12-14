@@ -12,7 +12,7 @@ type Props = {
 const customStyles = {
   control: (base: any, state: any) => ({
     ...base,
-    border: 0,
+    border: '0',
     boxShadow: 'none',
     caretColor: 'transparent',
     '[class$="-indicatorSeparator"]': {
