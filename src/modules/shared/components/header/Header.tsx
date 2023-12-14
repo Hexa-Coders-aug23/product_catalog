@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className={styles.header} id="header">
+    <header className={styles.header}>
       <NavLink to="/" className={styles.logo}>
         <img src={logo} alt="nice_gadgets_logo" />
       </NavLink>
