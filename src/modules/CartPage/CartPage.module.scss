@@ -1,0 +1,135 @@
+@import '../../styles/colors.scss';
+@import '../../styles/reset.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/typography.scss';
+@import '../../styles/blocks/container';
+
+// .container {
+//   padding-inline: 16px;
+//   margin-top: 24px;
+//   margin-bottom: 56px;
+
+//   @include onTablet {
+//     padding-inline: 24px;
+//     margin-top: 40px;
+//     margin-bottom: 64px;
+//   }
+
+//   @include onDesktop {
+//     padding-inline: 32px;
+//     margin-bottom: 80px;
+//   }
+// }
+
+.goBackButton {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  background-color: $color__hover-and-bg;
+  border: none;
+  gap: 4px;
+  padding-right: 15px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.goBackButtonIcon {
+  display: block;
+  filter: invert(4%) sepia(45%) saturate(25%) hue-rotate(202deg) brightness(0%)
+    contrast(95%);
+}
+
+.goBackButtonText {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: $color__secondary;
+
+  &:hover {
+    color: $color__primary;
+  }
+}
+
+.title {
+  margin-top: 24px;
+  margin-bottom: 32px;
+  color: $color__primary;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 56px;
+  letter-spacing: -0.48px;
+}
+
+.cartContent {
+  @include onDesktop {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.cartItemsList {
+  @include onDesktop {
+    width: 75%;
+  }
+}
+
+.checkout {
+  margin-top: 32px;
+  border-radius: 16px;
+  border: 1px solid $color__elements;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+
+  @include onDesktop {
+    margin-top: 16px;
+    height: fit-content;
+    width: 25%;
+  }
+}
+
+.checkoutPrice {
+  color: $color__primary;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 41px;
+  letter-spacing: -0.32px;
+}
+
+.checkoutAmountItems {
+  color: $color__secondary;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+.checkoutHr {
+  margin-top: 16px;
+  border-right: 1px solid $color__elements;
+  width: 100%;
+}
+
+.checkoutButton {
+  margin-top: 16px;
+  height: 48px;
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  color: $color__white;
+  background-color: $color__accent;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+  }
+
+  &:active {
+    background-color: $color__white;
+    color: $color__accent;
+    border: 1px solid $color__elements;
+  }
+}
