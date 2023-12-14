@@ -1,13 +1,17 @@
+/* eslint-disable max-len */
 import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 import { OnChangeValue } from 'react-select';
+import classNames from 'classnames';
 import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
 import { Phone } from '../../types/Phone';
 import { Option } from '../../types/Option';
 import { ProductsList } from '../shared/components/ProductsList';
 import { CustomSelect } from '../shared/components/CustomSelect/CustomSelect';
+import prevArrow from '../../static/icons/Chevron_Arrow_Left.svg';
+import nextArrow from '../../static/icons/Chevron_Arrow_Right.svg';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -24,14 +28,17 @@ const amountOptions: Option[] = [
 
 export const CatalogPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
+  const [offset, setOffset] = useState(0);
   const [itemsCount, setItemsCount] = useState<string | number>(16);
   const [totalCount, setTotalCount] = useState(0);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
-  const newRows = itemsCount === 'all' ? totalCount : itemsCount;
+  const newRows = itemsCount === 'all'
+    ? totalCount
+    : itemsCount;
 
   const getPhones = useCallback(async () => {
-    const { count, rows } = await phoneService.getPhones(page, itemsCount);
+    const { count, rows } = await phoneService.getPhones(page + 1, itemsCount);
 
     setTotalCount(count);
     setPhones(rows);
@@ -42,16 +49,73 @@ export const CatalogPage: React.FC = () => {
   }, [page, itemsCount, getPhones]);
 
   const onPageChange = (event: PaginatorPageChangeEvent) => {
-    const newItems = event.rows === totalCount ? 'all' : event.rows;
+    const newItems = event.rows === totalCount
+      ? 'all'
+      : event.rows;
 
-    setPage(event.page + 1);
+    setPage(event.page);
+    setOffset(event.first);
     setItemsCount(newItems);
   };
 
   const onSelectAmount = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      setItemsCount(selectedOption.value);
+      const newItems = selectedOption.value === 'all'
+        ? selectedOption.value
+        : +selectedOption.value;
+
+      setPage(0);
+      setItemsCount(newItems);
     }
+  };
+
+  const template = {
+    layout: 'PrevPageLink PageLinks NextPageLink',
+    PrevPageLink: (options: any) => {
+      return (
+        <button
+          type="button"
+          className={styles.circleWithChevrone}
+          onClick={options.onClick}
+          disabled={options.disabled}
+        >
+          <img
+            alt="Prev"
+            src={prevArrow}
+            className={styles.arrow}
+          />
+        </button>
+      );
+    },
+    NextPageLink: (options: any) => {
+      return (
+        <button
+          type="button"
+          className={styles.circleWithChevrone}
+          onClick={options.onClick}
+          disabled={options.disabled}
+        >
+          <img
+            alt="Next"
+            src={nextArrow}
+            className={styles.arrow}
+          />
+        </button>
+      );
+    },
+    PageLinks: (options: any) => {
+      return (
+        <button
+          type="button"
+          className={classNames(styles.circleButton, {
+            [styles.activeButton]: options.page === page,
+          })}
+          onClick={options.onClick}
+        >
+          {options.page + 1}
+        </button>
+      );
+    },
   };
 
   return (
@@ -80,6 +144,8 @@ export const CatalogPage: React.FC = () => {
       </div>
       <ProductsList phones={phones} />
       <Paginator
+        template={template}
+        first={offset}
         rows={newRows as number}
         totalRecords={totalCount}
         onPageChange={onPageChange}
