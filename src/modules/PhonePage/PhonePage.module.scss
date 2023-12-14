@@ -1,0 +1,370 @@
+@import './../../App.module.scss';
+
+.black {
+  background-color: black;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.white {
+  background-color: white;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.red {
+  background-color: red;
+}
+.spacegray {
+  background-color: #717378;
+}
+.midnightgreen {
+  background-color: #28372A;
+}
+.gold {
+  background-color: gold;
+}
+.silver {
+  background-color: silver;
+}
+.red {
+  background-color: red;
+}
+.red {
+  background-color: red;
+}
+
+main {
+  margin: 16px 16px 56px;
+  font-family: 'Mont', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  @include onTablet {
+    margin: 16px 24px 64px;
+  }
+
+  @include onDesktop {
+    padding-inline: 24px;
+    margin: 16px auto 81px;
+    max-width: 1200px;
+  }
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.homeIcon {
+  background-image: url(../../static/icons/Home.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.iconNext {
+  background-image: url(../../static/icons/Chevron_Arrow_Right.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.prevStep {
+  color: $color__primary;
+  text-decoration: none;
+}
+
+.step {
+  color: $color__secondary;
+  text-decoration: none;
+}
+
+.productCard {
+  @include onTablet {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+  }
+}
+
+.photosBlock {
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include onTablet {
+    display: grid;
+    grid-template-columns: 35px 16px 4fr max(16px);
+  }
+
+  @include onDesktop {
+    display: grid;
+    grid-template-columns: 80px 16px 4fr max(64px);
+  }
+}
+
+.mainHeader {
+  font-size: 22px;
+  line-height: 30.8px;
+  font-weight: 800;
+  margin-bottom: 32px;
+
+  @include onTablet {
+    font-size: 32px;
+    line-height: 41px;
+    margin-bottom: 40px;
+  }
+}
+
+.mainPhoto {
+  margin: 0 auto 16px;
+  max-width: 100%;
+}
+
+// .mainPhotoSpaceRight {
+//   // grid-column: 4;
+//   min-width: 16px;
+//   max-width: 64px;
+//   // width: clamp(16px, 5vw, 64px); /* Используйте значение, которое подходит для ваших требований */
+// }
+
+.altPhotos {
+  margin-bottom: 40px;
+  background-color: bisque;
+  text-align: center;
+
+  @include onTablet {
+    width: 35px;
+  }
+
+  @include onDesktop {
+    width: 80px;
+  }
+}
+
+.altPhoto {
+  max-width: 40px;
+  background-color: bisque;
+  text-align: center;
+
+  @include onTablet {
+    width: 35px;
+  }
+
+  @include onDesktop {
+    width: 80px;
+  }
+}
+
+aside {
+  margin-left: 0;
+
+  @include onTablet {
+    max-width: 320px;
+  }
+}
+
+.selectParametrsHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: $color__secondary;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.selectParametrsHeader>h3 {
+  color: $color__secondary;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.productSelect {
+  margin: 0 auto 8px;
+}
+
+.selectParametrsOptions {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $color__secondary;
+  margin-bottom: 24px;
+}
+
+.selectColorContainer {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+
+.activeColor {
+  border-color: $color__primary;
+}
+
+.selectColorOption {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid $color__white;
+}
+
+.selectCapacityOption {
+  height: 32px;
+  background-color: $color__white;
+  border: 1px solid $color__secondary;
+  border-radius: 4px;
+}
+
+.activeCapacity {
+  background-color: $color__primary;
+  border-color: $color__primary;
+  color: $color__white;
+}
+
+.prices {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.currentPrice {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.previousPrice {
+  font-size: 22px;
+  font-weight: 500;
+  color: $color__secondary;
+  text-decoration: line-through;
+}
+
+.buySectionButtons {
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.addToCartButton {
+  flex: 1;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 0px;
+  color: $color__white;
+  background-color: $color__accent;
+  transition: background-color 0.3s ease;
+}
+
+.addToCartButton:hover {
+  background-color: darken($color__accent, 10%);
+}
+
+.addToFavouriteButton {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 1px solid $color__secondary;
+  align-items: center;
+  line-height: 48px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.addToFavouriteButton:hover {
+  background-color: lighten($color__secondary, 10%);
+  transform: scale(1.1);
+}
+
+.techInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 56px;
+}
+
+.techInfoParametr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.asideInfoKey {
+  color: $color__secondary;
+}
+
+.asideInfoValue {
+  font-weight: 700;
+}
+
+.aboutArticle {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+.articleHeader {
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $color__secondary;
+
+  @include onTablet {
+    font-size: 22px;
+    font-weight: 800;
+  }
+}
+
+.aboutSectionHeader {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+
+  @include onTablet {
+    font-size: 20px;
+  }
+}
+
+.aboutSectionText {
+  font-size: 14px;
+  line-height: 21px;
+  color: $color__secondary;
+
+  @include onDesktop {
+    font-weight: 500;
+  }
+}
+
+.techSpecsContainer {
+  margin-bottom: 30px;
+}
+
+.techSpecsKey {
+  font-size: 14px;
+  font-weight: 500;
+  color: $color__secondary;
+}
+
+.techSpecsValue {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cards {
+  display: block;
+  height: 439px;
+  margin-right: 0;
+  margin-bottom: 56px;
+  background-color: burlywood;
+}
