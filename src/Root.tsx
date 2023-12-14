@@ -13,6 +13,7 @@ import { PhonePage } from './modules/PhonePage';
 import { CartPage } from './modules/CartPage';
 import { FavouritesPage } from './modules/FavouritesPage';
 import { PhonesProvider } from './context/GlobalProvider';
+import { Contacts } from './modules/Contacts';
 
 export const Root: React.FC = () => (
   <PhonesProvider>
@@ -27,6 +28,7 @@ export const Root: React.FC = () => (
           </Route>
           <Route path="cart" element={<CartPage />} />
           <Route path="favourites" element={<FavouritesPage />} />
+          <Route path="contacts" element={<Contacts />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>
