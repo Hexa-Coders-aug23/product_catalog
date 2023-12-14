@@ -6,7 +6,7 @@ import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
 
 export const CartPage: React.FC = () => {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <button type="button" className={styles.goBackButton}>
         <img
           className={styles.goBackButtonIcon}
@@ -34,6 +34,6 @@ export const CartPage: React.FC = () => {
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
