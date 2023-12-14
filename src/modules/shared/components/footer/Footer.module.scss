@@ -1,15 +1,17 @@
-@import '../../../../styles/mixins';
+@import './../../../../App.module.scss';
 
-.container {
-  border-top: 1px solid rgba(226, 230, 233, 1);
+.topLine {
+  display: block;
+  height: 1px;
+  background-color: $color__elements;
 }
 
-footer {
+.footer {
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding: 32px;
-  color: rgba(137, 147, 154, 1);
+  color: $color__secondary;
   font-size: 12px;
   font-weight: 700;
 
@@ -24,8 +26,6 @@ footer {
 }
 
 .footerLogo {
-  display: block;
-  text-align: center;
   width: 89px;
   height: 32px;
 }
@@ -44,9 +44,14 @@ footer {
 }
 
 .footerNavLink {
-  color: rgba(137, 147, 154, 1);
+  color: $color__secondary;
   text-decoration: none;
   font-weight: 800;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken($color__secondary, 30%);
+  }
 }
 
 .footerButton {
@@ -64,10 +69,12 @@ footer {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  color: black;
-  border: 1px solid rgba(180, 189, 195, 1);
+  color: $color__primary;
+  border: 1px solid $color__secondary;
+  transition: background-color 0.3s;
 
   &:hover {
-    background-color: lightgray;
+    background-color: $color__elements;
   }
 }
+
