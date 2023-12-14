@@ -5,15 +5,11 @@ import logoImg from '../../../../static/logo/Nice_Gadgets_logo_combined.svg';
 import iconImg from '../../../../static/icons/Chevron_Arrow_Up.svg';
 
 export const Footer: React.FC = () => {
-  const scrollToTarget = (targetId: string) => {
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -58,7 +54,7 @@ export const Footer: React.FC = () => {
           <p>Back to top</p>
           <button
             type="button"
-            onClick={() => scrollToTarget('header')}
+            onClick={() => scrollToTop()}
             className={styles.circleWithChevrone}
           >
             <img src={iconImg} alt="Chevrone" />
