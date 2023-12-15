@@ -1,0 +1,1 @@
+export type FavoriteItem = number;
