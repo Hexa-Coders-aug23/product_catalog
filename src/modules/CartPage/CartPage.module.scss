@@ -20,6 +20,49 @@
 //     margin-bottom: 80px;
 //   }
 // }
+.emptyCart {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.emptyCartImage {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  // filter: invert(50%) sepia(90%) saturate(3042%) hue-rotate(1deg) brightness(96%) contrast(106%);
+}
+
+.emptyCartTitle {
+  margin-top: 10px;
+  font-family: 'Mont';
+  font-weight: 700;
+  font-size: 13px;
+
+  @include onTablet {
+    margin-top: 15px;
+    font-size: 17px;
+  }
+
+  @include onDesktop {
+    margin-top: 25px;
+    font-size: 26px;
+  }
+}
+
+.emptyCartText {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 11px;
+
+  @include onTablet {
+    font-size: 14px;
+  }
+
+  @include onDesktop {
+    font-size: 18px;
+  }
+}
 
 .goBackButton {
   margin-top: 24px;
@@ -54,10 +97,15 @@
   margin-top: 24px;
   margin-bottom: 32px;
   color: $color__primary;
-  font-size: 48px;
+  font-size: 32px;
+  line-height: 41px;
   font-weight: 800;
-  line-height: 56px;
   letter-spacing: -0.48px;
+
+  @include onTablet {
+    line-height: 56px;
+    font-size: 48px;
+  }
 }
 
 .cartContent {
@@ -118,10 +166,12 @@
   border: none;
   color: $color__white;
   background-color: $color__accent;
+  font-family: 'Mont';
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   cursor: pointer;
+  transition: all 0.5s;
 
   &:hover {
     box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
