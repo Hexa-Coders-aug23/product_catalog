@@ -13,6 +13,7 @@
   top: 0;
   height: 48px;
   gap: 16px;
+  z-index: 2;
   @include displayPosition;
   background-color: $color__white;
   border-bottom: 1px solid $color__elements;

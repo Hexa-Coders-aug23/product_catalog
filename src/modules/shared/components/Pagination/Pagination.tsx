@@ -5,7 +5,7 @@ import prevArrow from '../../../../static/icons/Chevron_Arrow_Left.svg';
 import nextArrow from '../../../../static/icons/Chevron_Arrow_Right.svg';
 
 type Props = {
-  page: number;
+  activePage: number;
   offset: number;
   newRows: string | number;
   totalCount: number;
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const Pagination: React.FC<Props> = ({
-  page,
+  activePage,
   offset,
   newRows,
   totalCount,
@@ -54,11 +54,21 @@ export const Pagination: React.FC<Props> = ({
       );
     },
     PageLinks: (options: any) => {
+      // if (options.view.endPage === options.page
+      //     && options.page + 1 !== options.totalPages) {
+      //   return (
+      //     <span
+      //       className={options.className}
+      //       style={{ userSelect: 'none', display: 'none' }}
+      //     />
+      //   );
+      // }
+
       return (
         <button
           type="button"
           className={classNames(styles.circleButton, {
-            [styles.activeButton]: options.page === page,
+            [styles.activeButton]: options.page === activePage,
           })}
           onClick={options.onClick}
         >

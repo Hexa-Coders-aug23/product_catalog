@@ -9,7 +9,7 @@ type Props = {
 export const ProductsList: React.FC<Props> = ({ phones }) => (
   <div className={styles.itemsContainer}>
     {phones.map(({
-      // itemId,
+      itemId,
       image,
       name,
       price,
@@ -20,7 +20,7 @@ export const ProductsList: React.FC<Props> = ({ phones }) => (
     }) => {
       return (
         <Card
-          // itemId={itemId}
+          key={itemId}
           image={image}
           name={name}
           price={price}

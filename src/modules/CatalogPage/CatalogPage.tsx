@@ -30,21 +30,22 @@ export const CatalogPage: React.FC = () => {
   const [itemsCount, setItemsCount] = useState<string | number>(16);
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(0);
+  const [sortBy, setSortBy] = useState('age');
 
   const newRows = itemsCount === 'all'
     ? totalCount
     : itemsCount;
 
   const getPhones = useCallback(async () => {
-    const { count, rows } = await phoneService.getPhones(page + 1, itemsCount);
+    const { count, rows } = await phoneService.getPhones(page + 1, itemsCount, sortBy);
 
     setTotalCount(count);
     setPhones(rows);
-  }, [itemsCount, page]);
+  }, [itemsCount, page, sortBy]);
 
   useEffect(() => {
     getPhones();
-  }, [page, itemsCount, getPhones]);
+  }, [getPhones]);
 
   const onPageChange = (event: PaginatorPageChangeEvent) => {
     const newItems = event.rows === totalCount
@@ -67,6 +68,12 @@ export const CatalogPage: React.FC = () => {
     }
   };
 
+  const onSelectSort = (selectedOption: OnChangeValue<Option, false>) => {
+    if (selectedOption) {
+      setSortBy(selectedOption.value);
+    }
+  };
+
   return (
     <main className={styles.container}>
       <div className={styles.breadcrumbs}>
@@ -83,6 +90,7 @@ export const CatalogPage: React.FC = () => {
           label="Sort by"
           options={sortOptions}
           defaultOptionId={0}
+          onSelectSort={onSelectSort}
         />
         <CustomSelect
           label="Items on page"
@@ -91,14 +99,18 @@ export const CatalogPage: React.FC = () => {
           onSelectAmount={onSelectAmount}
         />
       </div>
+
       <ProductsList phones={phones} />
-      <Pagination
-        page={page}
-        offset={offset}
-        newRows={newRows}
-        totalCount={totalCount}
-        onPageChange={onPageChange}
-      />
+
+      {phones?.length !== totalCount && (
+        <Pagination
+          activePage={page}
+          offset={offset}
+          newRows={newRows}
+          totalCount={totalCount}
+          onPageChange={onPageChange}
+        />
+      )}
     </main>
   );
 };
