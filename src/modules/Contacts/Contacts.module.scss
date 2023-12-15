@@ -1,7 +1,7 @@
-@import '../../styles//blocks/grid';
 @import '../../styles/colors';
 @import '../../styles/typography';
 @import '../../styles/mixins';
+@import '../../styles/blocks/grid';
 
 .main {
   padding: 15px 15px 60px;
@@ -23,32 +23,14 @@
 .contactIcon {
   height: 16px;
   width: 16px;
-  margin-right: 10px;
-
-  @include onTablet {
-    height: 18px;
-    width: 18px;
-  }
-
-  @include onDesktop {
-    height: 20px;
-    width: 20px;
-  }
+  margin-right: 8px;
 }
-
 
 .textContact {
   font-family: 'Mont', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-
-  @include onTablet {
-    font-size: 18px;
-  }
-
-  @include onDesktop {
-    font-size: 20px;
-  }
+  font-size: 12px;
+  color: $color__secondary;
 }
 
 .main_contacts {
@@ -90,122 +72,12 @@
   }
 
   @include onDesktop {
-    grid-template-columns: repeat(auto-fill, minmax(220px, calc(33.33% - 32px)));
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(220px, calc(33.33% - 32px))
+    );
     margin-top: 60px;
     gap: 64px 32px;
   }
 }
 
-.member {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 18px;
-  max-width: 100%;
-  min-width: 200px;
-  border: 1px solid $color__secondary;
-  border-radius: 5%;
-
-  @include onTablet {
-    padding: 24px;
-  }
-
-  @include onDesktop {
-    padding: 32px;
-  }
-}
-
-.photo {
-  margin-top: 7px;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  @include onTablet {
-    margin-top: 10px;
-    height: 110px;
-    width: 110px;
-  }
-
-  @include onDesktop {
-    height: 125px;
-    width: 125px;
-  }
-}
-
-.photoMaksim {
-  object-fit: cover;
-}
-
-.name {
-  display: flex;
-  text-align: center;
-  margin-top: 20px;
-  font-size: 20px;
-  color: $color__primary;
-  font-weight: 600;
-
-  @include onTablet {
-    margin-top: 24px;
-    font-size: 24px;
-  }
-
-  @include onDesktop {
-    margin-top: 30px;
-    font-size: 28px;
-  }
-}
-
-.services {
-  margin-top: 28px;
-
-  @include onTablet {
-    margin-top: 32px;
-  }
-
-  @include onDesktop {
-    margin-top: 40px;
-  }
-}
-
-.iconParams {
-  border: 1px solid $color__secondary;
-  border-radius: 15%;
-  padding: 10px 7px 15px;
-  transition: transform 0.3s ease-in-out;
-  height: 40px;
-  width: 40px;
-
-  @include onTablet {
-    height: 44px;
-    width: 44px;
-  }
-
-  @include onDesktop {
-    height: 52px;
-    width: 52px;
-  }
-
-  &:hover {
-    transform: scale(1.2);
-    box-shadow: 3px 3px 0 0 $color__icons;
-  }
-}
-
-.gmail {
-  margin-right: 20px;
-}
-
-.linkedin {
-  margin-right: 20px;
-}
-
-.socialMedia {
-  margin-top: 20px;
-  margin-bottom: 48px;
-}
