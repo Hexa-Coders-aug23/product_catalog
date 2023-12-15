@@ -10,11 +10,11 @@ enum QuantityOperation {
 }
 
 type DefaultValuesType = {
-  cartItems: CartItem[] | FavoriteItem[];
+  cartItems: CartItem[];
   addToCart: (id: number) => void;
   removeFromCart: (id: number) => void;
   changeQuantity: (id: number, operation: QuantityOperation) => void;
-  favoriteItems: CartItem[] | FavoriteItem[];
+  favoriteItems: FavoriteItem[];
   handleFavorite: (id: number) => void;
 };
 
