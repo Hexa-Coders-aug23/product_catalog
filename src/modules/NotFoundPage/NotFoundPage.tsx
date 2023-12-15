@@ -6,7 +6,7 @@ import errorImage from '../../static/error/error_image.jpeg';
 
 export const NotFoundPage: React.FC = () => {
   return (
-    <article className={styles.error}>
+    <main className={styles.error}>
       <h1 className={styles.error_type}>Page not found</h1>
       <p className={styles.error_discription}>
         Sorry, we couldn&apos;t find the page you&apos;re looking for. Perhabs
@@ -21,6 +21,6 @@ export const NotFoundPage: React.FC = () => {
       </p>
 
       <img src={errorImage} alt="not found" className={styles.error_image} />
-    </article>
+    </main>
   );
 };
