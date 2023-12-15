@@ -32,10 +32,6 @@ export const CatalogPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [sortBy, setSortBy] = useState('age');
 
-  const newRows = itemsCount === 'all'
-    ? totalCount
-    : itemsCount;
-
   const getPhones = useCallback(async () => {
     const { count, rows } = await phoneService.getPhones(page + 1, itemsCount, sortBy);
 
@@ -106,7 +102,7 @@ export const CatalogPage: React.FC = () => {
         <Pagination
           activePage={page}
           offset={offset}
-          newRows={newRows}
+          rows={itemsCount}
           totalCount={totalCount}
           onPageChange={onPageChange}
         />

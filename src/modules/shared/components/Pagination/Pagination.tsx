@@ -7,7 +7,7 @@ import nextArrow from '../../../../static/icons/Chevron_Arrow_Right.svg';
 type Props = {
   activePage: number;
   offset: number;
-  newRows: string | number;
+  rows: string | number;
   totalCount: number;
   onPageChange: (event: PaginatorPageChangeEvent) => void;
 };
@@ -15,10 +15,14 @@ type Props = {
 export const Pagination: React.FC<Props> = ({
   activePage,
   offset,
-  newRows,
+  rows,
   totalCount,
   onPageChange,
 }) => {
+  const newRows = typeof rows === 'string'
+    ? totalCount
+    : rows;
+
   const template = {
     layout: 'PrevPageLink PageLinks NextPageLink',
     PrevPageLink: (options: any) => {
@@ -54,15 +58,17 @@ export const Pagination: React.FC<Props> = ({
       );
     },
     PageLinks: (options: any) => {
-      // if (options.view.endPage === options.page
-      //     && options.page + 1 !== options.totalPages) {
-      //   return (
-      //     <span
-      //       className={options.className}
-      //       style={{ userSelect: 'none', display: 'none' }}
-      //     />
-      //   );
-      // }
+      if ((options.view.endPage === options.page
+          && options.page !== activePage)
+          || (options.view.startPage === options.page
+            && options.view.endPage === activePage)) {
+        return (
+          <span
+            className={options.className}
+            style={{ userSelect: 'none', display: 'none' }}
+          />
+        );
+      }
 
       return (
         <button
@@ -82,7 +88,7 @@ export const Pagination: React.FC<Props> = ({
     <Paginator
       template={template}
       first={offset}
-      rows={newRows as number}
+      rows={newRows}
       totalRecords={totalCount}
       onPageChange={onPageChange}
     />
