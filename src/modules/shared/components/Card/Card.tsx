@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import cn from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import styles from './Card.module.scss';
 import defaultIcon from './Favourites.png';
 import favoritedIcon from './Union.png';
+import { PhonesContext } from '../../../../context/GlobalProvider';
 
 type Props = {
   // itemId: string;
+  id: number;
   image: string;
   name: string;
   price: number;
@@ -17,6 +20,7 @@ type Props = {
 
 export const Card: React.FC<Props> = ({
   // itemId,
+  id,
   image,
   capacity,
   screen,
@@ -25,8 +29,13 @@ export const Card: React.FC<Props> = ({
   price,
   name,
 }) => {
-  const isAlreadyAddedToCart = false;
-  const isAlreadyFavorited = false;
+  const {
+    addToCart, handleFavorite, favoriteItems, cartItems,
+  }
+    = useContext(PhonesContext);
+  const isAlreadyAddedToCart = cartItems.some((item) => item.id === id);
+  const navigate = useNavigate();
+  const isAlreadyFavorited = favoriteItems.includes(id);
 
   return (
     <article className={styles.card} data-qa="card">
@@ -70,12 +79,21 @@ export const Card: React.FC<Props> = ({
           className={cn(styles.addToCartButton, {
             [styles.alreadyAddedToCartButton]: isAlreadyAddedToCart,
           })}
+          onClick={
+            !isAlreadyAddedToCart
+              ? () => addToCart(id)
+              : () => navigate('/cart')
+          }
           data-qa="hover"
         >
           {isAlreadyAddedToCart ? 'Added to cart' : 'Add to cart'}
         </button>
 
-        <button className={styles.addToCompareButton} type="button">
+        <button
+          className={styles.addToCompareButton}
+          type="button"
+          onClick={() => handleFavorite(id)}
+        >
           <img
             className={styles.addToCompareIcon}
             src={isAlreadyFavorited ? favoritedIcon : defaultIcon} // Checks if added to favorites and conditional render

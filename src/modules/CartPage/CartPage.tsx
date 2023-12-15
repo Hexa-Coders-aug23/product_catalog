@@ -6,52 +6,8 @@ import emptyCartImage from './1942770.png';
 // import { CartItemsList } from './CartItemsList/CartItemsList';
 
 export const CartPage: React.FC = () => {
-  // const phones = [
-  //   {
-  //     id: '1',
-  //     category: 'phones',
-  //     phoneId: 'apple-iphone-7-32gb-black',
-  //     itemId: 'apple-iphone-7-32gb-black',
-  //     name: 'Apple iPhone 7 32GB Black',
-  //     fullPrice: 400,
-  //     price: 375,
-  //     screen: "4.7' IPS",
-  //     capacity: '32GB',
-  //     color: 'black',
-  //     ram: '2GB',
-  //     year: 2016,
-  //     image: 'img/phones/apple-iphone-7/black/00.jpg',
-  //   },
-  //   {
-  //     id: '2',
-  //     category: 'phones',
-  //     phoneId: 'apple-iphone-7-plus-32gb-black',
-  //     itemId: 'apple-iphone-7-plus-32gb-black',
-  //     name: 'Apple iPhone 7 Plus 32GB Black',
-  //     fullPrice: 540,
-  //     price: 500,
-  //     screen: "5.5' IPS",
-  //     capacity: '32GB',
-  //     color: 'black',
-  //     ram: '3GB',
-  //     year: 2016,
-  //     image: 'img/phones/apple-iphone-7-plus/black/00.jpg',
-  //   },
-  //   {
-  //     id: '3',
-  //     category: 'phones',
-  //     phoneId: 'apple-iphone-8-64gb-gold',
-  //     itemId: 'apple-iphone-8-64gb-gold',
-  //     name: 'Apple iPhone 8 64GB Gold',
-  //     fullPrice: 600,
-  //     price: 550,
-  //     screen: "4.7' IPS",
-  //     capacity: '64GB',
-  //     color: 'gold',
-  //     ram: '2GB',
-  //     year: 2017,
-  //     image: 'img/phones/apple-iphone-8/gold/00.jpg',
-  //   }];
+  // const { cartItems } = useContext(PhonesContext);
+  // const phones = Promise.all()
 
   return (
     <main className={styles.container}>

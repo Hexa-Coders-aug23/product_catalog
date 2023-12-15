@@ -74,15 +74,15 @@ export const PhonesProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const handleFavorite = (id: number) => {
-    const udpatedItems = [...favoriteItems];
+    let updatedItems = [...favoriteItems];
 
     if (favoriteItems.includes(id)) {
-      udpatedItems.filter((item) => item !== id);
+      updatedItems = updatedItems.filter((item) => item !== id);
     } else {
-      udpatedItems.push(id);
+      updatedItems.push(id);
     }
 
-    setFavoriteItems(udpatedItems);
+    setFavoriteItems(updatedItems);
   };
 
   const contextValue = {

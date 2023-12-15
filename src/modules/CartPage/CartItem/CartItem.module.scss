@@ -105,6 +105,7 @@
   display: block;
   padding: 8px;
   margin: -8px -8px -8px -6.8px;
+  transition: all .5s;
 
   &:active {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(34deg)
