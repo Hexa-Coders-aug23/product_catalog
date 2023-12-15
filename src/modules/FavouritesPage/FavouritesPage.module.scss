@@ -1,0 +1,76 @@
+@import '../../styles//blocks/grid';
+@import '../../styles/colors';
+@import '../../styles/typography';
+@import '../../styles/mixins';
+@import '../../styles/blocks/container';
+
+.container {
+  @include onTablet() {
+    padding-top: 24px;
+  }
+}
+
+.favourites {
+  font-family: 'Mont';
+  display: flex;
+  align-items: center;
+}
+
+.favouriteIcon {
+  height: 16px;
+  width: 16px;
+  margin-right: 8px;
+
+  @include onTablet {
+    height: 18px;
+    width: 18px;
+  }
+
+  @include onDesktop {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.textFavourites {
+  color: $color__secondary;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.main_favourites {
+  font-family: 'Mont';
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 41px;
+  letter-spacing: -0.32px;
+  color: $color__primary;
+  margin-top: 24px;
+
+  @include onTablet {
+    margin-top: 40px;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 56px;
+    letter-spacing: -0.48px;
+  }
+}
+
+.itemsAmount {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  margin-top: 8px;
+  color: $color__secondary;
+}
+
+.phones {
+  font-family: 'Mont';
+
+  @include pageGrid;
+  margin-top: 32px;
+
+  @include onTablet {
+    margin-top: 40px;
+  }
+}
