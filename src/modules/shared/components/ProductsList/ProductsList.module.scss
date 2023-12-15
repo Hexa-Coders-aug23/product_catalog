@@ -2,4 +2,9 @@
 
 .itemsContainer {
   @include pageGrid;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
 }
