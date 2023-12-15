@@ -1,6 +1,7 @@
 @import '../../../../styles/colors';
 
 .circleWithChevrone {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,6 +27,7 @@
 }
 
 .circleButton {
+  cursor: pointer;
   width: 32px;
   height: 32px;
   border-radius: 50%;

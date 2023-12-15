@@ -1,6 +1,5 @@
-/* eslint-disable max-len */
 import React, { useCallback, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import { PaginatorPageChangeEvent } from 'primereact/paginator';
 import { OnChangeValue } from 'react-select';
 import * as phoneService from '../../api/phones';
@@ -10,6 +9,7 @@ import { Option } from '../../types/Option';
 import { ProductsList } from '../shared/components/ProductsList';
 import { CustomSelect } from '../shared/components/CustomSelect/CustomSelect';
 import { Pagination } from '../shared/components/Pagination/Pagination';
+import { getSearchWith } from '../../utils/searchWithParams';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -25,45 +25,65 @@ const amountOptions: Option[] = [
 ];
 
 export const CatalogPage: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [phones, setPhones] = useState<Phone[]>([]);
   const [offset, setOffset] = useState(0);
-  const [itemsCount, setItemsCount] = useState<string | number>(16);
   const [totalCount, setTotalCount] = useState(0);
-  const [page, setPage] = useState(0);
 
-  const newRows = itemsCount === 'all'
-    ? totalCount
-    : itemsCount;
+  const pageQuery = +(searchParams.get('page') || 0);
+  const perPage = searchParams.get('perPage') || 'all';
+  const sortBy = searchParams.get('sortBy') || 'age';
+
+  const itemsCount = perPage === 'all' ? perPage : +perPage;
+  const page = pageQuery === 0 ? pageQuery : pageQuery - 1;
 
   const getPhones = useCallback(async () => {
-    const { count, rows } = await phoneService.getPhones(page + 1, itemsCount);
+    const { count, rows } = await phoneService.getPhones(
+      page + 1,
+      itemsCount,
+      sortBy,
+    );
 
     setTotalCount(count);
     setPhones(rows);
-  }, [itemsCount, page]);
+  }, [itemsCount, page, sortBy]);
 
   useEffect(() => {
     getPhones();
-  }, [page, itemsCount, getPhones]);
+  }, [getPhones]);
+
+  const setSearchWith = (params: any) => {
+    const search = getSearchWith(params, searchParams);
+
+    setSearchParams(search);
+  };
 
   const onPageChange = (event: PaginatorPageChangeEvent) => {
     const newItems = event.rows === totalCount
-      ? 'all'
+      ? null
       : event.rows;
 
-    setPage(event.page);
+    const pagePaginator = event.page === 0
+      ? null
+      : event.page + 1;
+
+    setSearchWith({ page: pagePaginator, perPage: newItems });
     setOffset(event.first);
-    setItemsCount(newItems);
   };
 
   const onSelectAmount = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      const newItems = selectedOption.value === 'all'
-        ? selectedOption.value
-        : +selectedOption.value;
+      const amount = selectedOption.value === 'all'
+        ? null
+        : selectedOption.value;
 
-      setPage(0);
-      setItemsCount(newItems);
+      setSearchWith({ page: null, perPage: amount });
+    }
+  };
+
+  const onSelectSort = (selectedOption: OnChangeValue<Option, false>) => {
+    if (selectedOption) {
+      setSearchWith({ sortBy: selectedOption.value });
     }
   };
 
@@ -83,22 +103,27 @@ export const CatalogPage: React.FC = () => {
           label="Sort by"
           options={sortOptions}
           defaultOptionId={0}
+          onSelectSort={onSelectSort}
         />
         <CustomSelect
           label="Items on page"
           options={amountOptions}
-          defaultOptionId={2}
+          defaultOptionId={3}
           onSelectAmount={onSelectAmount}
         />
       </div>
+
       <ProductsList phones={phones} />
-      <Pagination
-        page={page}
-        offset={offset}
-        newRows={newRows}
-        totalCount={totalCount}
-        onPageChange={onPageChange}
-      />
+
+      {phones?.length !== totalCount && (
+        <Pagination
+          activePage={page}
+          offset={offset}
+          rows={itemsCount}
+          totalCount={totalCount}
+          onPageChange={onPageChange}
+        />
+      )}
     </main>
   );
 };
