@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.3c7fb90e.css",
-    "main.js": "/product_catalog/static/js/main.7f90663e.js",
+    "main.css": "/product_catalog/static/css/main.a60f9ec5.css",
+    "main.js": "/product_catalog/static/js/main.10d30308.js",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
     "static/media/error_image.jpeg": "/product_catalog/static/media/error_image.157dafded0d0a46866a8.jpeg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
@@ -11,6 +11,7 @@
     "static/media/Olena.jpeg": "/product_catalog/static/media/Olena.bbbbd5dbb89588a6d7c4.jpeg",
     "static/media/Solomia.jpeg": "/product_catalog/static/media/Solomia.982bef15c5f289452310.jpeg",
     "static/media/Nazar.jpeg": "/product_catalog/static/media/Nazar.19bf93804d95c75d191f.jpeg",
+    "static/media/1942770.png": "/product_catalog/static/media/1942770.52ab0b622a006fb6b5a5.png",
     "static/media/Svytoslav.jpeg": "/product_catalog/static/media/Svytoslav.4917513a8b3108fec5d1.jpeg",
     "static/media/Dmytro.jpeg": "/product_catalog/static/media/Dmytro.fd101da6923844f93662.jpeg",
     "static/media/Git.svg": "/product_catalog/static/media/Git.3ecf27711255ef69c6785f9440457d46.svg",
@@ -26,11 +27,11 @@
     "static/media/Chevron_Arrow_Right.svg": "/product_catalog/static/media/Chevron_Arrow_Right.e028d3889646e0b5e56cf54f47bb701a.svg",
     "static/media/Chevron_Arrow_Up.svg": "/product_catalog/static/media/Chevron_Arrow_Up.1ea6958a07717117d3d583ab6fe7dcbd.svg",
     "index.html": "/product_catalog/index.html",
-    "main.3c7fb90e.css.map": "/product_catalog/static/css/main.3c7fb90e.css.map",
-    "main.7f90663e.js.map": "/product_catalog/static/js/main.7f90663e.js.map"
+    "main.a60f9ec5.css.map": "/product_catalog/static/css/main.a60f9ec5.css.map",
+    "main.10d30308.js.map": "/product_catalog/static/js/main.10d30308.js.map"
   },
   "entrypoints": [
-    "static/css/main.3c7fb90e.css",
-    "static/js/main.7f90663e.js"
+    "static/css/main.a60f9ec5.css",
+    "static/js/main.10d30308.js"
   ]
 }
