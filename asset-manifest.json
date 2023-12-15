@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.2ced6069.css",
-    "main.js": "/product_catalog/static/js/main.41bd7f5f.js",
+    "main.css": "/product_catalog/static/css/main.3c7fb90e.css",
+    "main.js": "/product_catalog/static/js/main.7f90663e.js",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
     "static/media/error_image.jpeg": "/product_catalog/static/media/error_image.157dafded0d0a46866a8.jpeg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
@@ -24,14 +24,13 @@
     "static/media/Menu.svg": "/product_catalog/static/media/Menu.73ddde2c093f9fb313b9.svg",
     "static/media/Chevron_Arrow_Left.svg": "/product_catalog/static/media/Chevron_Arrow_Left.7460d67936be8c4491a8997e5e905650.svg",
     "static/media/Chevron_Arrow_Right.svg": "/product_catalog/static/media/Chevron_Arrow_Right.e028d3889646e0b5e56cf54f47bb701a.svg",
-    "static/media/Chevron_Arrow_Down.svg": "/product_catalog/static/media/Chevron_Arrow_Down.98c9dd6d98b47f2f1977.svg",
     "static/media/Chevron_Arrow_Up.svg": "/product_catalog/static/media/Chevron_Arrow_Up.1ea6958a07717117d3d583ab6fe7dcbd.svg",
     "index.html": "/product_catalog/index.html",
-    "main.2ced6069.css.map": "/product_catalog/static/css/main.2ced6069.css.map",
-    "main.41bd7f5f.js.map": "/product_catalog/static/js/main.41bd7f5f.js.map"
+    "main.3c7fb90e.css.map": "/product_catalog/static/css/main.3c7fb90e.css.map",
+    "main.7f90663e.js.map": "/product_catalog/static/js/main.7f90663e.js.map"
   },
   "entrypoints": [
-    "static/css/main.2ced6069.css",
-    "static/js/main.41bd7f5f.js"
+    "static/css/main.3c7fb90e.css",
+    "static/js/main.7f90663e.js"
   ]
 }
