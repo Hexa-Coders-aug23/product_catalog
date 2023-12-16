@@ -29,6 +29,9 @@
 
   @include onDesktop {
     margin: 19px 24px;
+    img {
+    height: 28px;
+    }
   }
 }
 

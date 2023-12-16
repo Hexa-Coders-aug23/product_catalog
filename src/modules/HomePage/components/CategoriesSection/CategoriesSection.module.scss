@@ -1,0 +1,67 @@
+@import '../../../../App.module.scss';
+
+.categoriesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+
+  @include onTablet {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  @include onDesktop {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.blockName {
+  @include sectionName
+}
+.blockWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  @include onTablet {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  @include onDesktop {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.categoryBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  text-decoration: none;
+}
+
+.categoryTitle {
+  font-family: 'Mont', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25.56px;
+  color: $color__primary;
+}
+
+.categoryAmount {
+  @include amount(0,0);
+}
+
+.categoryImg {
+  width: 100%;
+  max-width: 386px;
+  border-radius: 8px;
+}

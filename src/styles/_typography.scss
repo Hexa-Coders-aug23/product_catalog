@@ -18,3 +18,33 @@
   font-weight: 700;
   src: url('../fonts/Mont-Bold.ttf');
 }
+
+@mixin sectionName {
+  font-family: 'Mont', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 30.8px;
+  color: $color__primary;
+  @content;
+
+  @include onTablet;
+  @include onDesktop {
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -1%
+  }
+}
+
+
+@mixin amount ($margin-bottom, $margin-bottom-tablet) {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;;
+  line-height: 21px;
+  color: $color__secondary;
+  margin-bottom: $margin-bottom;
+
+  @include onTablet {
+    margin-bottom: $margin-bottom-tablet;
+  }
+}

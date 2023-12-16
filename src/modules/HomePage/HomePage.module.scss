@@ -1,0 +1,30 @@
+@import '../../App.module.scss';
+
+.mainWrapper {
+  height: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 56px;
+  margin: 24px auto 64px;
+
+  @include onTablet {
+    gap: 64px;
+    margin: 24px 24px 64px;
+  }
+
+  @include onDesktop {
+    gap: 80px;
+    margin: 32px 32px 80px;
+  }
+
+  section {
+    // width: 100%;
+    background-color: $color__elements;
+    max-width: 1136px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
