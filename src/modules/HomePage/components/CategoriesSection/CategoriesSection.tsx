@@ -1,42 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as phoneService from '../../../../api/phones';
+import {
+  getPhonesLength,
+  getTabletsLength,
+  getAccessoriesLength,
+} from '../../../../api/categoriesAmount';
 import styles from './CategoriesSection.module.scss';
-import { Phone } from '../../../../types/Phone';
 import categoryPhonesImg from '../../../../static/categoryImg-Phones.png';
 import categoryTabletsImg from '../../../../static/categoryImg-Tablets.png';
 import categoryAccImg from '../../../../static/categoryImg-Accessories.png';
 
 export const CategoriesSection: React.FC = () => {
-  const [phonesCount, setPhonesCount] = useState<Phone[]>([]);
+  const [phonesAmount, setPhonesAmount] = useState(0);
+  const [tabletsAmount, setTabletsAmount] = useState(0);
+  const [accessoriesAmount, setAccessoriesAmount] = useState(0);
 
   const getPhones = async () => {
-    const data = await phoneService.getPhones();
+    const data = await getPhonesLength();
 
-    setPhonesCount(data.count);
+    setPhonesAmount(data.phonesCount);
+  };
+
+  const getTablets = async () => {
+    const data = await getTabletsLength();
+
+    setTabletsAmount(data.tabletsCount);
+  };
+
+  const getAccessories = async () => {
+    const data = await getAccessoriesLength();
+
+    setAccessoriesAmount(data.accessoriesCount);
   };
 
   useEffect(() => {
     getPhones();
+    getTablets();
+    getAccessories();
   }, []);
 
   const productCategories = [
     {
       to: '/phones',
       title: 'Mobile phones',
-      amount: phonesCount,
+      amount: phonesAmount,
       img: categoryPhonesImg,
     },
     {
       to: '/tablets',
       title: 'Tablets',
-      amount: 36,
+      amount: tabletsAmount,
       img: categoryTabletsImg,
     },
     {
       to: '/accessories',
       title: 'Accessories',
-      amount: 123,
+      amount: accessoriesAmount,
       img: categoryAccImg,
     },
   ];
