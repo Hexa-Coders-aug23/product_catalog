@@ -53,6 +53,7 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
           <div className={styles.buttonWrapper}>
             <NavLink
               to="favourites"
+              onClick={() => setIsOpen(false)}
               className={({ isActive }) => cn([styles.iconWrapper], {
                 [styles.active]: isActive,
               })}
@@ -62,6 +63,7 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
 
             <NavLink
               to="cart"
+              onClick={() => setIsOpen(false)}
               className={({ isActive }) => cn([styles.iconWrapper], {
                 [styles.active]: isActive,
               })}

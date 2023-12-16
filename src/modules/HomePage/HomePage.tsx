@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './HomePage.module.scss';
 import { BannerSection } from './components/BannerSection';
-import { BrandNewSection } from './components/BrandNewSection';
 import { CategoriesSection } from './components/CategoriesSection';
-import { HotPricesSection } from './components/HotPricesSection';
 
 export const HomePage: React.FC = () => {
   return (
-    <main className={styles.mainWrapper}>
+    <main className={styles.container}>
+      <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
       <BannerSection />
-      <BrandNewSection />
+      <div>Brand-New Section</div>
       <CategoriesSection />
-      <HotPricesSection />
+      <div>Hot prices</div>
     </main>
   );
 };
