@@ -7,6 +7,7 @@
 }
 
 .header {
+  z-index: 2;
   position: sticky;
   width: 100%;
   right: 0;
@@ -25,12 +26,11 @@
 
 .logo {
   margin: 14px 16px;
-  @include hoverEffect(transform, scale(1.2));
 
   @include onDesktop {
     margin: 19px 24px;
     img {
-    height: 28px;
+      height: 28px;
     }
   }
 }
@@ -58,18 +58,18 @@
   display: none;
 
   &:hover {
+    color: $color__primary;
     text-shadow: 1px 2px 2px $color__hover-and-bg;
+    transition: all, 1s;
   }
 
   @include onTablet {
     @include pageNamePosition;
-    @include hoverEffect(transform, scale(1.1));
   }
 
   @include onDesktop {
     height: 100%;
     @include pageNamePosition;
-    @include hoverEffect(transform, scale(1.1));
   }
 }
 
@@ -118,7 +118,6 @@
   background-position: center;
   align-items: center;
   @include displayPosition;
-  @include hoverEffect(transform, scale(1.2));
 }
 
 .favourites {

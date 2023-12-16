@@ -8,12 +8,12 @@ import categoryTabletsImg from '../../../../static/categoryImg-Tablets.png';
 import categoryAccImg from '../../../../static/categoryImg-Accessories.png';
 
 export const CategoriesSection: React.FC = () => {
-  const [, setPhones] = useState<Phone[]>([]);
+  const [phonesCount, setPhonesCount] = useState<Phone[]>([]);
 
   const getPhones = async () => {
     const data = await phoneService.getPhones();
 
-    setPhones(data);
+    setPhonesCount(data.count);
   };
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const CategoriesSection: React.FC = () => {
     {
       to: '/phones',
       title: 'Mobile phones',
-      amount: 95,
+      amount: phonesCount,
       img: categoryPhonesImg,
     },
     {

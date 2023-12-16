@@ -19,7 +19,7 @@
 }
 
 .blockName {
-  @include sectionName
+  @include sectionName;
 }
 .blockWrapper {
   box-sizing: border-box;
@@ -57,7 +57,7 @@
 }
 
 .categoryAmount {
-  @include amount(0,0);
+  @include amount(0, 0);
 }
 
 .categoryImg {
