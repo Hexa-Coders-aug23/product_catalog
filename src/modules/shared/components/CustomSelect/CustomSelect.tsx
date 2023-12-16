@@ -50,7 +50,7 @@ const customStyles = {
   }),
 };
 
-export const CustomSelect:React.FC<Props> = ({
+export const CustomSelect: React.FC<Props> = ({
   label,
   options,
   defaultOptionId,
@@ -59,9 +59,7 @@ export const CustomSelect:React.FC<Props> = ({
 }) => {
   return (
     <div className={styles.selectWrapper}>
-      <label className={styles.selectLabel}>
-        {label}
-      </label>
+      <label className={styles.selectLabel}>{label}</label>
       <Select
         className={styles.select}
         styles={customStyles}

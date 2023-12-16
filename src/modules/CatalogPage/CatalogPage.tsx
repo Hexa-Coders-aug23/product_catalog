@@ -59,13 +59,9 @@ export const CatalogPage: React.FC = () => {
   };
 
   const onPageChange = (event: PaginatorPageChangeEvent) => {
-    const newItems = event.rows === totalCount
-      ? null
-      : event.rows;
+    const newItems = event.rows === totalCount ? null : event.rows;
 
-    const pagePaginator = event.page === 0
-      ? null
-      : event.page + 1;
+    const pagePaginator = event.page === 0 ? null : event.page + 1;
 
     setSearchWith({ page: pagePaginator, perPage: newItems });
     setOffset(event.first);
@@ -73,9 +69,8 @@ export const CatalogPage: React.FC = () => {
 
   const onSelectAmount = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      const amount = selectedOption.value === 'all'
-        ? null
-        : selectedOption.value;
+      const amount
+        = selectedOption.value === 'all' ? null : selectedOption.value;
 
       setSearchWith({ page: null, perPage: amount });
     }

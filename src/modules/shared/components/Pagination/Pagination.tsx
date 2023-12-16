@@ -19,9 +19,7 @@ export const Pagination: React.FC<Props> = ({
   totalCount,
   onPageChange,
 }) => {
-  const newRows = typeof rows === 'string'
-    ? totalCount
-    : rows;
+  const newRows = typeof rows === 'string' ? totalCount : rows;
 
   const template = {
     layout: 'PrevPageLink PageLinks NextPageLink',
@@ -33,11 +31,7 @@ export const Pagination: React.FC<Props> = ({
           onClick={options.onClick}
           disabled={options.disabled}
         >
-          <img
-            alt="Prev"
-            src={prevArrow}
-            className={styles.arrow}
-          />
+          <img alt="Prev" src={prevArrow} className={styles.arrow} />
         </button>
       );
     },
@@ -49,19 +43,17 @@ export const Pagination: React.FC<Props> = ({
           onClick={options.onClick}
           disabled={options.disabled}
         >
-          <img
-            alt="Next"
-            src={nextArrow}
-            className={styles.arrow}
-          />
+          <img alt="Next" src={nextArrow} className={styles.arrow} />
         </button>
       );
     },
     PageLinks: (options: any) => {
-      if ((options.view.endPage === options.page
+      if (
+        (options.view.endPage === options.page
           && options.page !== activePage)
-          || (options.view.startPage === options.page
-            && options.view.endPage === activePage)) {
+        || (options.view.startPage === options.page
+          && options.view.endPage === activePage)
+      ) {
         return (
           <span
             className={options.className}

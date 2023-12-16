@@ -20,7 +20,7 @@
   &:disabled {
     border-color: $color__elements;
 
-    &> .arrow {
+    & > .arrow {
       filter: none;
     }
   }

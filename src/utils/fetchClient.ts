@@ -8,16 +8,15 @@ export const requests = {
     page?: number,
     perPage?: number | string,
     sortBy?: string,
-  ) => (
-    axios.get(`${BASE_URL}${pathname}`, {
+  ) => axios
+    .get(`${BASE_URL}${pathname}`, {
       params: {
         page,
         perPage,
         sortBy,
       },
     })
-  )
-    .then(response => response.data)
+    .then((response) => response.data)
     .catch((error) => {
       throw new Error(error);
     }),
