@@ -10,6 +10,7 @@ import { ProductsList } from '../shared/components/ProductsList';
 import { CustomSelect } from '../shared/components/CustomSelect/CustomSelect';
 import { Pagination } from '../shared/components/Pagination/Pagination';
 import { getSearchWith } from '../../utils/searchWithParams';
+import { Loader } from '../shared/components/Loader';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -29,6 +30,7 @@ export const CatalogPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
   const [offset, setOffset] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const pageQuery = +(searchParams.get('page') || 0);
   const perPage = searchParams.get('perPage') || 'all';
@@ -44,6 +46,7 @@ export const CatalogPage: React.FC = () => {
       sortBy,
     );
 
+    setIsLoading(false);
     setTotalCount(count);
     setPhones(rows);
   }, [itemsCount, page, sortBy]);
@@ -113,7 +116,11 @@ export const CatalogPage: React.FC = () => {
         />
       </div>
 
-      <ProductsList phones={phones} />
+      {isLoading ? (
+        <Loader times={4} className={styles.loader} />
+      ) : (
+        <ProductsList phones={phones} />
+      )}
 
       {phones?.length !== totalCount && (
         <Pagination
