@@ -8,28 +8,29 @@ type Props = {
   items: Breadcrumb[];
 };
 
-export const Breadcrumbs: React.FC<Props> = ({ items }) => {
-  return (
-    <nav className={styles.breadcrumbs}>
-      {items.map((item, index) => {
-        return (
-          <React.Fragment
-            key={item.label}
+export const Breadcrumbs: React.FC<Props> = ({ items }) => (
+  <nav className={styles.breadcrumbs}>
+    {items.map((item, index) => {
+      const firstItem = index === 0;
+      const lastItem = index === items.length - 1;
+
+      return (
+        <React.Fragment
+          key={item.label}
+        >
+          <Link
+            to={item.url}
+            className={classNames({
+              [styles.homeIcon]: firstItem,
+              [styles.step]: !firstItem,
+              [styles.disabled]: lastItem,
+            })}
           >
-            <Link
-              to={item.url}
-              className={classNames({
-                [styles.homeIcon]: index === 0,
-                [styles.step]: index !== 0,
-                [styles.disabled]: index === items.length - 1,
-              })}
-            >
-              {item.label}
-            </Link>
-            {index !== items.length - 1 && <div className={styles.iconNext} />}
-          </React.Fragment>
-        );
-      })}
-    </nav>
-  );
-};
+            {item.label}
+          </Link>
+          {!lastItem && <div className={styles.iconNext} />}
+        </React.Fragment>
+      );
+    })}
+  </nav>
+);
