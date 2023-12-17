@@ -4,11 +4,6 @@
 @import '../../styles/mixins';
 @import '../../styles/blocks/container';
 
-.container {
-  @include onTablet() {
-    padding-top: 24px;
-  }
-}
 
 .favourites {
   font-family: 'Mont';
@@ -17,19 +12,7 @@
 }
 
 .favouriteIcon {
-  height: 16px;
-  width: 16px;
   margin-right: 8px;
-
-  @include onTablet {
-    height: 18px;
-    width: 18px;
-  }
-
-  @include onDesktop {
-    height: 20px;
-    width: 20px;
-  }
 }
 
 .textFavourites {
@@ -61,7 +44,12 @@
   font-weight: 600;
   line-height: 21px;
   margin-top: 8px;
+  margin-bottom: 32px;
   color: $color__secondary;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
 }
 
 .phones {
@@ -72,5 +60,19 @@
 
   @include onTablet {
     margin-top: 40px;
+  }
+}
+
+.emptyFavoritesText {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 11px;
+
+  @include onTablet {
+    font-size: 14px;
+  }
+
+  @include onDesktop {
+    font-size: 18px;
   }
 }
