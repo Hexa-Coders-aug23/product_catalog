@@ -12,39 +12,6 @@
   }
 }
 
-.breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
-
-  @include onTablet {
-    margin-bottom: 40px;
-  }
-}
-
-.step {
-  color: $color__secondary;
-  text-decoration: none;
-
-  &:hover {
-    color: $color__primary;
-    font-weight: 700;
-  }
-}
-
-.homeIcon {
-  background-image: url(../../static/icons/Home.svg);
-  width: 16px;
-  height: 16px;
-}
-
-.iconNext {
-  background-image: url(../../static/icons/Chevron_Arrow_Right.svg);
-  width: 16px;
-  height: 16px;
-}
-
 .amount {
   display: block;
   color: $color__secondary;

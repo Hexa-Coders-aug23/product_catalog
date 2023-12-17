@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { PaginatorPageChangeEvent } from 'primereact/paginator';
 import { OnChangeValue } from 'react-select';
-import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
-import { Phone } from '../../types/Phone';
-import { Option } from '../../types/Option';
 import { ProductsList } from '../shared/components/ProductsList';
 import { CustomSelect } from '../shared/components/CustomSelect/CustomSelect';
 import { Pagination } from '../shared/components/Pagination/Pagination';
+import { Breadcrumbs } from '../shared/components/Breadcrumbs';
+import * as phoneService from '../../api/phones';
+import { Phone } from '../../types/Phone';
+import { Option } from '../../types/Option';
 import { getSearchWith } from '../../utils/searchWithParams';
 import { Loader } from '../shared/components/Loader';
+import { Breadcrumb } from '../../types/Breadcrumb';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -23,6 +25,11 @@ const amountOptions: Option[] = [
   { value: '8', label: '8' },
   { value: '16', label: '16' },
   { value: 'all', label: 'all' },
+];
+
+const breadcrumbs: Breadcrumb[] = [
+  { label: '', url: '/' },
+  { label: 'Phones', url: '/phones' },
 ];
 
 export const CatalogPage: React.FC = () => {
@@ -95,13 +102,7 @@ export const CatalogPage: React.FC = () => {
 
   return (
     <main className={styles.container}>
-      <div className={styles.breadcrumbs}>
-        <NavLink to="/" className={styles.homeIcon} />
-        <div className={styles.iconNext} />
-        <NavLink to="phones" className={styles.step}>
-          Phones
-        </NavLink>
-      </div>
+      <Breadcrumbs items={breadcrumbs} />
       <h1 className={styles.title}>Mobile phones</h1>
       <p className={styles.amount}>{`${totalCount} models`}</p>
       <div className={styles.selects}>
