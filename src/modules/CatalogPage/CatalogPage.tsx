@@ -33,11 +33,14 @@ export const CatalogPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const pageQuery = +(searchParams.get('page') || 0);
-  const perPage = searchParams.get('perPage') || 'all';
-  const sortBy = searchParams.get('sortBy') || 'age';
+  const perPage = searchParams.get('perPage') || 16;
+  const sortBy = searchParams.get('sort') || 'age';
 
   const itemsCount = perPage === 'all' ? perPage : +perPage;
   const page = pageQuery === 0 ? pageQuery : pageQuery - 1;
+
+  const currentSort = sortOptions.find(option => option.value === sortBy)
+    || sortOptions[0];
 
   const getPhones = useCallback(async () => {
     const { count, rows } = await phoneService.getPhones(
@@ -86,7 +89,7 @@ export const CatalogPage: React.FC = () => {
 
   const onSelectSort = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      setSearchWith({ sortBy: selectedOption.value });
+      setSearchWith({ sort: selectedOption.value });
     }
   };
 
@@ -105,13 +108,13 @@ export const CatalogPage: React.FC = () => {
         <CustomSelect
           label="Sort by"
           options={sortOptions}
-          defaultOptionId={0}
+          value={currentSort.label}
           onSelectSort={onSelectSort}
         />
         <CustomSelect
           label="Items on page"
           options={amountOptions}
-          defaultOptionId={3}
+          value={itemsCount}
           onSelectAmount={onSelectAmount}
         />
       </div>

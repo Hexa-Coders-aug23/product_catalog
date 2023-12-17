@@ -86,6 +86,7 @@ export const Pagination: React.FC<Props> = ({
 
   return (
     <Paginator
+      className={styles.pagination}
       template={template}
       first={offset}
       rows={newRows}

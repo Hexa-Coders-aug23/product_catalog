@@ -5,7 +5,7 @@ import { Option } from '../../../../types/Option';
 type Props = {
   label: string;
   options: Option[];
-  defaultOptionId: number;
+  value: string | number;
   onSelectAmount?: (selectedOption: OnChangeValue<Option, false>) => void;
   onSelectSort?: (selectedOption: OnChangeValue<Option, false>) => void;
 };
@@ -53,7 +53,7 @@ const customStyles = {
 export const CustomSelect:React.FC<Props> = ({
   label,
   options,
-  defaultOptionId,
+  value,
   onSelectAmount,
   onSelectSort,
 }) => {
@@ -65,8 +65,8 @@ export const CustomSelect:React.FC<Props> = ({
       <Select
         className={styles.select}
         styles={customStyles}
+        placeholder={value}
         options={options}
-        defaultValue={options[defaultOptionId]}
         onChange={onSelectAmount || onSelectSort}
       />
     </div>

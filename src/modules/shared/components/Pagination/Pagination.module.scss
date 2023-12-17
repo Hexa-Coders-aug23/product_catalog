@@ -1,4 +1,13 @@
 @import '../../../../styles/colors';
+@import '../../../../styles/mixins';
+
+.pagination {
+  margin-top: 24px;
+
+  @include onTablet {
+    margin-top: 40px;
+  }
+}
 
 .circleWithChevrone {
   cursor: pointer;
