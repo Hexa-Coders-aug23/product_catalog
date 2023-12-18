@@ -1,24 +1,30 @@
 /* eslint-disable no-console */
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './FavouritesPage.module.scss';
-
-import homeIcon from '../../static/icons/Home.svg';
-import vectorIcon from '../../static/icons/Chevron_Arrow_Right.svg';
 import { PhonesContext } from '../../context/GlobalProvider';
 import { getFavorites } from '../../api/favoritePhones';
 import { Phone } from '../../types/Phone';
 import { ProductsList } from '../shared/components/ProductsList';
+import { Breadcrumb } from '../../types/Breadcrumb';
+import { Loader } from '../shared/components/Loader';
+import { Breadcrumbs } from '../shared/components/Breadcrumbs';
+
+const breadcrumbs: Breadcrumb[] = [
+  { label: '', url: '/' },
+  { label: 'Favourites', url: '/favourites' },
+];
 
 export const FavouritesPage: React.FC = () => {
   const { favoriteItems } = useContext(PhonesContext);
   const [phones, setPhones] = useState<Phone[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const favoritesCount = favoriteItems.length;
 
   useEffect(() => {
     const getFavoriteItems = async () => {
       const data = await getFavorites(favoriteItems.toString());
 
+      setIsLoading(false);
       setPhones(data);
     };
 
@@ -33,22 +39,20 @@ export const FavouritesPage: React.FC = () => {
 
   return (
     <main className={styles.container}>
-      <div className={styles.favourites}>
-        <Link to="/home">
-          <img src={homeIcon} alt="icon" className={styles.favouriteIcon} />
-          <img src={vectorIcon} alt="icon" className={styles.favouriteIcon} />
-        </Link>
-
-        <p className={styles.textFavourites}>Favourites</p>
-      </div>
+      <Breadcrumbs items={breadcrumbs} />
 
       <h1 className={styles.main_favourites}>Favourites</h1>
 
       <p className={styles.itemsAmount}>{countTitle}</p>
 
-      {favoritesCount > 0 ? (
-        <ProductsList phones={phones} />
-      ) : (
+      {favoritesCount > 0
+        && (isLoading ? (
+          <Loader times={favoritesCount} className={styles.loader} />
+        ) : (
+          <ProductsList phones={phones} />
+        ))}
+
+      {favoritesCount === 0 && (
         <p className={styles.emptyFavoritesText}>
           Build your collection: Click the heart icon to save favorites.
         </p>
