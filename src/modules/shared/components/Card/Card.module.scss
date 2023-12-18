@@ -27,6 +27,7 @@
 .image {
   object-fit: scale-down;
   height: 130px;
+  cursor: pointer;
 
   @include onTablet {
     height: 196px;
@@ -39,6 +40,7 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
+  cursor: pointer;
 }
 
 .prices {

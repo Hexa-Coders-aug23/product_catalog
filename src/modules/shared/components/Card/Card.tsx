@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useContext } from 'react';
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +9,7 @@ import favoritedIcon from './Union.png';
 import { PhonesContext } from '../../../../context/GlobalProvider';
 
 type Props = {
-  // itemId: string;
+  itemId: string;
   id: number;
   image: string;
   name: string;
@@ -19,7 +21,7 @@ type Props = {
 };
 
 export const Card: React.FC<Props> = ({
-  // itemId,
+  itemId,
   id,
   image,
   capacity,
@@ -39,9 +41,16 @@ export const Card: React.FC<Props> = ({
 
   return (
     <article className={styles.card} data-qa="card">
-      <img className={styles.image} src={image} alt={name} />
+      <img
+        className={styles.image}
+        src={image}
+        alt={name}
+        onClick={() => navigate(`/phones/${itemId}`)}
+      />
 
-      <p className={styles.name}>{name}</p>
+      <p className={styles.name} onClick={() => navigate(`/phones/${itemId}`)}>
+        {name}
+      </p>
 
       <div className={styles.prices}>
         <h2 className={styles.price}>{`$${price}`}</h2>
