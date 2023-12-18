@@ -13,7 +13,7 @@ import banner3Dsk from '../../../../static/banner/iPad_Pro_banner_desktop.jpg';
 
 import style from './BannerSlider.module.scss';
 
-type CheckPosition = (direction: 'right' | 'left', width: number) => void;
+type CheckPosition = (direction: 'right' | 'left') => void;
 
 const BANNERS = [
   {
@@ -38,57 +38,60 @@ const BANNERS = [
 
 export const BannerSlider = () => {
   const [scrollImage, setScrollImage] = useState(0);
-  const [frameWidth, setFrameWidth] = useState(0);
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   const windowWidth = useRef(window.innerWidth);
-  const finalPosition = -frameWidth * 2;
+  const finalPosition = -containerWidth * 2;
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const isActiveDot = (slide: number) => {
-    return slide === scrollImage;
+    return slide === slideNumber;
   };
 
-  const handleScroll: CheckPosition = useCallback(
-    (direction: string, width: number) => {
-      if (direction === 'right') {
-        const scrollRight = scrollImage + -width;
+  const handleScroll: CheckPosition = useCallback((direction: string) => {
+    if (direction === 'right') {
+      const scrollRight = scrollImage - containerWidth;
 
-        if (scrollImage === finalPosition) {
-          setScrollImage(0);
+      if (scrollImage === finalPosition) {
+        setScrollImage(0);
+        setSlideNumber(0);
 
-          return;
-        }
-
-        if (scrollImage < finalPosition) {
-          setScrollImage(finalPosition);
-        } else {
-          setScrollImage(scrollRight);
-        }
+        return;
       }
 
-      if (direction === 'left') {
-        const scrollLeft = scrollImage + width;
-
-        if (scrollImage === 0) {
-          setScrollImage(finalPosition);
-
-          return;
-        }
-
-        if (scrollLeft > 0) {
-          setScrollImage(0);
-        } else {
-          setScrollImage(scrollLeft);
-        }
+      if (scrollImage > finalPosition) {
+        setScrollImage(scrollRight);
+        setSlideNumber(slideNumber + 1);
       }
-    },
-    [finalPosition, scrollImage],
-  );
+    }
+
+    if (direction === 'left') {
+      const scrollLeft = scrollImage + containerWidth;
+
+      if (scrollImage === 0) {
+        setScrollImage(finalPosition);
+        setSlideNumber(2);
+
+        return;
+      }
+
+      if (scrollLeft <= 0) {
+        setScrollImage(scrollLeft);
+        setSlideNumber(slideNumber - 1);
+      }
+    }
+  }, [finalPosition, scrollImage, containerWidth, slideNumber]);
+
+  const handleDotSlide = (slideNum: number) => {
+    setSlideNumber(slideNum);
+    setScrollImage(-containerWidth * slideNum);
+  };
 
   useEffect(() => {
     const handleResize = () => {
       if (elementRef.current) {
-        setFrameWidth(elementRef.current.offsetWidth);
+        setContainerWidth(elementRef.current.offsetWidth);
       }
     };
 
@@ -102,27 +105,27 @@ export const BannerSlider = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      handleScroll('right', frameWidth);
+      handleScroll('right');
     }, 15000);
 
     return () => clearInterval(interval);
-  }, [scrollImage, frameWidth, handleScroll]);
+  }, [scrollImage, handleScroll]);
 
   const styles = {
     carouselList: {
-      width: frameWidth * 3,
+      width: containerWidth * 3,
       transition: 'transform 1000ms ease-in-out',
       transform: `translateX(${scrollImage}px)`,
     },
   };
 
   return (
-    <div className={style.pictureSlider}>
+    <div className={style.bannerSlider}>
       <div className={style.sliderContainer}>
         <button
           type="button"
           className={style.sliderBtn}
-          onClick={() => handleScroll('left', frameWidth)}
+          onClick={() => handleScroll('left')}
         >
           <img src={arrowLeft} alt="button left" />
         </button>
@@ -146,7 +149,7 @@ export const BannerSlider = () => {
         <button
           type="button"
           className={style.sliderBtn}
-          onClick={() => handleScroll('right', frameWidth)}
+          onClick={() => handleScroll('right')}
         >
           <img src={arrowRight} alt="button right" />
         </button>
@@ -159,7 +162,7 @@ export const BannerSlider = () => {
             className={cn([style.dot], {
               [style.dotActive]: isActiveDot(0),
             })}
-            onClick={() => handleScroll('left', frameWidth)}
+            onClick={() => handleDotSlide(0)}
           />
         </li>
         <li className={style.dotContainer}>
@@ -167,9 +170,9 @@ export const BannerSlider = () => {
             type="button"
             aria-label="Pagination dots"
             className={cn([style.dot], {
-              [style.dotActive]: isActiveDot(-frameWidth),
+              [style.dotActive]: isActiveDot(1),
             })}
-            onClick={() => handleScroll('left', frameWidth)}
+            onClick={() => handleDotSlide(1)}
           />
         </li>
         <li className={style.dotContainer}>
@@ -177,9 +180,9 @@ export const BannerSlider = () => {
             type="button"
             aria-label="Pagination dots"
             className={cn([style.dot], {
-              [style.dotActive]: isActiveDot(finalPosition),
+              [style.dotActive]: isActiveDot(2),
             })}
-            onClick={() => handleScroll('left', frameWidth)}
+            onClick={() => handleDotSlide(2)}
           />
         </li>
       </ul>

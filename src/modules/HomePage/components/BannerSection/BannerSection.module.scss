@@ -3,10 +3,11 @@
 .bannerSection {
   box-sizing: content-box;
   min-width: 320px;
+  padding-top: 24px;
 
   @include onTablet {
     height: 221px;
-    padding: 56px 0 24px;
+    padding: 32px 0 24px;
   }
 
   @include onDesktop {
