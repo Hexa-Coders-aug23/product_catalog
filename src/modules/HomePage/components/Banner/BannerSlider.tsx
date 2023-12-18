@@ -11,7 +11,7 @@ import banner2Dsk from '../../../../static/banner/i_Watch_banner_tablet.jpg';
 import banner3Mob from '../../../../static/banner/iPad_Pro_banner_mobile.png';
 import banner3Dsk from '../../../../static/banner/iPad_Pro_banner_desktop.jpg';
 
-import style from './BannerSlider.module.scss';
+import styles from './BannerSlider.module.scss';
 
 type Direction = (direction: 'right' | 'left') => void;
 type SlideNumber = (slideNum: number) => void;
@@ -93,28 +93,26 @@ export const BannerSlider = () => {
     return () => clearInterval(interval);
   }, [scrollImage, handleScroll]);
 
-  const styles = {
-    carouselList: {
-      width: containerWidth * 3,
-      transition: 'transform 1000ms ease-in-out',
-      transform: `translateX(${scrollImage}px)`,
-    },
+  const sliderAnimation = {
+    width: containerWidth * 3,
+    transition: 'transform 1000ms ease-in-out',
+    transform: `translateX(${scrollImage}px)`,
   };
 
   return (
-    <div className={style.bannerSlider}>
-      <div className={style.sliderContainer}>
+    <div className={styles.bannerSlider}>
+      <div className={styles.sliderContainer}>
         <button
           type="button"
-          className={style.sliderBtn}
+          className={styles.sliderBtn}
           onClick={() => handleScroll('left')}
         >
           <img src={arrowLeft} alt="button left" />
         </button>
-        <div className={style.imagesContainer} ref={elementRef}>
-          <ul className={style.imagesList} style={styles.carouselList}>
+        <div className={styles.imagesContainer} ref={elementRef}>
+          <ul className={styles.imagesList} style={sliderAnimation}>
             {BANNERS.map((banner) => (
-              <li className={style.imagesItem} key={banner.id}>
+              <li className={styles.imagesItem} key={banner.id}>
                 <img
                   src={
                     windowWidth.current <= 640
@@ -122,7 +120,7 @@ export const BannerSlider = () => {
                       : banner.imgDesktop
                   }
                   alt={banner.title}
-                  className={style.image}
+                  className={styles.image}
                 />
               </li>
             ))}
@@ -130,39 +128,39 @@ export const BannerSlider = () => {
         </div>
         <button
           type="button"
-          className={style.sliderBtn}
+          className={styles.sliderBtn}
           onClick={() => handleScroll('right')}
         >
           <img src={arrowRight} alt="button right" />
         </button>
       </div>
-      <ul className={style.dots}>
-        <li className={style.dotContainer}>
+      <ul className={styles.dots}>
+        <li className={styles.dotContainer}>
           <button
             type="button"
             aria-label="Pagination dots"
-            className={cn([style.dot], {
-              [style.dotActive]: isActiveDot(0),
+            className={cn([styles.dot], {
+              [styles.dotActive]: isActiveDot(0),
             })}
             onClick={() => handleSlide(0)}
           />
         </li>
-        <li className={style.dotContainer}>
+        <li className={styles.dotContainer}>
           <button
             type="button"
             aria-label="Pagination dots"
-            className={cn([style.dot], {
-              [style.dotActive]: isActiveDot(1),
+            className={cn([styles.dot], {
+              [styles.dotActive]: isActiveDot(1),
             })}
             onClick={() => handleSlide(1)}
           />
         </li>
-        <li className={style.dotContainer}>
+        <li className={styles.dotContainer}>
           <button
             type="button"
             aria-label="Pagination dots"
-            className={cn([style.dot], {
-              [style.dotActive]: isActiveDot(2),
+            className={cn([styles.dot], {
+              [styles.dotActive]: isActiveDot(2),
             })}
             onClick={() => handleSlide(2)}
           />
