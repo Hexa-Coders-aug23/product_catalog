@@ -170,9 +170,9 @@
   background-color: $color__secondary-accent;
   width: 14px;
   height: 14px;
-  border: 1px solid white;
+  border: 1px solid $color__white;
   border-radius: 50%;
-  color: var(--Gray-White, #FFF);
+  color: $color__white;
   text-align: center;
   font-family: Mont;
   font-size: 9px;
