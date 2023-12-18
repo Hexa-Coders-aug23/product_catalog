@@ -1,0 +1,56 @@
+@import '../../../../App.module.scss';
+
+.categoriesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1136px;
+}
+
+.blockName {
+  @include sectionName;
+}
+
+.blockWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+
+  @include onTablet {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  @include onDesktop {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
+
+.categoryBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  text-decoration: none;
+}
+
+.categoryTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25.56px;
+  color: $color__primary;
+}
+
+.categoryAmount {
+  @include amount(0, 0);
+}
+
+.categoryImg {
+  width: 100%;
+  max-width: 368px;
+  border-radius: 8px;
+}
