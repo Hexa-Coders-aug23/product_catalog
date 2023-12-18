@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import cn from 'classnames';
 import logo from '../../../../static/logo/Nice_Gadgets_logo_combined.svg';
 import styles from './Header.module.scss';
 import { BurgerMenu } from '../burger';
+import { PhonesContext } from '../../../../context/GlobalProvider';
 
 export const Header: React.FC = () => {
+  const { favoriteItems, cartItems } = useContext(PhonesContext);
+
+  const favoritesCount = favoriteItems.length;
+  const cartItemsCount = cartItems.length;
+
   const tabs = [
     { to: '/', title: 'home' },
     { to: '/phones', title: 'phones' },
@@ -41,6 +47,9 @@ export const Header: React.FC = () => {
             [styles.active]: isActive,
           })}
         >
+          {favoritesCount > 0 && (
+            <span className={styles.count}>{favoritesCount}</span>
+          )}
           <i className={`${styles.wrapper} ${styles.favourites}`} />
         </NavLink>
 
@@ -50,6 +59,9 @@ export const Header: React.FC = () => {
             [styles.active]: isActive,
           })}
         >
+          {cartItemsCount > 0 && (
+            <span className={styles.count}>{cartItemsCount}</span>
+          )}
           <i className={`${styles.wrapper} ${styles.cart}`} />
         </NavLink>
 

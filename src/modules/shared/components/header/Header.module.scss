@@ -82,6 +82,7 @@
 .fullscreen {
   display: none;
   border-left: 1px solid $color__elements;
+  position: relative;
 
   @include onTablet {
     display: block;
@@ -155,5 +156,26 @@
   100% {
     transform: scaleY(1);
     height: 2.5px;
+  }
+}
+
+.count {
+  position: absolute;
+  background-color: $color__secondary-accent;
+  width: 14px;
+  height: 14px;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: var(--Gray-White, #FFF);
+  text-align: center;
+  font-family: Mont;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 14px;
+  top: 10px;
+  left: 55%;
+
+  @include onDesktop {
+    top: 18px;
   }
 }
