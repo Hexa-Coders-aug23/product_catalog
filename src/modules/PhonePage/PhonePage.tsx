@@ -8,8 +8,6 @@ import * as phoneService from '../../api/phones';
 
 import heartIcon from '../../static/icons/Favourites_Heart.svg';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import styles from './PhonePage.module.scss';
 import { PhoneDetailed } from '../../types/Phone';
 
@@ -22,6 +20,8 @@ const handleButtonClick = (section: string, option: string, color: string) => {
 const addTo = (id: string, place: string) => {
   console.log(`Запит до серверу для додавання продукту з id ${id} в ${place}`);
 };
+
+let num = 1;
 
 export const PhonePage: React.FC = () => {
   const [phone, setPhone] = useState<PhoneDetailed | null>(null);
@@ -73,13 +73,6 @@ export const PhonePage: React.FC = () => {
 
   useEffect(() => {
     if (phone) {
-      setNewColor(phone.color);
-      setNewCapacity(phone.capacity);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (phone) {
       setCurrentMainPhoto(phone.images[0]);
     }
   }, [phone, newColor, newCapacity]);
@@ -120,6 +113,12 @@ export const PhonePage: React.FC = () => {
     zoom,
     cell,
   } = phone;
+
+  if (num === 1) {
+    setNewColor(phone.color);
+    setNewCapacity(phone.capacity);
+    num = 0;
+  }
 
   return (
     <main>
