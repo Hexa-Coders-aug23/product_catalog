@@ -7,7 +7,7 @@
   border: 1px solid $color__elements;
   border-radius: 8px;
   padding: 32px;
-  gap: 8px;
+  gap: 24px;
   min-width: 288px;
   max-width: fit-content;
   margin-inline: auto;
@@ -21,4 +21,85 @@
   @include onTablet {
     font-size: 22px;
   }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: $color__primary;
+  font-weight: 700;
+
+  @include onTablet {
+    font-size: 14px;
+  }
+}
+
+.control {
+  border-radius: 8px;
+  border: 1px solid $color__icons;
+  background-color: $color__hover-and-bg;
+  padding-inline: 12px;
+  min-width: 200px;
+  height: 30px;
+  line-height: 30px;
+
+  @include onTablet {
+    min-width: 500px;
+  }
+
+  &:hover {
+    border-color: $color__secondary;
+  }
+
+  &:focus {
+    border-color: $color__primary;
+  }
+}
+
+.input {
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.error {
+  color: $color__red;
+}
+
+.controlError {
+  border-color: $color__red;
+}
+
+.detail {
+  color: $color__primary;
+  font-weight: 600;
+}
+
+.button {
+  border-radius: 8px;
+  border-color: transparent;
+  background-color: $color__accent;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: white;
+  padding: 4px 24px;
+  height: 36px;
+  cursor: pointer;
+
+  @include onTablet {
+    padding: 0 24px;
+  }
+}
+
+.signup {
+  color: $color__primary;
+  font-weight: 700;
+  font-size: 14px;
 }

@@ -62,80 +62,58 @@ export const LoginPage = () => {
           <Form className={styles.form}>
             <h1 className={styles.title}>Log in</h1>
 
-            <div className="field">
-              <label htmlFor="email" className="label">Email</label>
+            <div className={styles.field}>
+              <label htmlFor="email" className={styles.label}>Email</label>
 
-              <div className="control has-icons-left has-icons-right">
+              <div className={classNames(styles.control, {
+                [styles.controlError]: touched.email && errors.email,
+              })}
+              >
                 <Field
                   validate={validateEmail}
                   name="email"
                   type="email"
                   id="email"
                   placeholder="e.g. bobsmith@gmail.com"
-                  className={classNames('input', {
-                    'is-danger': touched.email && errors.email,
-                  })}
+                  className={styles.input}
                 />
-
-                <span className="icon is-small is-left">
-                  <i className="fa fa-envelope" />
-                </span>
-
-                {touched.email && errors.email && (
-                  <span className="icon is-small is-right has-text-danger">
-                    <i className="fas fa-exclamation-triangle" />
-                  </span>
-                )}
               </div>
 
               {touched.email && errors.email && (
-                <p className="help is-danger">{errors.email}</p>
+                <p className={styles.error}>{errors.email}</p>
               )}
             </div>
 
-            <div className="field">
-              <label htmlFor="password" className="label">
+            <div className={styles.field}>
+              <label htmlFor="password" className={styles.label}>
                 Password
               </label>
 
-              <div className="control has-icons-left has-icons-right">
+              <div className={classNames(styles.control, {
+                [styles.controlError]: touched.password && errors.password,
+              })}
+              >
                 <Field
                   validate={validatePassword}
                   name="password"
                   type="password"
                   id="password"
-                  placeholder="*******"
-                  className={classNames('input', {
-                    'is-danger': touched.password && errors.password,
-                  })}
+                  placeholder="password"
+                  className={styles.input}
                 />
-
-                <span className="icon is-small is-left">
-                  <i className="fa fa-lock" />
-                </span>
-
-                {touched.password && errors.password && (
-                  <span className="icon is-small is-right has-text-danger">
-                    <i className="fas fa-exclamation-triangle" />
-                  </span>
-                )}
               </div>
 
               {touched.password && errors.password ? (
-                <p className="help is-danger">{errors.password}</p>
+                <p className={styles.error}>{errors.password}</p>
               ) : (
-                <p className="help">At least 6 characters</p>
+                <p className={styles.detail}>At least 6 characters</p>
               )}
             </div>
 
-            <div className="field">
+            <div>
               <button
                 type="submit"
-                className={classNames(
-                  'button is-success has-text-weight-bold', {
-                    'is-loading': isSubmitting,
-                  },
-                )}
+                className={styles.button}
                 disabled={isSubmitting
                   || !!errors.email
                   || !!errors.password}
@@ -146,13 +124,13 @@ export const LoginPage = () => {
 
             Do not have an account?
             {' '}
-            <Link to="/sign-up">Sign up</Link>
+            <Link to="/sign-up" className={styles.signup}>Sign up</Link>
           </Form>
         )}
       </Formik>
 
       {errorMessage && (
-        <p className="notification is-danger is-light">{errorMessage}</p>
+        <p className={styles.error}>{errorMessage}</p>
       )}
     </main>
   );
