@@ -1,12 +1,11 @@
 import React from 'react';
-import './BannerSection.module.scss';
-import { Swiper } from '../Swiper';
+import styles from './BannerSection.module.scss';
+import { Slider } from '../Swiper/Slider';
 
 export const BannerSection: React.FC = () => {
   return (
-    <>
-      {/* <h1>Welcome to Nice Gadgets store!</h1> */}
-      <Swiper />
-    </>
+    <div className={styles.bannerSection}>
+      <Slider />
+    </div>
   );
 };

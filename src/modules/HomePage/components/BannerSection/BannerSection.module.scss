@@ -1,0 +1,14 @@
+@import '../../../../App.module.scss';
+
+.bannerSection {
+  box-sizing: content-box;
+  min-width: 320px;
+
+  @include onTablet {
+    padding: 56px 24px 24px;
+  }
+
+  @include onDesktop {
+    padding: 56px 32px 32px;
+  }
+}
