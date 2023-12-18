@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Footer.module.scss';
@@ -50,13 +52,9 @@ export const Footer: React.FC = () => {
           </ul>
         </div>
 
-        <div className={styles.footerButton}>
+        <div className={styles.footerButton} onClick={() => scrollToTop()}>
           <p>Back to top</p>
-          <button
-            type="button"
-            onClick={() => scrollToTop()}
-            className={styles.circleWithChevrone}
-          >
+          <button type="button" className={styles.circleWithChevrone}>
             <img src={iconImg} alt="Chevrone" />
           </button>
         </div>
