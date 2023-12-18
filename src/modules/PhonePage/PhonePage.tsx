@@ -3,10 +3,13 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import * as phoneService from '../../api/phones';
 
 import heartIcon from '../../static/icons/Favourites_Heart.svg';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import styles from './PhonePage.module.scss';
 import { PhoneDetailed } from '../../types/Phone';
 
@@ -22,13 +25,23 @@ const addTo = (id: string, place: string) => {
 
 export const PhonePage: React.FC = () => {
   const [phone, setPhone] = useState<PhoneDetailed | null>(null);
-  // const { id } = useParams<{ id: string }>();
+  const [newColor, setNewColor] = useState('');
+  const [newCapacity, setNewCapacity] = useState('');
+  const [currentMainPhoto, setCurrentMainPhoto] = useState('');
+
+  const phonesSlug = useLocation().pathname.slice(8);
+
+  const [phoneLink, setPhoneLink] = useState(phonesSlug);
+
+  const phoneLinkBase = phonesSlug.split('-').slice(0, -2).join('-');
+
+  console.log(`Phone slug ${phonesSlug}`);
+  console.log(`Phone link base ${phoneLinkBase}`);
+  console.log(`Phone link ${phoneLink}`);
 
   const fetchPhoneById = async () => {
     try {
-      const data = await phoneService.getPhone(
-        'apple-iphone-11-pro-max-64gb-spacegray',
-      ); // (id)
+      const data = await phoneService.getPhone(phoneLink); // (id)
 
       console.log(data);
 
@@ -38,9 +51,37 @@ export const PhonePage: React.FC = () => {
     }
   };
 
+  const handleAltPhotoClick = (photo: string) => {
+    setCurrentMainPhoto(photo);
+  };
+
   useEffect(() => {
     fetchPhoneById();
-  }, []);
+  }, [phoneLink]);
+
+  useEffect(() => {
+    console.log('image');
+
+    if (phone) {
+      setCurrentMainPhoto(phone.images[0]);
+    }
+  }, [phone, newColor, newCapacity]);
+
+  useEffect(() => {
+    console.log('color');
+
+    if (phone) {
+      setNewColor(phone.color);
+    }
+  }, [newColor]);
+
+  useEffect(() => {
+    console.log('capacity');
+
+    if (phone) {
+      setNewCapacity(phone.capacity);
+    }
+  }, [newCapacity]);
 
   if (!phone) {
     return <div>Loading...</div>;
@@ -85,16 +126,25 @@ export const PhonePage: React.FC = () => {
         <div className={styles.photosBlock}>
           <div className={styles.altPhotos}>
             {images.map((image, imageNum) => (
-              <img
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
                 key={imageNum}
-                src={image}
-                alt={namespaceId}
-                className={styles.altPhoto}
-              />
+                className={`${styles.altPhotoBlock} ${
+                  image === currentMainPhoto && styles.activeColor
+                }`}
+                onClick={() => handleAltPhotoClick(image)}
+              >
+                <img
+                  src={image}
+                  alt={namespaceId}
+                  className={styles.altPhoto}
+                />
+              </div>
             ))}
           </div>
+
           <div className={styles.mainPhotoSpaceLeft} />
-          <img src={images[0]} alt={name} className={styles.mainPhoto} />
+          <img src={currentMainPhoto} alt={name} className={styles.mainPhoto} />
           <div className={styles.mainPhotoSpaceRight} />
         </div>
         <aside>
@@ -115,7 +165,13 @@ export const PhonePage: React.FC = () => {
                     <button
                       className={`${styles.selectColorOption} ${styles[colorOption]}`}
                       type="button"
-                      onClick={() => handleButtonClick('color', colorOption, color)}
+                      onClick={() => {
+                        handleButtonClick('color', colorOption, color);
+                        setNewColor(colorOption);
+                        setPhoneLink(
+                          `${phoneLinkBase}-${newCapacity}-${newColor}`,
+                        );
+                      }}
                     />
                   </div>
                 ))}
@@ -132,7 +188,13 @@ export const PhonePage: React.FC = () => {
                       capacityOption === capacity && styles.activeCapacity
                     }`}
                     type="button"
-                    onClick={() => handleButtonClick('capacity', capacityOption, capacity)}
+                    onClick={() => {
+                      handleButtonClick('capacity', capacityOption, capacity);
+                      setNewCapacity(capacityOption);
+                      setPhoneLink(
+                        `${phoneLinkBase}-${newCapacity}-${newColor}`,
+                      );
+                    }}
                   >
                     {capacityOption}
                   </button>
@@ -188,62 +250,74 @@ export const PhonePage: React.FC = () => {
           </ul>
         </aside>
       </div>
-      <article className={styles.aboutArticle}>
-        <h2 className={styles.articleHeader}>About</h2>
-        <section className={styles.aboutSection}>
-          <h3 className={styles.aboutSectionHeader}>{description[0].title}</h3>
-          <p className={styles.aboutSectionText}>{description[0].text[0]}</p>
-          <br />
-          <p className={styles.aboutSectionText}>{description[0].text[1]}</p>
-        </section>
-        <section className={styles.aboutSection}>
-          <h3 className={styles.aboutSectionHeader}>{description[1].title}</h3>
-          <p className={styles.aboutSectionText}>{description[1].text}</p>
-        </section>
-        <section className={styles.aboutSection}>
-          <h3 className={styles.aboutSectionHeader}>{description[2].title}</h3>
-          <p className={styles.aboutSectionText}>{description[2].text}</p>
-        </section>
-      </article>
-      <article className={styles.techSpecsArticle}>
-        <div className={styles.techSpecsContainer}>
-          <h2 className={styles.articleHeader}>Tech specs</h2>
-        </div>
-        <ul className={styles.techInfo}>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Screen</h3>
-            <h3 className={styles.techSpecsValue}>{screen}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Resolution</h3>
-            <h3 className={styles.techSpecsValue}>{resolution}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Processor</h3>
-            <h3 className={styles.techSpecsValue}>{processor}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>RAM</h3>
-            <h3 className={styles.techSpecsValue}>{ram}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Built in memory</h3>
-            <h3 className={styles.techSpecsValue}>{capacity}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Camera</h3>
-            <h3 className={styles.techSpecsValue}>{camera}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Zoom</h3>
-            <h3 className={styles.techSpecsValue}>{zoom}</h3>
-          </li>
-          <li className={styles.techInfoParametr}>
-            <h3 className={styles.techSpecsKey}>Cell</h3>
-            <h3 className={styles.techSpecsValue}>{cell.join(', ')}</h3>
-          </li>
-        </ul>
-      </article>
+      <div className={styles.articlesBlock}>
+        <article className={styles.aboutArticle}>
+          <div>
+            <h2 className={styles.articleHeader}>About</h2>
+            <div className={styles.articleLine} />
+          </div>
+          <section className={styles.aboutSection}>
+            <h3 className={styles.aboutSectionHeader}>
+              {description[0].title}
+            </h3>
+            <p className={styles.aboutSectionText}>{description[0].text[0]}</p>
+            <br />
+            <p className={styles.aboutSectionText}>{description[0].text[1]}</p>
+          </section>
+          <section className={styles.aboutSection}>
+            <h3 className={styles.aboutSectionHeader}>
+              {description[1].title}
+            </h3>
+            <p className={styles.aboutSectionText}>{description[1].text}</p>
+          </section>
+          <section className={styles.aboutSection}>
+            <h3 className={styles.aboutSectionHeader}>
+              {description[2].title}
+            </h3>
+            <p className={styles.aboutSectionText}>{description[2].text}</p>
+          </section>
+        </article>
+        <article className={styles.techSpecsArticle}>
+          <div className={styles.techSpecsContainer}>
+            <h2 className={styles.articleHeader}>Tech specs</h2>
+            <div className={styles.articleLine} />
+          </div>
+          <ul className={styles.techInfo}>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Screen</h3>
+              <h3 className={styles.techSpecsValue}>{screen}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Resolution</h3>
+              <h3 className={styles.techSpecsValue}>{resolution}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Processor</h3>
+              <h3 className={styles.techSpecsValue}>{processor}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>RAM</h3>
+              <h3 className={styles.techSpecsValue}>{ram}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Built in memory</h3>
+              <h3 className={styles.techSpecsValue}>{capacity}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Camera</h3>
+              <h3 className={styles.techSpecsValue}>{camera}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Zoom</h3>
+              <h3 className={styles.techSpecsValue}>{zoom}</h3>
+            </li>
+            <li className={styles.techInfoParametr}>
+              <h3 className={styles.techSpecsKey}>Cell</h3>
+              <h3 className={styles.techSpecsValue}>{cell.join(', ')}</h3>
+            </li>
+          </ul>
+        </article>
+      </div>
       <article className={styles.recomendsArticle}>
         <h2 className={styles.articleHeader}>You may also like</h2>
         <div className={styles.cards}>some cards and slider</div>
