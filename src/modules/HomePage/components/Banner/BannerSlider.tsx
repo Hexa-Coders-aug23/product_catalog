@@ -4,40 +4,13 @@ import {
 import cn from 'classnames';
 import arrowLeft from '../../../../static/icons/Chevron_Arrow_Left.svg';
 import arrowRight from '../../../../static/icons/Chevron_Arrow_Right.svg';
-import banner1Mob from '../../../../static/banner/Now_Avaliable_mobile.png';
-import banner1Dsk from '../../../../static/banner/Now_Avaliable_desktop.png';
-import banner2Mob from '../../../../static/banner/i_Watch_banner_mobile.jpg';
-import banner2Dsk from '../../../../static/banner/i_Watch_banner_tablet.jpg';
-import banner3Mob from '../../../../static/banner/iPad_Pro_banner_mobile.png';
-import banner3Dsk from '../../../../static/banner/iPad_Pro_banner_desktop.jpg';
-
 import styles from './BannerSlider.module.scss';
+import { Banner } from '../../../../types/Banner';
 
 type Direction = (direction: 'right' | 'left') => void;
 type SlideNumber = (slideNum: number) => void;
 
-const BANNERS = [
-  {
-    id: 1,
-    imgMobile: banner1Mob,
-    imgDesktop: banner1Dsk,
-    title: 'Phones banner',
-  },
-  {
-    id: 2,
-    imgMobile: banner2Mob,
-    imgDesktop: banner2Dsk,
-    title: 'Accessories banner',
-  },
-  {
-    id: 3,
-    imgMobile: banner3Mob,
-    imgDesktop: banner3Dsk,
-    title: 'Tablets banner',
-  },
-];
-
-export const BannerSlider = () => {
+export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   const [scrollImage, setScrollImage] = useState(0);
   const [slideNumber, setSlideNumber] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -88,7 +61,7 @@ export const BannerSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleScroll('right');
-    }, 15000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [scrollImage, handleScroll]);
@@ -111,7 +84,7 @@ export const BannerSlider = () => {
         </button>
         <div className={styles.imagesContainer} ref={elementRef}>
           <ul className={styles.imagesList} style={sliderAnimation}>
-            {BANNERS.map((banner) => (
+            {Banners.map((banner) => (
               <li className={styles.imagesItem} key={banner.id}>
                 <img
                   src={
