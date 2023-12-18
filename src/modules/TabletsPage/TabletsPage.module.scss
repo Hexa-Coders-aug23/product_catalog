@@ -1,0 +1,85 @@
+@import '../../styles/blocks/container';
+@import '../../styles/colors';
+
+.title {
+  display: block;
+  font-weight: 800;
+  font-size: 32px;
+  margin-bottom: 8px;
+
+  @include onTablet {
+    font-size: 48px;
+  }
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.step {
+  color: $color__secondary;
+  text-decoration: none;
+}
+
+.homeIcon {
+  background-image: url(../../static/icons/Home.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.iconNext {
+  background-image: url(../../static/icons/Chevron_Arrow_Right.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.amount {
+  display: block;
+  color: $color__secondary;
+  font-size: 14px;
+  margin-bottom: 32px;
+
+  @include onTablet {
+    margin-bottom: 40px;
+  }
+}
+
+.outOfStockTitle {
+  margin-top: 10px;
+  font-family: 'Mont';
+  font-weight: 700;
+  font-size: 13px;
+
+  @include onTablet {
+    margin-top: 15px;
+    font-size: 17px;
+  }
+
+  @include onDesktop {
+    margin-top: 25px;
+    font-size: 26px;
+  }
+}
+
+.outOfStockText {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 20px;
+
+  @include onTablet {
+    font-size: 14px;
+    line-height: 30px;
+  }
+
+  @include onDesktop {
+    font-size: 18px;
+  }
+}
