@@ -13,8 +13,8 @@ type Props = {
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [authorized, setAuthorized] = useState(false);
 
-  const login = async (username: string, password: string) => {
-    if (username !== 'Misha' || password !== '1234') {
+  const login = async (email: string, password: string) => {
+    if (email !== 'asdfgh@gmail.com' || password !== '1234567') {
       throw new Error('Username or password is wrong');
     }
 
