@@ -41,11 +41,11 @@ export const LoginPage = () => {
   const handleSubmit = (email: string, password: string) => {
     setErrorMessage('');
 
-    login(email, password)
+    login({ email, password })
       .then(() => {
         navigate(state?.pathname || '/', { replace: true });
       })
-      .catch(error => setErrorMessage(error.response?.data?.message));
+      .catch((error: any) => setErrorMessage(error.response?.data?.message));
   };
 
   return (

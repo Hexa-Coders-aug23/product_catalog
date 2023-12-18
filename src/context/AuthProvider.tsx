@@ -1,10 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 import * as authService from '../api/auth';
+import { Login } from '../types/Login';
+import { accessTokenService } from '../utils/accessTokenService';
+import { User } from '../types/User';
 
-export const AuthContext = createContext({
-  authorized: false,
-  login: (username: string, password: string) => Promise.resolve(),
+export type AuthContextType = {
+  isChecked: boolean;
+  currentUser: User | null;
+  checkAuth: () => Promise<void>;
+  activate: (token: string) => Promise<void>;
+  login: (login: Login) => Promise<void>;
+  logout: () => Promise<void>;
+};
+
+export const AuthContext = createContext<AuthContextType>({
+  isChecked: true,
+  currentUser: null,
+  checkAuth: async () => {},
+  activate: async (_token: string) => {},
+  login: async (_user: Login) => {},
+  logout: async () => {},
 });
 
 type Props = {
@@ -12,20 +28,54 @@ type Props = {
 };
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [authorized, setAuthorized] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isChecked, setChecked] = useState(true);
 
-  const login = async (email: string, password: string) => {
-    authService.login({ email, password })
-      .then((response) => {
-        setAuthorized(true);
-      })
-      .catch((error) => {
-        throw new Error(error.message);
-      });
+  const activate = async (activationToken: string) => {
+    const { accessToken, user } = await authService.activate(activationToken);
+
+    accessTokenService.save(accessToken);
+    setCurrentUser(user);
   };
 
+  const checkAuth = async () => {
+    try {
+      const { accessToken, user } = await authService.refresh();
+
+      accessTokenService.save(accessToken);
+      setCurrentUser(user);
+    } catch (error) {
+      throw new Error('User is not authentincated');
+    } finally {
+      setChecked(true);
+    }
+  };
+
+  const login = async ({ email, password }: Login) => {
+    const { accessToken, user } = await authService.login({ email, password });
+
+    accessTokenService.save(accessToken);
+    setCurrentUser(user);
+  };
+
+  const logout = async () => {
+    await authService.logout();
+
+    accessTokenService.remove();
+    setCurrentUser(null);
+  };
+
+  const value: AuthContextType = useMemo(() => ({
+    isChecked,
+    currentUser,
+    checkAuth,
+    activate,
+    login,
+    logout,
+  }), [currentUser, isChecked]);
+
   return (
-    <AuthContext.Provider value={{ authorized, login }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

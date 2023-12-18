@@ -3,10 +3,10 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider';
 
 export const RequireAuth = () => {
-  const { authorized } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const { pathname } = useLocation();
 
-  if (!authorized) {
+  if (!currentUser) {
     return <Navigate to="/login" state={{ pathname }} replace />;
   }
 

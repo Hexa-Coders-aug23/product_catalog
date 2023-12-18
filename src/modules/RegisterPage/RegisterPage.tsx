@@ -67,7 +67,7 @@ export const RegisterPage = () => {
 
     authService.register({ name, email, password })
       .then(() => {
-        login(email, password)
+        login({ email, password })
           .then(() => {
             navigate(state?.pathname || '/', { replace: true });
           })

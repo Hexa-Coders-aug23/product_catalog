@@ -9,3 +9,15 @@ export const register = ({ name, email, password }: Register) => {
 export const login = ({ email, password }: Login) => {
   return requests.post('/login', { email, password });
 };
+
+export const logout = () => {
+  return requests.post('./logout');
+};
+
+export const refresh = () => {
+  return requests.get('./refresh');
+};
+
+export const activate = (activationToken: string) => {
+  return requests.get(`./activation/:${activationToken}`);
+};
