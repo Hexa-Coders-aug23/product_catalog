@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './BannerSection.module.scss';
-import { Slider } from '../Swiper/Slider';
+import { BannerSlider } from '../Banner/BannerSlider';
 
 export const BannerSection: React.FC = () => {
   return (
     <div className={styles.bannerSection}>
-      <Slider />
+      <BannerSlider />
     </div>
   );
 };

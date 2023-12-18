@@ -5,6 +5,11 @@
   flex-direction: column;
   gap: 16px;
   max-width: 1136px;
+  padding-inline: 16px;
+
+  @include onTablet {
+    padding-inline: 0;
+  }
 }
 
 .blockName {

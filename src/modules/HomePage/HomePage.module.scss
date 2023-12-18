@@ -6,6 +6,12 @@
   display: flex;
   justify-content: center;
  }
+
+ padding: 24px 0 64px;
+
+ @include onTablet {
+  padding: 24px 24px 64px;
+ }
 }
 
 .title {

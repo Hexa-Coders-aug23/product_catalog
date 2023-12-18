@@ -11,7 +11,7 @@ import banner2Dsk from '../../../../static/banner/i_Watch_banner_tablet.jpg';
 import banner3Mob from '../../../../static/banner/iPad_Pro_banner_mobile.png';
 import banner3Dsk from '../../../../static/banner/iPad_Pro_banner_desktop.jpg';
 
-import style from './Slider.module.scss';
+import style from './BannerSlider.module.scss';
 
 type CheckPosition = (direction: 'right' | 'left', width: number) => void;
 
@@ -36,7 +36,7 @@ const BANNERS = [
   },
 ];
 
-export const Slider = () => {
+export const BannerSlider = () => {
   const [scrollImage, setScrollImage] = useState(0);
   const [frameWidth, setFrameWidth] = useState(0);
 
@@ -117,7 +117,7 @@ export const Slider = () => {
   };
 
   return (
-    <section className={style.pictureSlider}>
+    <div className={style.pictureSlider}>
       <div className={style.sliderContainer}>
         <button
           type="button"
@@ -183,6 +183,6 @@ export const Slider = () => {
           />
         </li>
       </ul>
-    </section>
+    </div>
   );
 };
