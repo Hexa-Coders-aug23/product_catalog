@@ -4,7 +4,7 @@ import { FavoriteItem } from '../types/FavoriteItem';
 import { useCartItems } from './hooks/useCartItems';
 import { useFavoriteItems } from './hooks/useFavoriteItems';
 
-enum QuantityOperation {
+export enum QuantityOperation {
   Increase = 'increase',
   Decrease = 'decrease',
 }
