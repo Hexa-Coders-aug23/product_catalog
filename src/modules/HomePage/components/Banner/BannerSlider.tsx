@@ -14,6 +14,8 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   const [scrollImage, setScrollImage] = useState(0);
   const [slideNumber, setSlideNumber] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   const windowWidth = useRef(window.innerWidth);
   const elementRef = useRef<HTMLDivElement | null>(null);
@@ -42,6 +44,24 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
     },
     [slideNumber, handleSlide],
   );
+
+  function handleTouchStart(e: React.TouchEvent<HTMLLIElement>) {
+    setTouchStart(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchMove(e: React.TouchEvent<HTMLLIElement>) {
+    setTouchEnd(e.targetTouches[0].clientX);
+  }
+
+  function handleTouchEnd() {
+    if (touchStart - touchEnd > 75) {
+      handleScroll('right');
+    }
+
+    if (touchStart - touchEnd < -75) {
+      handleScroll('left');
+    }
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,7 +105,13 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
         <div className={styles.imagesContainer} ref={elementRef}>
           <ul className={styles.imagesList} style={sliderAnimation}>
             {Banners.map((banner) => (
-              <li className={styles.imagesItem} key={banner.id}>
+              <li
+                className={styles.imagesItem}
+                key={banner.id}
+                onTouchStart={touchStartEvt => handleTouchStart(touchStartEvt)}
+                onTouchMove={touchMoveEvent => handleTouchMove(touchMoveEvent)}
+                onTouchEnd={() => handleTouchEnd()}
+              >
                 <img
                   src={
                     windowWidth.current <= 640
