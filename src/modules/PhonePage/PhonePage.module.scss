@@ -122,7 +122,6 @@ main {
   -ms-overflow-style: none;
   scrollbar-width: none;
 
-
   @include onTablet {
     display: flex;
     width: 40px;
@@ -191,7 +190,7 @@ aside {
   font-weight: 600;
 }
 
-.selectParametrsHeader>h3 {
+.selectParametrsHeader > h3 {
   color: $color__secondary;
   font-size: 12px;
   font-weight: 600;
@@ -286,7 +285,9 @@ aside {
   border: 1px solid $color__secondary;
   align-items: center;
   line-height: 48px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .addToFavouriteButton:hover {
@@ -426,7 +427,7 @@ aside {
 }
 
 .midnightgreen {
-  background-color: #28372A;
+  background-color: #28372a;
 }
 
 .gold {

@@ -35,13 +35,9 @@ export const PhonePage: React.FC = () => {
 
   const phoneLinkBase = phonesSlug.split('-').slice(0, -2).join('-');
 
-  console.log(`Phone slug ${phonesSlug}`);
-  console.log(`Phone link base ${phoneLinkBase}`);
-  console.log(`Phone link ${phoneLink}`);
-
   const fetchPhoneById = async () => {
     try {
-      const data = await phoneService.getPhone(phoneLink); // (id)
+      const data = await phoneService.getPhone(phoneLink);
 
       console.log(data);
 
@@ -55,29 +51,46 @@ export const PhonePage: React.FC = () => {
     setCurrentMainPhoto(photo);
   };
 
+  const handleColorButtonClick = (colorOption: string) => {
+    handleButtonClick('color', colorOption, newColor);
+    setNewColor(colorOption);
+    setPhoneLink(
+      `${phoneLinkBase}-${newCapacity.toLowerCase()}-${colorOption}`,
+    );
+  };
+
+  const handleCapacityButtonClick = (capacityOption: string) => {
+    handleButtonClick('capacity', capacityOption, newCapacity);
+    setNewCapacity(capacityOption);
+    setPhoneLink(
+      `${phoneLinkBase}-${capacityOption.toLowerCase()}-${newColor}`,
+    );
+  };
+
   useEffect(() => {
     fetchPhoneById();
   }, [phoneLink]);
 
   useEffect(() => {
-    console.log('image');
+    if (phone) {
+      setNewColor(phone.color);
+      setNewCapacity(phone.capacity);
+    }
+  }, []);
 
+  useEffect(() => {
     if (phone) {
       setCurrentMainPhoto(phone.images[0]);
     }
   }, [phone, newColor, newCapacity]);
 
   useEffect(() => {
-    console.log('color');
-
     if (phone) {
       setNewColor(phone.color);
     }
   }, [newColor]);
 
   useEffect(() => {
-    console.log('capacity');
-
     if (phone) {
       setNewCapacity(phone.capacity);
     }
@@ -141,6 +154,86 @@ export const PhonePage: React.FC = () => {
                 />
               </div>
             ))}
+            {images.map((image, imageNum) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                key={imageNum}
+                className={`${styles.altPhotoBlock} ${
+                  image === currentMainPhoto && styles.activeColor
+                }`}
+                onClick={() => handleAltPhotoClick(image)}
+              >
+                <img
+                  src={image}
+                  alt={namespaceId}
+                  className={styles.altPhoto}
+                />
+              </div>
+            ))}
+            {images.map((image, imageNum) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                key={imageNum}
+                className={`${styles.altPhotoBlock} ${
+                  image === currentMainPhoto && styles.activeColor
+                }`}
+                onClick={() => handleAltPhotoClick(image)}
+              >
+                <img
+                  src={image}
+                  alt={namespaceId}
+                  className={styles.altPhoto}
+                />
+              </div>
+            ))}
+            {images.map((image, imageNum) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                key={imageNum}
+                className={`${styles.altPhotoBlock} ${
+                  image === currentMainPhoto && styles.activeColor
+                }`}
+                onClick={() => handleAltPhotoClick(image)}
+              >
+                <img
+                  src={image}
+                  alt={namespaceId}
+                  className={styles.altPhoto}
+                />
+              </div>
+            ))}
+            {images.map((image, imageNum) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                key={imageNum}
+                className={`${styles.altPhotoBlock} ${
+                  image === currentMainPhoto && styles.activeColor
+                }`}
+                onClick={() => handleAltPhotoClick(image)}
+              >
+                <img
+                  src={image}
+                  alt={namespaceId}
+                  className={styles.altPhoto}
+                />
+              </div>
+            ))}
+            {images.map((image, imageNum) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                key={imageNum}
+                className={`${styles.altPhotoBlock} ${
+                  image === currentMainPhoto && styles.activeColor
+                }`}
+                onClick={() => handleAltPhotoClick(image)}
+              >
+                <img
+                  src={image}
+                  alt={namespaceId}
+                  className={styles.altPhoto}
+                />
+              </div>
+            ))}
           </div>
 
           <div className={styles.mainPhotoSpaceLeft} />
@@ -165,13 +258,7 @@ export const PhonePage: React.FC = () => {
                     <button
                       className={`${styles.selectColorOption} ${styles[colorOption]}`}
                       type="button"
-                      onClick={() => {
-                        handleButtonClick('color', colorOption, color);
-                        setNewColor(colorOption);
-                        setPhoneLink(
-                          `${phoneLinkBase}-${newCapacity}-${newColor}`,
-                        );
-                      }}
+                      onClick={() => handleColorButtonClick(colorOption)}
                     />
                   </div>
                 ))}
@@ -188,13 +275,7 @@ export const PhonePage: React.FC = () => {
                       capacityOption === capacity && styles.activeCapacity
                     }`}
                     type="button"
-                    onClick={() => {
-                      handleButtonClick('capacity', capacityOption, capacity);
-                      setNewCapacity(capacityOption);
-                      setPhoneLink(
-                        `${phoneLinkBase}-${newCapacity}-${newColor}`,
-                      );
-                    }}
+                    onClick={() => handleCapacityButtonClick(capacityOption)}
                   >
                     {capacityOption}
                   </button>
