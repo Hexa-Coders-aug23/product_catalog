@@ -40,7 +40,7 @@
     width: 32px;
     height: 189px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: $color__hover-and-bg;
     border: 1px solid $color__elements;
     border-radius: 48px;
     transition: box-shadow 400ms ease-in-out;
@@ -48,15 +48,7 @@
   }
 
   @include onDesktop {
-    display: block;
-    width: 32px;
     height: 400px;
-    cursor: pointer;
-    background-color: #fff;
-    border: 1px solid $color__elements;
-    border-radius: 48px;
-    transition: box-shadow 400ms ease-in-out;
-    user-select: none;
   }
 
   &:active {
@@ -90,7 +82,6 @@
   }
 
   @include onDesktop {
-    width: inherit;
     height: 400px;
   }
 }

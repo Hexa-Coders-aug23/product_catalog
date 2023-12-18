@@ -17,7 +17,7 @@
   @include displayPosition;
   background-color: $color__white;
   border-bottom: 1px solid $color__elements;
-  // overflow: hidden;
+
   @include onDesktop {
     height: 64px;
     gap: 24px;
@@ -89,7 +89,6 @@
   }
 
   @include onDesktop {
-    display: block;
     width: 64px;
   }
 }
@@ -102,10 +101,6 @@
   border-left: 1px solid $color__elements;
 
   @include onTablet {
-    display: none;
-  }
-
-  @include onDesktop {
     display: none;
   }
 }

@@ -17,6 +17,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
+  const NUMBER_OF_SLIDES = Banners.length;
   const windowWidth = useRef(window.innerWidth);
   const elementRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,14 +36,14 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   const handleScroll: Direction = useCallback(
     (direction: string) => {
       if (direction === 'right') {
-        handleSlide((slideNumber + 1) % 3);
+        handleSlide((slideNumber + 1) % NUMBER_OF_SLIDES);
       }
 
       if (direction === 'left') {
-        handleSlide((slideNumber - 1 + 3) % 3);
+        handleSlide((slideNumber - 1 + NUMBER_OF_SLIDES) % NUMBER_OF_SLIDES);
       }
     },
-    [slideNumber, handleSlide],
+    [slideNumber, handleSlide, NUMBER_OF_SLIDES],
   );
 
   function handleTouchStart(e: React.TouchEvent<HTMLLIElement>) {
@@ -87,7 +88,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   }, [scrollImage, handleScroll]);
 
   const sliderAnimation = {
-    width: containerWidth * 3,
+    width: containerWidth * NUMBER_OF_SLIDES,
     transition: 'transform 1000ms ease-in-out',
     transform: `translateX(${scrollImage}px)`,
   };
