@@ -13,7 +13,8 @@ import banner3Dsk from '../../../../static/banner/iPad_Pro_banner_desktop.jpg';
 
 import style from './BannerSlider.module.scss';
 
-type CheckPosition = (direction: 'right' | 'left') => void;
+type Direction = (direction: 'right' | 'left') => void;
+type SlideNumber = (slideNum: number) => void;
 
 const BANNERS = [
   {
@@ -42,51 +43,32 @@ export const BannerSlider = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const windowWidth = useRef(window.innerWidth);
-  const finalPosition = -containerWidth * 2;
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const isActiveDot = (slide: number) => {
     return slide === slideNumber;
   };
 
-  const handleScroll: CheckPosition = useCallback((direction: string) => {
-    if (direction === 'right') {
-      const scrollRight = scrollImage - containerWidth;
+  const handleSlide: SlideNumber = useCallback(
+    (slideNum: number) => {
+      setSlideNumber(slideNum);
+      setScrollImage(-containerWidth * slideNum);
+    },
+    [containerWidth],
+  );
 
-      if (scrollImage === finalPosition) {
-        setScrollImage(0);
-        setSlideNumber(0);
-
-        return;
+  const handleScroll: Direction = useCallback(
+    (direction: string) => {
+      if (direction === 'right') {
+        handleSlide((slideNumber + 1) % 3);
       }
 
-      if (scrollImage > finalPosition) {
-        setScrollImage(scrollRight);
-        setSlideNumber(slideNumber + 1);
+      if (direction === 'left') {
+        handleSlide((slideNumber - 1 + 3) % 3);
       }
-    }
-
-    if (direction === 'left') {
-      const scrollLeft = scrollImage + containerWidth;
-
-      if (scrollImage === 0) {
-        setScrollImage(finalPosition);
-        setSlideNumber(2);
-
-        return;
-      }
-
-      if (scrollLeft <= 0) {
-        setScrollImage(scrollLeft);
-        setSlideNumber(slideNumber - 1);
-      }
-    }
-  }, [finalPosition, scrollImage, containerWidth, slideNumber]);
-
-  const handleDotSlide = (slideNum: number) => {
-    setSlideNumber(slideNum);
-    setScrollImage(-containerWidth * slideNum);
-  };
+    },
+    [slideNumber, handleSlide],
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -162,7 +144,7 @@ export const BannerSlider = () => {
             className={cn([style.dot], {
               [style.dotActive]: isActiveDot(0),
             })}
-            onClick={() => handleDotSlide(0)}
+            onClick={() => handleSlide(0)}
           />
         </li>
         <li className={style.dotContainer}>
@@ -172,7 +154,7 @@ export const BannerSlider = () => {
             className={cn([style.dot], {
               [style.dotActive]: isActiveDot(1),
             })}
-            onClick={() => handleDotSlide(1)}
+            onClick={() => handleSlide(1)}
           />
         </li>
         <li className={style.dotContainer}>
@@ -182,7 +164,7 @@ export const BannerSlider = () => {
             className={cn([style.dot], {
               [style.dotActive]: isActiveDot(2),
             })}
-            onClick={() => handleDotSlide(2)}
+            onClick={() => handleSlide(2)}
           />
         </li>
       </ul>
