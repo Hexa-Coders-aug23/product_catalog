@@ -109,8 +109,8 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
               <li
                 className={styles.imagesItem}
                 key={banner.id}
-                onTouchStart={touchStartEvt => handleTouchStart(touchStartEvt)}
-                onTouchMove={touchMoveEvent => handleTouchMove(touchMoveEvent)}
+                onTouchStart={(touchStrtEvt) => handleTouchStart(touchStrtEvt)}
+                onTouchMove={(touchMoveEvt) => handleTouchMove(touchMoveEvt)}
                 onTouchEnd={() => handleTouchEnd()}
               >
                 <img
