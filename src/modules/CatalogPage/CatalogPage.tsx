@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { PaginatorPageChangeEvent } from 'primereact/paginator';
 import { OnChangeValue } from 'react-select';
-import * as phoneService from '../../api/phones';
 import styles from './CatalogPage.module.scss';
-import { Phone } from '../../types/Phone';
-import { Option } from '../../types/Option';
 import { ProductsList } from '../shared/components/ProductsList';
 import { CustomSelect } from '../shared/components/CustomSelect/CustomSelect';
 import { Pagination } from '../shared/components/Pagination/Pagination';
+import { Breadcrumbs } from '../shared/components/Breadcrumbs';
+import * as phoneService from '../../api/phones';
+import { Phone } from '../../types/Phone';
+import { Option } from '../../types/Option';
 import { getSearchWith } from '../../utils/searchWithParams';
 import { Loader } from '../shared/components/Loader';
+import { Breadcrumb } from '../../types/Breadcrumb';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -25,6 +27,11 @@ const amountOptions: Option[] = [
   { value: 'all', label: 'all' },
 ];
 
+const breadcrumbs: Breadcrumb[] = [
+  { label: '', url: '/' },
+  { label: 'Phones', url: '/phones' },
+];
+
 export const CatalogPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [phones, setPhones] = useState<Phone[]>([]);
@@ -33,11 +40,14 @@ export const CatalogPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const pageQuery = +(searchParams.get('page') || 0);
-  const perPage = searchParams.get('perPage') || 'all';
-  const sortBy = searchParams.get('sortBy') || 'age';
+  const perPage = searchParams.get('perPage') || 16;
+  const sortBy = searchParams.get('sort') || 'age';
 
   const itemsCount = perPage === 'all' ? perPage : +perPage;
   const page = pageQuery === 0 ? pageQuery : pageQuery - 1;
+
+  const currentSort = sortOptions.find(option => option.value === sortBy)
+    || sortOptions[0];
 
   const getPhones = useCallback(async () => {
     const { count, rows } = await phoneService.getPhones(
@@ -86,32 +96,26 @@ export const CatalogPage: React.FC = () => {
 
   const onSelectSort = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      setSearchWith({ sortBy: selectedOption.value });
+      setSearchWith({ sort: selectedOption.value });
     }
   };
 
   return (
     <main className={styles.container}>
-      <div className={styles.breadcrumbs}>
-        <NavLink to="/" className={styles.homeIcon} />
-        <div className={styles.iconNext} />
-        <NavLink to="phones" className={styles.step}>
-          Phones
-        </NavLink>
-      </div>
+      <Breadcrumbs items={breadcrumbs} />
       <h1 className={styles.title}>Mobile phones</h1>
       <p className={styles.amount}>{`${totalCount} models`}</p>
       <div className={styles.selects}>
         <CustomSelect
           label="Sort by"
           options={sortOptions}
-          defaultOptionId={0}
+          value={currentSort.label}
           onSelectSort={onSelectSort}
         />
         <CustomSelect
           label="Items on page"
           options={amountOptions}
-          defaultOptionId={3}
+          value={itemsCount}
           onSelectAmount={onSelectAmount}
         />
       </div>
