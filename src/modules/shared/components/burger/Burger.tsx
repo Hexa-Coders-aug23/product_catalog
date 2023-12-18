@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import logo from '../../../../static/logo/Nice_Gadgets_logo_combined.svg';
 import styles from './BurgerMenu.module.scss';
+import { PhonesContext } from '../../../../context/GlobalProvider';
 
 type Tab = {
   to: string;
@@ -15,6 +16,10 @@ type Props = {
 
 export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { favoriteItems, cartItems } = useContext(PhonesContext);
+
+  const favoritesCount = favoriteItems.length;
+  const cartItemsCount = cartItems.length;
 
   return (
     <>
@@ -58,6 +63,9 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
                 [styles.active]: isActive,
               })}
             >
+              {favoritesCount > 0 && (
+                <span className={styles.count}>{favoritesCount}</span>
+              )}
               <i className={`${styles.icon} ${styles.favourites}`} />
             </NavLink>
 
@@ -68,6 +76,9 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
                 [styles.active]: isActive,
               })}
             >
+              {cartItemsCount > 0 && (
+                <span className={styles.count}>{cartItemsCount}</span>
+              )}
               <i className={`${styles.icon} ${styles.cart}`} />
             </NavLink>
           </div>
