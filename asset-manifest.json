@@ -1,12 +1,15 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.a60f9ec5.css",
-    "main.js": "/product_catalog/static/js/main.10d30308.js",
+    "main.css": "/product_catalog/static/css/main.902c8143.css",
+    "main.js": "/product_catalog/static/js/main.5cf204f3.js",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
     "static/media/error_image.jpeg": "/product_catalog/static/media/error_image.157dafded0d0a46866a8.jpeg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
     "static/media/Mont-SemiBold.ttf": "/product_catalog/static/media/Mont-SemiBold.0b5e68ebb36ca4006e21.ttf",
     "static/media/Mont-Bold.ttf": "/product_catalog/static/media/Mont-Bold.3675b597d3ffb2b75168.ttf",
+    "static/media/categoryImg-Accessories.png": "/product_catalog/static/media/categoryImg-Accessories.ceac5a16c668432a34a0.png",
+    "static/media/categoryImg-Tablets.png": "/product_catalog/static/media/categoryImg-Tablets.a1aff0fe1c1693fcea55.png",
+    "static/media/categoryImg-Phones.png": "/product_catalog/static/media/categoryImg-Phones.9e913039f5c6a4866001.png",
     "static/media/Maksim.jpg": "/product_catalog/static/media/Maksim.fb942475280c87095db0.jpg",
     "static/media/Olena.jpeg": "/product_catalog/static/media/Olena.bbbbd5dbb89588a6d7c4.jpeg",
     "static/media/Solomia.jpeg": "/product_catalog/static/media/Solomia.982bef15c5f289452310.jpeg",
@@ -27,11 +30,11 @@
     "static/media/Chevron_Arrow_Right.svg": "/product_catalog/static/media/Chevron_Arrow_Right.e028d3889646e0b5e56cf54f47bb701a.svg",
     "static/media/Chevron_Arrow_Up.svg": "/product_catalog/static/media/Chevron_Arrow_Up.1ea6958a07717117d3d583ab6fe7dcbd.svg",
     "index.html": "/product_catalog/index.html",
-    "main.a60f9ec5.css.map": "/product_catalog/static/css/main.a60f9ec5.css.map",
-    "main.10d30308.js.map": "/product_catalog/static/js/main.10d30308.js.map"
+    "main.902c8143.css.map": "/product_catalog/static/css/main.902c8143.css.map",
+    "main.5cf204f3.js.map": "/product_catalog/static/js/main.5cf204f3.js.map"
   },
   "entrypoints": [
-    "static/css/main.a60f9ec5.css",
-    "static/js/main.10d30308.js"
+    "static/css/main.902c8143.css",
+    "static/js/main.5cf204f3.js"
   ]
 }
