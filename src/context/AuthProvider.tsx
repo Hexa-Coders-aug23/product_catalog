@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [authorized, setAuthorized] = useState(false);
 
   const login = async (email: string, password: string) => {
-    if (email !== 'asdfgh@gmail.com' || password !== '1234567') {
+    if (email !== 'asdfghjk@gmail.com' || password !== '12345678') {
       throw new Error('Username or password is wrong');
     }
 

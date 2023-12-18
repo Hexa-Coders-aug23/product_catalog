@@ -69,11 +69,17 @@
 }
 
 .error {
+  display: block;
   color: $color__red;
 }
 
 .controlError {
   border-color: $color__red;
+}
+
+.detail {
+  color: $color__primary;
+  font-weight: 600;
 }
 
 .button {

@@ -1,9 +1,24 @@
 import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  FormikHelpers,
+} from 'formik';
 import classNames from 'classnames';
-import styles from './LoginPage.module.scss';
+import styles from './RegisterPage.module.scss';
+import * as authService from '../../api/auth';
 import { AuthContext } from '../../context/AuthProvider';
+import { Register } from '../../types/Register';
+
+const validateName = (value: string) => {
+  if (!value) {
+    return 'Name is required';
+  }
+
+  return '';
+};
 
 const validateEmail = (value: string) => {
   if (!value) {
@@ -14,6 +29,10 @@ const validateEmail = (value: string) => {
 
   if (!emailPattern.test(value)) {
     return 'Email is not valid';
+  }
+
+  if (value?.length < 8) {
+    return 'At least 8 characters';
   }
 
   return '';
@@ -31,36 +50,95 @@ const validatePassword = (value: string) => {
   return '';
 };
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const handleSubmit = (email: string, password: string) => {
+  const handleSubmit = ({
+    name,
+    email,
+    password,
+  }: Register, formikHelpers: FormikHelpers<Register>) => {
     setErrorMessage('');
+    formikHelpers.setSubmitting(true);
 
-    login(email, password)
+    authService.register({ name, email, password })
       .then(() => {
-        navigate(state?.pathname || '/', { replace: true });
+        login(email, password)
+          .then(() => {
+            navigate(state?.pathname || '/', { replace: true });
+          })
+          .catch(error => setErrorMessage(error.response?.data?.message));
       })
-      .catch(error => setErrorMessage(error.response?.data?.message));
+      .catch((error: any) => {
+        if (error.message) {
+          setErrorMessage(error.message);
+        }
+
+        if (!error.response?.data) {
+          return;
+        }
+
+        const { errors, message } = error.response.data;
+
+        formikHelpers.setFieldError('email', errors?.email);
+        formikHelpers.setFieldError('password', errors?.password);
+
+        if (message) {
+          setErrorMessage(message);
+        }
+      })
+      .finally(() => {
+        formikHelpers.setSubmitting(false);
+      });
   };
 
   return (
     <main className={styles.container}>
       <Formik
         initialValues={{
+          name: '',
           email: '',
           password: '',
         }}
         validateOnChange
-        onSubmit={({ email, password }) => handleSubmit(email, password)}
+        onSubmit={({
+          name,
+          email,
+          password,
+        }, formikHelpers) => handleSubmit(
+          { name, email, password },
+          formikHelpers,
+        )}
       >
         {({ touched, errors, isSubmitting }) => (
           <Form className={styles.form}>
-            <h1 className={styles.title}>Log In</h1>
+            <h1 className={styles.title}>Sign In</h1>
+
+            <div className={styles.field}>
+              <label htmlFor="name" className={styles.label}>Name</label>
+
+              <div className={classNames(styles.control, {
+                [styles.controlError]: touched.name && errors.name,
+              })}
+              >
+                <Field
+                  validate={validateName}
+                  name="name"
+                  type="text"
+                  id="name"
+                  placeholder="e.g. Bob"
+                  className={styles.input}
+                />
+              </div>
+
+              {touched.name && errors.name && (
+                <p className={styles.error}>{errors.name}</p>
+              )}
+            </div>
 
             <div className={styles.field}>
               <label htmlFor="email" className={styles.label}>Email</label>
@@ -103,8 +181,10 @@ export const LoginPage = () => {
                 />
               </div>
 
-              {touched.password && errors.password && (
+              {touched.password && errors.password ? (
                 <p className={styles.error}>{errors.password}</p>
+              ) : (
+                <p className={styles.detail}>At least 8 characters</p>
               )}
             </div>
 
@@ -114,19 +194,21 @@ export const LoginPage = () => {
                 className={classNames(styles.button, {
                   [styles.disabled]: isSubmitting
                     || errors.email
-                    || errors.password,
+                    || errors.password
+                    || errors.name,
                 })}
                 disabled={isSubmitting
                   || !!errors.email
-                  || !!errors.password}
+                  || !!errors.password
+                  || !!errors.name}
               >
-                Log in
+                Sign in
               </button>
             </div>
 
-            Do not have an account?
+            Forgot password?
             {' '}
-            <Link to="/sign-up" className={styles.signup}>Sign up</Link>
+            <Link to="/" className={styles.signup}>Change password</Link>
           </Form>
         )}
       </Formik>

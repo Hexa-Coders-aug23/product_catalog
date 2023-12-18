@@ -18,6 +18,7 @@ import { AccessoriesPage } from './modules/AccessoriesPage/AccessoriesPage';
 import { TabletsPage } from './modules/TabletsPage';
 import { AuthProvider } from './context/AuthProvider';
 import { LoginPage } from './modules/LoginPage';
+import { RegisterPage } from './modules/RegisterPage';
 
 export const Root: React.FC = () => (
   <AuthProvider>
@@ -28,7 +29,7 @@ export const Root: React.FC = () => (
             <Route index element={<HomePage />} />
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="login" element={<LoginPage />} />
-            <Route path="sign-up" />
+            <Route path="sign-up" element={<RegisterPage />} />
 
             <Route path="phones">
               <Route index element={<CatalogPage />} />
