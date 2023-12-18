@@ -38,12 +38,13 @@ export const CatalogPage: React.FC = () => {
   const [offset, setOffset] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAllPhones, setIsAllPhones] = useState(false);
 
   const pageQuery = +(searchParams.get('page') || 0);
   const perPage = searchParams.get('perPage') || 16;
   const sortBy = searchParams.get('sort') || 'age';
 
-  const itemsCount = perPage === 'all' ? perPage : +perPage;
+  const itemsCount = isAllPhones ? 'all' : +perPage;
   const page = pageQuery === 0 ? pageQuery : pageQuery - 1;
 
   const currentSort = sortOptions.find(option => option.value === sortBy)
@@ -86,9 +87,13 @@ export const CatalogPage: React.FC = () => {
 
   const onSelectAmount = (selectedOption: OnChangeValue<Option, false>) => {
     if (selectedOption) {
-      const amount = selectedOption.value === 'all'
-        ? null
-        : selectedOption.value;
+      let amount: string | null = selectedOption.value;
+
+      if (selectedOption.value === 'all') {
+        amount = null;
+
+        setIsAllPhones(true);
+      }
 
       setSearchWith({ page: null, perPage: amount });
     }
