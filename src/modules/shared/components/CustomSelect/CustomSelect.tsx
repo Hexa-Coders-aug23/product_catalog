@@ -17,6 +17,7 @@ const customStyles = {
     boxShadow: 'none',
     caretColor: 'transparent',
     backgroundColor: '#fafbfc',
+    cursor: 'pointer',
     '[class$="-indicatorSeparator"]': {
       display: 'none',
     },
@@ -40,6 +41,7 @@ const customStyles = {
   }),
   option: (base: any, state: any) => ({
     ...base,
+    cursor: 'pointer',
     fontSize: '14px',
     fontWeight: '600',
     backgroundColor: state.isSelected ? '#e2e6e9' : '#ffffff',

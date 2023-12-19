@@ -96,6 +96,7 @@ export const CatalogPage: React.FC = () => {
       }
 
       setSearchWith({ page: null, perPage: amount });
+      setOffset(0);
     }
   };
 
