@@ -54,13 +54,16 @@
   @include amount(0, 0);
 }
 
-.categoryImg {
+.categoryImgContainer {
   width: 100%;
-  max-width: 368px;
+  overflow: hidden;
   border-radius: 8px;
+}
+.categoryImg {
+  max-width: 368px;
   transition: all 0.5s ease-in-out;
 
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.1);
   }
 }

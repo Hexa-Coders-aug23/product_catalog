@@ -135,36 +135,18 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
         </button>
       </div>
       <ul className={styles.dots}>
-        <li className={styles.dotContainer}>
-          <button
-            type="button"
-            aria-label="Pagination dots"
-            className={cn([styles.dot], {
-              [styles.dotActive]: isActiveDot(0),
-            })}
-            onClick={() => handleSlide(0)}
-          />
-        </li>
-        <li className={styles.dotContainer}>
-          <button
-            type="button"
-            aria-label="Pagination dots"
-            className={cn([styles.dot], {
-              [styles.dotActive]: isActiveDot(1),
-            })}
-            onClick={() => handleSlide(1)}
-          />
-        </li>
-        <li className={styles.dotContainer}>
-          <button
-            type="button"
-            aria-label="Pagination dots"
-            className={cn([styles.dot], {
-              [styles.dotActive]: isActiveDot(2),
-            })}
-            onClick={() => handleSlide(2)}
-          />
-        </li>
+        {Banners.map((banner) => (
+          <li className={styles.dotContainer}>
+            <button
+              type="button"
+              aria-label={banner.title}
+              className={cn([styles.dot], {
+                [styles.dotActive]: isActiveDot(banner.id),
+              })}
+              onClick={() => handleSlide(banner.id)}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );
