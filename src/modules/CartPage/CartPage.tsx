@@ -11,9 +11,13 @@ import { PhonesContext } from '../../context/GlobalProvider';
 import { CartItemsList } from './CartItemsList/CartItemsList';
 
 import { Phone } from '../../types/Phone';
+import { Loader } from './Loader/Loader';
+import { Modal } from './Modal/Modal';
 
 export const CartPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [modal, setModal] = useState(false);
   const { cartItems } = useContext(PhonesContext);
 
   const checkoutTotalAmount = cartItems.reduce(
@@ -42,6 +46,7 @@ export const CartPage: React.FC = () => {
     const fetchData = async () => {
       const phonesData = await loadPhones();
 
+      setIsLoading(false);
       setPhones(phonesData);
     };
 
@@ -50,7 +55,11 @@ export const CartPage: React.FC = () => {
 
   return (
     <main className={styles.container}>
-      <button type="button" className={styles.goBackButton}>
+      <button
+        type="button"
+        className={styles.goBackButton}
+        onClick={() => window.history.back()}
+      >
         <img
           className={styles.goBackButtonIcon}
           src={iconBack}
@@ -61,8 +70,34 @@ export const CartPage: React.FC = () => {
       </button>
 
       <h2 className={styles.title}>Cart</h2>
+      {cartItems.length > 0
+        && (isLoading ? (
+          <Loader />
+        ) : (
+          <div className={styles.cartContent}>
+            <CartItemsList phones={phones} />
 
-      {!phones.length ? (
+            <div className={styles.checkout}>
+              <h2 className={styles.checkoutPrice}>{`$${checkoutSum}`}</h2>
+
+              <p className={styles.checkoutAmountItems}>
+                {`Total for ${checkoutTotalAmount} items`}
+              </p>
+
+              <hr className={styles.checkoutHr} />
+
+              <button
+                className={styles.checkoutButton}
+                type="button"
+                onClick={() => setModal(true)}
+              >
+                Checkout
+              </button>
+            </div>
+          </div>
+        ))}
+
+      {cartItems.length === 0 && (
         <div className={styles.emptyCart}>
           <img
             className={styles.emptyCartImage}
@@ -79,27 +114,9 @@ export const CartPage: React.FC = () => {
             hottest discount
           </p>
         </div>
-      ) : (
-        <div className={styles.cartContent}>
-          <CartItemsList phones={phones} />
-
-          <div className={styles.checkout}>
-            <h2 className={styles.checkoutPrice}>{`$${checkoutSum}`}</h2>
-
-            <p
-              className={styles.checkoutAmountItems}
-            >
-              {`Total for ${checkoutTotalAmount} items`}
-            </p>
-
-            <hr className={styles.checkoutHr} />
-
-            <button className={styles.checkoutButton} type="button">
-              Checkout
-            </button>
-          </div>
-        </div>
       )}
+
+      {modal && <Modal setModal={setModal} />}
     </main>
   );
 };

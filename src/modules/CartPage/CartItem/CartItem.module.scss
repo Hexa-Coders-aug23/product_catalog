@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $color__white;
+  background-color: inherit;
   border: none;
   width: 16px;
   height: 16px;
@@ -108,6 +108,11 @@
   }
 
   &:active {
+    .cartIconMinusPlus {
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(34deg)
+      brightness(102%) contrast(105%);
+    }
+
     background-color: $color__primary;
   }
 }
@@ -123,20 +128,13 @@
 
 .cartIconMinusPlus {
   display: block;
-  padding: 8px;
-  margin: -8px -8px -8px -6.8px;
+  margin: auto;
   transition: all .5s;
-
-  &:active {
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(34deg)
-      brightness(102%) contrast(105%);
-  }
 }
 
 .cartIconMinusDisabled {
   display: block;
-  padding: 8px;
-  margin: -8px -8px -8px -6.8px;
+  margin: auto;
   filter: invert(97%) sepia(4%) saturate(170%) hue-rotate(165deg) brightness(92%) contrast(100%);
 }
 
@@ -145,6 +143,8 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
+  width: 20px;
+  text-align: center;
 }
 
 .cartItemPrice {
