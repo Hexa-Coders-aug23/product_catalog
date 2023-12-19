@@ -10,6 +10,7 @@ import heartIcon from '../../static/icons/Favourites_Heart.svg';
 
 import styles from './PhonePage.module.scss';
 import { PhoneDetailed } from '../../types/Phone';
+import { ProductsSlider } from '../shared/components/ProductsSliderLib';
 
 const handleButtonClick = (section: string, option: string, color: string) => {
   console.log(
@@ -30,6 +31,7 @@ export const PhonePage: React.FC = () => {
   const [newCapacity, setNewCapacity] = useState('');
   const [currentMainPhoto, setCurrentMainPhoto] = useState('');
   // const [currentSearch, setCurrentSearch] = useState('');
+  const [recommended, setRecommended] = useState([]);
 
   const phonesSlug = useLocation().pathname.slice(8);
 
@@ -49,8 +51,19 @@ export const PhonePage: React.FC = () => {
     }
   };
 
+  const fetchRecommended = async () => {
+    try {
+      const data = await phoneService.getRecommendedPhones(phoneLink);
+
+      setRecommended(data);
+    } catch (error) {
+      console.error('Error fetching recommended phones:', error);
+    }
+  };
+
   useEffect(() => {
     fetchPhoneById();
+    fetchRecommended();
   }, [phoneLink]);
 
   useEffect(() => {
@@ -420,10 +433,7 @@ export const PhonePage: React.FC = () => {
           </ul>
         </article>
       </div>
-      <article className={styles.recomendsArticle}>
-        <h2 className={styles.articleHeader}>You may also like</h2>
-        <div className={styles.cards}>some cards and slider</div>
-      </article>
+      <ProductsSlider sectionTitle="You may also like" phones={recommended} />
     </main>
   );
 };
