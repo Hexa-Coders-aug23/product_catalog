@@ -93,9 +93,12 @@ export const CatalogPage: React.FC = () => {
         amount = null;
 
         setIsAllPhones(true);
+      } else {
+        setIsAllPhones(false);
       }
 
       setSearchWith({ page: null, perPage: amount });
+      setOffset(0);
     }
   };
 
