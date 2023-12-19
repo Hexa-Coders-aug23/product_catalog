@@ -1,6 +1,7 @@
 import React, {
   useCallback, useContext, useEffect, useState,
 } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './CartPage.module.scss';
 
 import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
@@ -13,12 +14,16 @@ import { CartItemsList } from './CartItemsList/CartItemsList';
 import { Phone } from '../../types/Phone';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
+import { AuthContext } from '../../context/AuthProvider';
 
 export const CartPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState(false);
-  const { cartItems } = useContext(PhonesContext);
+  const { pathname } = useLocation();
+  const { currentUser } = useContext(AuthContext);
+  const { cartItems, setCartItems } = useContext(PhonesContext);
+  const navigate = useNavigate();
 
   const checkoutTotalAmount = cartItems.reduce(
     (acc, item) => acc + item.quantity,
@@ -53,6 +58,20 @@ export const CartPage: React.FC = () => {
     fetchData();
   }, [loadPhones]);
 
+  const handleCheckout = () => {
+    if (!currentUser) {
+      navigate('/login', { state: { pathname }, replace: true });
+    }
+
+    setModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setCartItems([]);
+    localStorage.removeItem('cart');
+    setModal(false);
+  };
+
   return (
     <main className={styles.container}>
       <button
@@ -70,6 +89,7 @@ export const CartPage: React.FC = () => {
       </button>
 
       <h2 className={styles.title}>Cart</h2>
+
       {cartItems.length > 0
         && (isLoading ? (
           <Loader />
@@ -89,7 +109,7 @@ export const CartPage: React.FC = () => {
               <button
                 className={styles.checkoutButton}
                 type="button"
-                onClick={() => setModal(true)}
+                onClick={handleCheckout}
               >
                 Checkout
               </button>
@@ -116,7 +136,7 @@ export const CartPage: React.FC = () => {
         </div>
       )}
 
-      {modal && <Modal setModal={setModal} />}
+      {modal && <Modal onClose={handleCloseModal} />}
     </main>
   );
 };

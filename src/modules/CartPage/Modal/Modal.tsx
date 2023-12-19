@@ -2,10 +2,10 @@ import styles from './Modal.module.scss';
 import iconClose from '../../../static/icons/Close.svg';
 
 type Props = {
-  setModal: (v: boolean) => void;
+  onClose: () => void;
 };
 
-export const Modal: React.FC<Props> = ({ setModal }) => {
+export const Modal: React.FC<Props> = ({ onClose }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.modal_window}>
@@ -18,7 +18,7 @@ export const Modal: React.FC<Props> = ({ setModal }) => {
         <button
           type="button"
           className={styles.cartItemButtonClose}
-          onClick={() => setModal(false)}
+          onClick={onClose}
         >
           <img
             className={styles.cartItemIconClose}
