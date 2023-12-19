@@ -58,13 +58,14 @@
 }
 
 .imagesContainer {
-  width: 95%;
+  width: 100%;
   height: inherit;
   overflow: hidden;
   display: flex;
   align-items: center;
 
   @include onTablet {
+    width: 95%;
     margin: 0 16px;
     border-radius: 8px;
   }

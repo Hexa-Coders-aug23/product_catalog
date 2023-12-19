@@ -15,7 +15,7 @@ type Props = {
 
 export const ProductsSlider: FC<Props> = ({ sectionTitle, phones }) => {
   return (
-    <div className={styles.slider}>
+    <section className={styles.slider}>
       <div className={`${styles['slider-header']}`}>
         <h2 className={`${styles['slider-title']}`}>{sectionTitle}</h2>
         <div className={styles.buttons}>
@@ -94,6 +94,6 @@ export const ProductsSlider: FC<Props> = ({ sectionTitle, phones }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 };
