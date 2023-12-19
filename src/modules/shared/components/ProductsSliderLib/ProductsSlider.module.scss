@@ -1,0 +1,81 @@
+@import './../../../../App.module.scss';
+
+.slider {
+  padding-inline: 16px;
+
+  @include onTablet{
+    padding-inline: 0;
+  }
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.slider-title{
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 140%;
+
+  @include onTablet {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 41px;
+    letter-spacing: -0.32px;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.slider-button {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid $color__icons;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $color__primary;
+  }
+}
+
+.slider-button:disabled {
+  cursor:default;
+  border-color: $color__elements;
+}
+
+.slider-button__prev{
+  background-image: url(./img/prev-button-active.svg);
+
+  &:not(:disabled):active {
+    background-color: $color__primary;
+    background-image: url(./img/prev-button.svg);
+  }
+}
+
+.slider-button__prev:disabled{
+  background-image: url(./img/prev-button.svg);
+}
+
+.slider-button__next {
+  background-image: url(./img/next-button-active.svg);
+
+  &:not(:disabled):active {
+    background-color: $color__primary;
+    background-image: url(./img/next-button.svg);
+  }
+}
+
+.slider-button__next:disabled {
+  background-image: url(./img/next-button.svg);
+}
