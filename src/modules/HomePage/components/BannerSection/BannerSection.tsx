@@ -12,19 +12,19 @@ import banner3Dsk from '../../../../static/banner/iPad_Pro_banner_desktop.jpg';
 
 const Banners: Banner[] = [
   {
-    id: 1,
+    id: 0,
     imgMobile: banner1Mob,
     imgDesktop: banner1Dsk,
     title: 'Phones banner',
   },
   {
-    id: 2,
+    id: 1,
     imgMobile: banner2Mob,
     imgDesktop: banner2Dsk,
     title: 'Accessories banner',
   },
   {
-    id: 3,
+    id: 2,
     imgMobile: banner3Mob,
     imgDesktop: banner3Dsk,
     title: 'Tablets banner',
