@@ -8,7 +8,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   box-sizing: border-box;
-  width: 288px;
+  // width: 288px;
   border: 1px solid $color__elements;
   border-radius: 8px;
   padding: 32px;
@@ -16,7 +16,7 @@
   gap: 8px;
 
   @include onDesktop {
-    width: 272px;
+    // width: 272px;
   }
 }
 
