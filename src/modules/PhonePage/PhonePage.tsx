@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import * as phoneService from '../../api/phones';
 
 import heartIcon from '../../static/icons/Favourites_Heart.svg';
@@ -24,10 +24,12 @@ const addTo = (id: string, place: string) => {
 let num = 1;
 
 export const PhonePage: React.FC = () => {
+  const navigate = useNavigate();
   const [phone, setPhone] = useState<PhoneDetailed | null>(null);
   const [newColor, setNewColor] = useState('');
   const [newCapacity, setNewCapacity] = useState('');
   const [currentMainPhoto, setCurrentMainPhoto] = useState('');
+  // const [currentSearch, setCurrentSearch] = useState('');
 
   const phonesSlug = useLocation().pathname.slice(8);
 
@@ -47,26 +49,6 @@ export const PhonePage: React.FC = () => {
     }
   };
 
-  const handleAltPhotoClick = (photo: string) => {
-    setCurrentMainPhoto(photo);
-  };
-
-  const handleColorButtonClick = (colorOption: string) => {
-    handleButtonClick('color', colorOption, newColor);
-    setNewColor(colorOption);
-    setPhoneLink(
-      `${phoneLinkBase}-${newCapacity.toLowerCase()}-${colorOption}`,
-    );
-  };
-
-  const handleCapacityButtonClick = (capacityOption: string) => {
-    handleButtonClick('capacity', capacityOption, newCapacity);
-    setNewCapacity(capacityOption);
-    setPhoneLink(
-      `${phoneLinkBase}-${capacityOption.toLowerCase()}-${newColor}`,
-    );
-  };
-
   useEffect(() => {
     fetchPhoneById();
   }, [phoneLink]);
@@ -77,17 +59,57 @@ export const PhonePage: React.FC = () => {
     }
   }, [phone, newColor, newCapacity]);
 
-  useEffect(() => {
-    if (phone) {
-      setNewColor(phone.color);
-    }
-  }, [newColor]);
+  // useEffect(() => {
+  //   setCurrentSearch(window.location.href);
+  //   console.log('Пошукова строка змінилася:', currentSearch);
+  // }, []);
 
-  useEffect(() => {
-    if (phone) {
-      setNewCapacity(phone.capacity);
-    }
-  }, [newCapacity]);
+  // const handleLocationChange = () => {
+  //   console.log('Пошукова строка змінилася:', currentSearch);
+  // };
+
+  // useEffect(() => {
+  //   handleLocationChange();
+  // }, [currentSearch]);
+
+  const handleAltPhotoClick = (photo: string) => {
+    setCurrentMainPhoto(photo);
+  };
+
+  const updateUrl = (newLink: string) => {
+    navigate(`/phones/${newLink}`);
+  };
+
+  const handleColorButtonClick = (colorOption: string) => {
+    handleButtonClick('color', colorOption, newColor);
+    setNewColor(colorOption);
+    setPhoneLink(
+      `${phoneLinkBase}-${newCapacity.toLowerCase()}-${colorOption}`,
+    );
+    updateUrl(phoneLink);
+
+    setPhoneLink((prevPhoneLink) => {
+      const newPhoneLinkBase = prevPhoneLink.split('-').slice(0, -2).join('-');
+      const newLink = `${newPhoneLinkBase}-${newCapacity.toLowerCase()}-${colorOption}`;
+
+      updateUrl(newLink);
+
+      return newLink;
+    });
+  };
+
+  const handleCapacityButtonClick = (capacityOption: string) => {
+    handleButtonClick('capacity', capacityOption, newCapacity);
+    setNewCapacity(capacityOption);
+    setPhoneLink((prevPhoneLink) => {
+      const newPhoneLinkBase = prevPhoneLink.split('-').slice(0, -2).join('-');
+      const newLink = `${newPhoneLinkBase}-${capacityOption.toLowerCase()}-${newColor}`;
+
+      updateUrl(newLink);
+
+      return newLink;
+    });
+  };
 
   if (!phone) {
     return <div>Loading...</div>;
