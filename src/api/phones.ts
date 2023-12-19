@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 import { PhoneResponse } from '../types/Responses';
 import { httpClient } from '../utils/httpClient';
+import { requests } from '../utils/fetchClient';
 
 export const getPhones = async (
   page: number,
@@ -19,5 +20,5 @@ export const getPhones = async (
 };
 
 export const getPhone = (phoneId: string) => {
-  return httpClient.get(`/phones/${phoneId}`);
+  return requests.get(`/phones/${phoneId}`);
 };
