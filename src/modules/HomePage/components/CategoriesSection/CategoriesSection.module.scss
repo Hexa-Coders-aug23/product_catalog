@@ -5,6 +5,11 @@
   flex-direction: column;
   gap: 16px;
   max-width: 1136px;
+  padding-inline: 16px;
+
+  @include onTablet {
+    padding-inline: 0;
+  }
 }
 
 .blockName {
@@ -53,4 +58,9 @@
   width: 100%;
   max-width: 368px;
   border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 }

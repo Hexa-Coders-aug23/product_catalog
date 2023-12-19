@@ -1,0 +1,121 @@
+@import '../../../../App.module.scss';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.bannerSlider {
+  min-height: 352px;
+
+  @include onTablet {
+    min-height: 221px;
+  }
+
+  @include onTablet {
+    min-height: 432px;
+  }
+}
+
+.sliderContainer {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  height: 320px;
+
+  @include onTablet {
+    height: 189px;
+  }
+
+  @include onDesktop {
+    height: 400px;
+  }
+}
+
+.sliderBtn {
+  display: none;
+
+  @include onTablet {
+    display: block;
+    width: 32px;
+    height: 189px;
+    cursor: pointer;
+    background-color: $color__hover-and-bg;
+    border: 1px solid $color__elements;
+    border-radius: 48px;
+    transition: box-shadow 400ms ease-in-out;
+    user-select: none;
+  }
+
+  @include onDesktop {
+    height: 400px;
+  }
+
+  &:active {
+    box-shadow: 0 0 1px 0.5px $color__secondary;
+  }
+}
+
+.imagesContainer {
+  width: 1040px;
+  height: inherit;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  @include onTablet {
+    margin: 0 16px;
+  }
+}
+
+.imagesList {
+  display: flex;
+}
+
+.imagesItem {
+  width: 1040px;
+  height: 320px;
+
+  @include onTablet {
+    width: inherit;
+    height: 189px;
+  }
+
+  @include onDesktop {
+    height: 400px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  @include onTablet {
+    border-radius: 8px;
+  }
+}
+
+.dotContainer {
+  padding: 6px 9px;
+}
+
+.dots {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.dot {
+  cursor: pointer;
+  line-height: normal;
+  height: 4px;
+  width: 14px;
+  border: none;
+  background-color: $color__elements;
+  transition: background-color 1000ms ease-in-out;
+}
+
+.dotActive {
+  background-color: $color__primary;
+}

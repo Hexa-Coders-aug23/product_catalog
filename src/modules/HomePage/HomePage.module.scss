@@ -1,11 +1,17 @@
 @import '../../App.module.scss';
 
 .container {
- section {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
- }
+  section {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  padding: 24px 0 64px;
+
+  @include onTablet {
+    padding: 24px 24px 64px;
+  }
 }
 
 .title {
@@ -16,11 +22,9 @@
   @include onTablet {
     font-size: 48px;
     line-height: 56px;
-    padding-bottom: 32px;
   }
 
   @include onDesktop {
     padding-top: 16px;
-    padding-bottom: 56px;
   }
 }
