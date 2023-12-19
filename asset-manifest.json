@@ -1,16 +1,22 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.0bd5f5f2.css",
-    "main.js": "/product_catalog/static/js/main.8be9a329.js",
+    "main.css": "/product_catalog/static/css/main.7e2cd6ca.css",
+    "main.js": "/product_catalog/static/js/main.89339fd3.js",
+    "static/media/Now_Avaliable_desktop.png": "/product_catalog/static/media/Now_Avaliable_desktop.dbf2b4c89ac87688554d.png",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
+    "static/media/iPad_Pro_banner_desktop.jpg": "/product_catalog/static/media/iPad_Pro_banner_desktop.f57b8b3c2bb04392593f.jpg",
     "static/media/error_image.jpeg": "/product_catalog/static/media/error_image.157dafded0d0a46866a8.jpeg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
     "static/media/Mont-SemiBold.ttf": "/product_catalog/static/media/Mont-SemiBold.0b5e68ebb36ca4006e21.ttf",
     "static/media/Mont-Bold.ttf": "/product_catalog/static/media/Mont-Bold.3675b597d3ffb2b75168.ttf",
     "static/media/categoryImg-Accessories.png": "/product_catalog/static/media/categoryImg-Accessories.ceac5a16c668432a34a0.png",
     "static/media/categoryImg-Tablets.png": "/product_catalog/static/media/categoryImg-Tablets.a1aff0fe1c1693fcea55.png",
+    "static/media/i_Watch_banner_tablet.jpg": "/product_catalog/static/media/i_Watch_banner_tablet.233e73a773c1e5b81e2e.jpg",
+    "static/media/iPad_Pro_banner_mobile.png": "/product_catalog/static/media/iPad_Pro_banner_mobile.6f95a4ffafb84d0b6fa3.png",
     "static/media/categoryImg-Phones.png": "/product_catalog/static/media/categoryImg-Phones.9e913039f5c6a4866001.png",
     "static/media/Maksim.jpg": "/product_catalog/static/media/Maksim.fb942475280c87095db0.jpg",
+    "static/media/i_Watch_banner_mobile.jpg": "/product_catalog/static/media/i_Watch_banner_mobile.f21cc97b6567b43997ef.jpg",
+    "static/media/Now_Avaliable_mobile.png": "/product_catalog/static/media/Now_Avaliable_mobile.0582a9dfa7e5ea770487.png",
     "static/media/Olena.jpeg": "/product_catalog/static/media/Olena.bbbbd5dbb89588a6d7c4.jpeg",
     "static/media/Solomia.jpeg": "/product_catalog/static/media/Solomia.982bef15c5f289452310.jpeg",
     "static/media/Nazar.jpeg": "/product_catalog/static/media/Nazar.19bf93804d95c75d191f.jpeg",
@@ -22,21 +28,25 @@
     "static/media/Gmail.svg": "/product_catalog/static/media/Gmail.e6ddfac94aadca00d41c5070fc24f187.svg",
     "static/media/Linkedin.svg": "/product_catalog/static/media/Linkedin.96627ab0c0324e5bcd949a65df2e9a71.svg",
     "static/media/Shopping_bag_Cart.svg": "/product_catalog/static/media/Shopping_bag_Cart.df23e4fbb25ff3701b16.svg",
-    "static/media/Favourites_Heart.svg": "/product_catalog/static/media/Favourites_Heart.cc696932b63c19f48776.svg",
+    "static/media/Favourites_Heart.svg": "/product_catalog/static/media/Favourites_Heart.cc696932b63c19f487763e75a935dfcb.svg",
     "static/media/Home.svg": "/product_catalog/static/media/Home.9a24a70540404ccecd05fd9f900ddeeb.svg",
     "static/media/Close.svg": "/product_catalog/static/media/Close.cdfb6ae506fe360c9ad495bfc61f521d.svg",
     "static/media/Menu.svg": "/product_catalog/static/media/Menu.73ddde2c093f9fb313b9.svg",
     "static/media/Plus.svg": "/product_catalog/static/media/Plus.d886cbead86167dad78ed7d08416c466.svg",
     "static/media/Chevron_Arrow_Left.svg": "/product_catalog/static/media/Chevron_Arrow_Left.7460d67936be8c4491a8997e5e905650.svg",
     "static/media/Chevron_Arrow_Right.svg": "/product_catalog/static/media/Chevron_Arrow_Right.e028d3889646e0b5e56cf54f47bb701a.svg",
+    "static/media/next-button-active.svg": "/product_catalog/static/media/next-button-active.c88b21ea4346cb754e9d.svg",
+    "static/media/next-button.svg": "/product_catalog/static/media/next-button.e028d3889646e0b5e56c.svg",
+    "static/media/prev-button-active.svg": "/product_catalog/static/media/prev-button-active.f2b7e8886911b6359ca8.svg",
     "static/media/Chevron_Arrow_Up.svg": "/product_catalog/static/media/Chevron_Arrow_Up.1ea6958a07717117d3d583ab6fe7dcbd.svg",
+    "static/media/prev-button.svg": "/product_catalog/static/media/prev-button.55d6debc0b6023a16d6d.svg",
     "static/media/Minus.svg": "/product_catalog/static/media/Minus.6147cb5db4c975f91de08b377dc8a814.svg",
     "index.html": "/product_catalog/index.html",
-    "main.0bd5f5f2.css.map": "/product_catalog/static/css/main.0bd5f5f2.css.map",
-    "main.8be9a329.js.map": "/product_catalog/static/js/main.8be9a329.js.map"
+    "main.7e2cd6ca.css.map": "/product_catalog/static/css/main.7e2cd6ca.css.map",
+    "main.89339fd3.js.map": "/product_catalog/static/js/main.89339fd3.js.map"
   },
   "entrypoints": [
-    "static/css/main.0bd5f5f2.css",
-    "static/js/main.8be9a329.js"
+    "static/css/main.7e2cd6ca.css",
+    "static/js/main.89339fd3.js"
   ]
 }
