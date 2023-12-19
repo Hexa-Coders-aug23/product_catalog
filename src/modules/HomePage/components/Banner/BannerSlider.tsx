@@ -136,7 +136,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
       </div>
       <ul className={styles.dots}>
         {Banners.map((banner) => (
-          <li className={styles.dotContainer}>
+          <li key={banner.id} className={styles.dotContainer}>
             <button
               type="button"
               aria-label={banner.title}
