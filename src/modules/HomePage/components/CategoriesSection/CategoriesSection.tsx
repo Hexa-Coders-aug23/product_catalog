@@ -71,11 +71,13 @@ export const CategoriesSection: React.FC = () => {
               to={category.to}
               className={styles.categoryBlock}
             >
-              <img
-                src={category.img}
-                alt="Mobile phones category"
-                className={styles.categoryImg}
-              />
+              <div className={styles.categoryImgContainer}>
+                <img
+                  src={category.img}
+                  alt={category.title}
+                  className={styles.categoryImg}
+                />
+              </div>
               <div className={styles.categoryInfo}>
                 <h4 className={styles.categoryTitle}>{category.title}</h4>
                 <span className={styles.categoryAmount}>
