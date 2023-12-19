@@ -1,0 +1,31 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/reset.scss';
+
+.loader {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  border: 8px solid $color__accent;
+  border-radius: 50%;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  animation: loader 1.5s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+
+.loader_img {
+  width: 75px;
+}
+
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}

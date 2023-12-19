@@ -4,22 +4,12 @@
 @import '../../styles/typography.scss';
 @import '../../styles/blocks/container';
 
-// .container {
-//   padding-inline: 16px;
-//   margin-top: 24px;
-//   margin-bottom: 56px;
+.container {
+  @include onTablet {
+    padding-top: 40px;
+  }
+}
 
-//   @include onTablet {
-//     padding-inline: 24px;
-//     margin-top: 40px;
-//     margin-bottom: 64px;
-//   }
-
-//   @include onDesktop {
-//     padding-inline: 32px;
-//     margin-bottom: 80px;
-//   }
-// }
 .emptyCart {
   width: 50%;
   margin: auto;
@@ -65,7 +55,6 @@
 }
 
 .goBackButton {
-  margin-top: 24px;
   display: flex;
   align-items: center;
   background-color: $color__hover-and-bg;

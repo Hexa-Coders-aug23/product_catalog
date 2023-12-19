@@ -1,0 +1,86 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/typography.scss';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.modal_window {
+  position: relative;
+  padding: 30px;
+  z-index: 2;
+  width: 550px;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, .4);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal_title {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.modal_text {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 15px;
+
+  @include onTablet {
+    font-size: 20px;
+  }
+}
+
+.cartItemIconClose {
+  object-fit: cover;
+  margin-block: 34px;
+  filter: invert(96%) sepia(1%) saturate(7423%) hue-rotate(183deg)
+    brightness(81%) contrast(88%);
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: rotate(0deg) scale(1);
+
+  &:hover {
+    filter: invert(0%) sepia(1%) saturate(7423%) hue-rotate(183deg)
+      brightness(106%) contrast(106%);
+    transform: rotate(180deg) scale(1.75);
+  }
+
+  &:active {
+    filter: invert(96%) sepia(1%) saturate(7423%) hue-rotate(183deg)
+      brightness(81%) contrast(88%);
+  }
+}
+
+.cartItemButtonClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: inherit;
+  border: none;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
