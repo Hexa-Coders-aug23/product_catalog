@@ -16,6 +16,7 @@ const customStyles = {
     border: '0',
     boxShadow: 'none',
     caretColor: 'transparent',
+    backgroundColor: '#fafbfc',
     '[class$="-indicatorSeparator"]': {
       display: 'none',
     },
@@ -57,6 +58,10 @@ export const CustomSelect:React.FC<Props> = ({
   onSelectAmount,
   onSelectSort,
 }) => {
+  const defaultSelectedOption = options
+    .find(option => option.value === value.toString()
+      || option.label === value);
+
   return (
     <div className={styles.selectWrapper}>
       <label className={styles.selectLabel}>
@@ -67,6 +72,7 @@ export const CustomSelect:React.FC<Props> = ({
         styles={customStyles}
         placeholder={value}
         options={options}
+        defaultValue={defaultSelectedOption}
         onChange={onSelectAmount || onSelectSort}
       />
     </div>
