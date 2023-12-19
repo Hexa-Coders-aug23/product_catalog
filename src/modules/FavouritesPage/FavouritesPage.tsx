@@ -47,7 +47,11 @@ export const FavouritesPage: React.FC = () => {
 
       {favoritesCount > 0
         && (isLoading ? (
-          <Loader times={favoritesCount} className={styles.loader} />
+          <Loader
+            times={favoritesCount}
+            className={styles.loader}
+            isGrid
+          />
         ) : (
           <ProductsList phones={phones} />
         ))}

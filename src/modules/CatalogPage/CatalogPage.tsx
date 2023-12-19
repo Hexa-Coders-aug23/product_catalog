@@ -126,7 +126,11 @@ export const CatalogPage: React.FC = () => {
       </div>
 
       {isLoading ? (
-        <Loader times={4} className={styles.loader} />
+        <Loader
+          times={4}
+          className={styles.loader}
+          isGrid
+        />
       ) : (
         <ProductsList phones={phones} />
       )}

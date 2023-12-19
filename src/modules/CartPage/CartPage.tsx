@@ -11,9 +11,11 @@ import { PhonesContext } from '../../context/GlobalProvider';
 import { CartItemsList } from './CartItemsList/CartItemsList';
 
 import { Phone } from '../../types/Phone';
+import { Loader } from '../shared/components/Loader';
 
 export const CartPage: React.FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { cartItems } = useContext(PhonesContext);
 
   const checkoutTotalAmount = cartItems.reduce(
@@ -42,6 +44,7 @@ export const CartPage: React.FC = () => {
     const fetchData = async () => {
       const phonesData = await loadPhones();
 
+      setIsLoading(false);
       setPhones(phonesData);
     };
 
@@ -62,7 +65,7 @@ export const CartPage: React.FC = () => {
 
       <h2 className={styles.title}>Cart</h2>
 
-      {!phones.length ? (
+      {!phones.length && !isLoading ? (
         <div className={styles.emptyCart}>
           <img
             className={styles.emptyCartImage}
@@ -81,23 +84,38 @@ export const CartPage: React.FC = () => {
         </div>
       ) : (
         <div className={styles.cartContent}>
-          <CartItemsList phones={phones} />
+          {isLoading
+            ? (
+              <>
+                <Loader times={3} className={styles.loader} isGrid={false} />
+                <Loader
+                  times={1}
+                  className={styles.loadCheckout}
+                  isGrid={false}
+                />
+              </>
+            )
+            : (
+              <>
+                <CartItemsList phones={phones} />
 
-          <div className={styles.checkout}>
-            <h2 className={styles.checkoutPrice}>{`$${checkoutSum}`}</h2>
+                <div className={styles.checkout}>
+                  <h2 className={styles.checkoutPrice}>{`$${checkoutSum}`}</h2>
 
-            <p
-              className={styles.checkoutAmountItems}
-            >
-              {`Total for ${checkoutTotalAmount} items`}
-            </p>
+                  <p
+                    className={styles.checkoutAmountItems}
+                  >
+                    {`Total for ${checkoutTotalAmount} items`}
+                  </p>
 
-            <hr className={styles.checkoutHr} />
+                  <hr className={styles.checkoutHr} />
 
-            <button className={styles.checkoutButton} type="button">
-              Checkout
-            </button>
-          </div>
+                  <button className={styles.checkoutButton} type="button">
+                    Checkout
+                  </button>
+                </div>
+              </>
+            )}
         </div>
       )}
     </main>

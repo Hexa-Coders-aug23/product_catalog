@@ -4,9 +4,10 @@ import styles from './Loader.module.scss';
 type Props = {
   times: number;
   className: string;
+  isGrid: boolean;
 };
 
-export const Loader: React.FC<Props> = ({ times, className }) => {
+export const Loader: React.FC<Props> = ({ times, className, isGrid }) => {
   const outerStyles = classNames(styles.outer, className);
   const innerStyles = classNames(styles.inner);
 
@@ -20,7 +21,11 @@ export const Loader: React.FC<Props> = ({ times, className }) => {
   });
 
   return (
-    <div className={styles.loadContainer}>
+    <div className={classNames({
+      [styles.loadContainer]: isGrid,
+      [styles.flexContainer]: !isGrid,
+    })}
+    >
       {boxes}
     </div>
   );

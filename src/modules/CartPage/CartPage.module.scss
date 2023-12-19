@@ -184,3 +184,25 @@
     border: 1px solid $color__elements;
   }
 }
+
+.loader {
+  width: 100%;
+  height: 165px;
+
+  @include onTablet {
+    height: 135px;
+  }
+
+  @include onDesktop {
+    width: 55.5rem;
+  }
+}
+
+.loadCheckout {
+  width: 100%;
+  height: 200px;
+
+  @include onDesktop {
+    width: 18.5rem;
+  }
+}
