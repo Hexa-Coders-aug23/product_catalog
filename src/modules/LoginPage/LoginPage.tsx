@@ -38,14 +38,16 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const handleSubmit = (email: string, password: string) => {
+  const handleSubmit = async (email: string, password: string) => {
     setErrorMessage('');
 
-    login({ email, password })
-      .then(() => {
-        navigate(state?.pathname || '/', { replace: true });
-      })
-      .catch((error: any) => setErrorMessage(error.response?.data?.message));
+    try {
+      await login({ email, password });
+
+      navigate(state?.pathname || '/', { replace: true });
+    } catch (error: any) {
+      setErrorMessage(error.response?.data?.message);
+    }
   };
 
   return (

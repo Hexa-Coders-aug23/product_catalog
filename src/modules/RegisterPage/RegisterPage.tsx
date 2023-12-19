@@ -116,7 +116,7 @@ export const RegisterPage = () => {
       >
         {({ touched, errors, isSubmitting }) => (
           <Form className={styles.form}>
-            <h1 className={styles.title}>Sign In</h1>
+            <h1 className={styles.title}>Sign Up</h1>
 
             <div className={styles.field}>
               <label htmlFor="name" className={styles.label}>Name</label>
@@ -202,7 +202,7 @@ export const RegisterPage = () => {
                   || !!errors.password
                   || !!errors.name}
               >
-                Sign in
+                Sign un
               </button>
             </div>
 

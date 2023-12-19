@@ -51,15 +51,16 @@ export const CatalogPage: React.FC = () => {
     || sortOptions[0];
 
   const getPhones = useCallback(async () => {
-    const { count, rows } = await phoneService.getPhones(
-      page + 1,
-      itemsCount,
-      sortBy,
-    );
+    try {
+      const { count, rows } = await phoneService
+        .getPhones(page + 1, itemsCount, sortBy);
 
-    setIsLoading(false);
-    setTotalCount(count);
-    setPhones(rows);
+      setIsLoading(false);
+      setTotalCount(count);
+      setPhones(rows);
+    } catch (error: any) {
+      throw new Error('Error fetching phones:', error.message);
+    }
   }, [itemsCount, page, sortBy]);
 
   useEffect(() => {

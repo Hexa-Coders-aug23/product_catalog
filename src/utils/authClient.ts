@@ -1,23 +1,5 @@
-import axios from 'axios';
-import { Register } from '../types/Register';
-import { Login } from '../types/Login';
+import { createClient } from './index';
 
-const BASE_URL = 'https://product-catalog-api-hy23.onrender.com';
+export const authClient = createClient();
 
-export const requests = {
-  post: (
-    pathname: string,
-    data?: Register | Login,
-  ) => (
-    axios.post(`${BASE_URL}${pathname}`, data)
-  )
-    .then(response => response.data)
-    .catch((error) => {
-      throw new Error(error);
-    }),
-  get: (pathname: string) => axios.get(`${BASE_URL}${pathname}`)
-    .then(response => response.data)
-    .catch((error) => {
-      throw new Error(error);
-    }),
-};
+authClient.interceptors.response.use(res => res.data);

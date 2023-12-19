@@ -1,23 +1,35 @@
+/* eslint-disable no-useless-catch */
 import { Login } from '../types/Login';
 import { Register } from '../types/Register';
-import { requests } from '../utils/authClient';
+import { LoginResponse } from '../types/Responses';
+import { authClient } from '../utils/authClient';
 
 export const register = ({ name, email, password }: Register) => {
-  return requests.post('/registration', { name, email, password });
+  return authClient.post('/registration', { name, email, password });
 };
 
-export const login = ({ email, password }: Login) => {
-  return requests.post('/login', { email, password });
+export const login = async ({
+  email,
+  password,
+}: Login): Promise<LoginResponse> => {
+  try {
+    const response = await authClient
+      .post('/login', { email, password }) as LoginResponse;
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const logout = () => {
-  return requests.post('./logout');
+  return authClient.post('./logout');
 };
 
 export const refresh = () => {
-  return requests.get('./refresh');
+  return authClient.get('./refresh');
 };
 
 export const activate = (activationToken: string) => {
-  return requests.get(`./activation/:${activationToken}`);
+  return authClient.get(`./activation/${activationToken}`);
 };
