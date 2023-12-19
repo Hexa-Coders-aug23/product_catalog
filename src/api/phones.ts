@@ -8,6 +8,6 @@ export const getPhones = (
   return requests.get('/phones', page, perPage, sortBy);
 };
 
-export const getPhone = (phoneId: number) => {
+export const getPhone = (phoneId: string) => {
   return requests.get(`/phones/${phoneId}`);
 };
