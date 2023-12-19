@@ -16,27 +16,36 @@ import { PhonesProvider } from './context/GlobalProvider';
 import { Contacts } from './modules/Contacts';
 import { AccessoriesPage } from './modules/AccessoriesPage/AccessoriesPage';
 import { TabletsPage } from './modules/TabletsPage';
+import { AuthProvider } from './context/AuthProvider';
+import { LoginPage } from './modules/LoginPage';
+import { RegisterPage } from './modules/RegisterPage';
 
 export const Root: React.FC = () => (
-  <PhonesProvider>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="phones">
-            <Route index element={<CatalogPage />} />
-            <Route path=":phonesSlug?" element={<PhonePage />} />
-          </Route>
-          <Route path="cart" element={<CartPage />} />
-          <Route path="favourites" element={<FavouritesPage />} />
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="tablets" element={<TabletsPage />} />
-          <Route path="accessories" element={<AccessoriesPage />} />
+  <AuthProvider>
+    <PhonesProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<HomePage />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="sign-up" element={<RegisterPage />} />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </Router>
-  </PhonesProvider>
+            <Route path="phones">
+              <Route index element={<CatalogPage />} />
+              <Route path=":phonesSlug?" element={<PhonePage />} />
+            </Route>
+
+            <Route path="cart" element={<CartPage />} />
+            <Route path="favourites" element={<FavouritesPage />} />
+            <Route path="contacts" element={<Contacts />} />
+            <Route path="tablets" element={<TabletsPage />} />
+            <Route path="accessories" element={<AccessoriesPage />} />
+
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </PhonesProvider>
+  </AuthProvider>
 );
