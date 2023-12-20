@@ -2,18 +2,22 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import * as phoneService from '../../api/phones';
 
-import heartIcon from '../../static/icons/Favourites_Heart.svg';
-
-import styles from './PhonePage.module.scss';
 import { PhoneDetailed } from '../../types/Phone';
 import { HeaderComponent } from './Header';
 import AboutArticle from './AboutArticle/AboutArticle';
 import TechSpecsArticle from './TechArticle/TechArticle';
 import { ProductsSlider } from '../shared/components/ProductsSliderLib';
+
+import cartStyles from '../shared/components/Card/Card.module.scss';
+import styles from './PhonePage.module.scss';
+import defaultIcon from '../shared/components/Card/Favourites.png';
+import favoritedIcon from '../shared/components/Card/Union.png';
+import { PhonesContext } from '../../context/GlobalProvider';
 
 const handleButtonClick = (section: string, option: string, color: string) => {
   console.log(
@@ -21,9 +25,9 @@ const handleButtonClick = (section: string, option: string, color: string) => {
   );
 };
 
-const addTo = (id: string, place: string) => {
-  console.log(`Запит до серверу для додавання продукту з id ${id} в ${place}`);
-};
+// const addTo = (id: string, place: string) => {
+//   console.log(`Запит до серверу для додавання продукту з id ${id} в ${place}`);
+// };
 
 export const PhonePage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,6 +41,13 @@ export const PhonePage: React.FC = () => {
   const phonesSlug = useLocation().pathname.slice(8);
 
   const [phoneLink, setPhoneLink] = useState(phonesSlug);
+
+  const {
+    addToCart,
+    handleFavorite,
+    favoriteItems,
+    cartItems,
+  } = useContext(PhonesContext);
 
   const fetchPhoneById = async () => {
     try {
@@ -61,6 +72,7 @@ export const PhonePage: React.FC = () => {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchPhoneById();
     fetchRecommended();
   }, [phoneLink]);
@@ -148,7 +160,13 @@ export const PhonePage: React.FC = () => {
     resolution,
     processor,
     ram,
+    phoneId,
   } = phone;
+
+  const isAlreadyAddedToCart = cartItems.some((item) => item.id === phoneId);
+  const isAlreadyFavorited = favoriteItems.includes(phoneId);
+
+  console.log(phoneId);
 
   return (
     <main className={styles.productPage}>
@@ -230,21 +248,28 @@ export const PhonePage: React.FC = () => {
             </div>
             <div className={styles.buySectionButtons}>
               <button
-                className={styles.addToCartButton}
                 type="button"
-                onClick={() => addTo('productId', 'cart')}
+                className={cn(cartStyles.addToCartButton, {
+                  [cartStyles.alreadyAddedToCartButton]: isAlreadyAddedToCart,
+                })}
+                onClick={
+                  !isAlreadyAddedToCart
+                    ? () => addToCart(phoneId)
+                    : () => navigate('/cart')
+                }
+                data-qa="hover"
               >
-                Add to cart
+                {isAlreadyAddedToCart ? 'Added to cart' : 'Add to cart'}
               </button>
               <button
-                className={styles.addToFavouriteButton}
+                className={cartStyles.addToCompareButton}
                 type="button"
-                onClick={() => addTo('productId', 'favourite')}
+                onClick={() => handleFavorite(phoneId)}
               >
                 <img
-                  className={styles.heartIcon}
-                  src={heartIcon}
-                  alt="heart icon"
+                  className={cartStyles.addToCompareIcon}
+                  src={isAlreadyFavorited ? favoritedIcon : defaultIcon} // Checks if added to favorites and conditional render
+                  alt="iconToCompare"
                 />
               </button>
             </div>
