@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.7e2cd6ca.css",
-    "main.js": "/product_catalog/static/js/main.89339fd3.js",
+    "main.css": "/product_catalog/static/css/main.82a26251.css",
+    "main.js": "/product_catalog/static/js/main.0cc9f8d9.js",
     "static/media/Now_Avaliable_desktop.png": "/product_catalog/static/media/Now_Avaliable_desktop.dbf2b4c89ac87688554d.png",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
     "static/media/iPad_Pro_banner_desktop.jpg": "/product_catalog/static/media/iPad_Pro_banner_desktop.f57b8b3c2bb04392593f.jpg",
@@ -42,11 +42,11 @@
     "static/media/prev-button.svg": "/product_catalog/static/media/prev-button.55d6debc0b6023a16d6d.svg",
     "static/media/Minus.svg": "/product_catalog/static/media/Minus.6147cb5db4c975f91de08b377dc8a814.svg",
     "index.html": "/product_catalog/index.html",
-    "main.7e2cd6ca.css.map": "/product_catalog/static/css/main.7e2cd6ca.css.map",
-    "main.89339fd3.js.map": "/product_catalog/static/js/main.89339fd3.js.map"
+    "main.82a26251.css.map": "/product_catalog/static/css/main.82a26251.css.map",
+    "main.0cc9f8d9.js.map": "/product_catalog/static/js/main.0cc9f8d9.js.map"
   },
   "entrypoints": [
-    "static/css/main.7e2cd6ca.css",
-    "static/js/main.89339fd3.js"
+    "static/css/main.82a26251.css",
+    "static/js/main.0cc9f8d9.js"
   ]
 }
