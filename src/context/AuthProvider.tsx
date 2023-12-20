@@ -1,9 +1,13 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useMemo, useState } from 'react';
-import * as authService from '../api/auth';
+import {
+  createContext, useEffect, useMemo, useState,
+} from 'react';
 import { Login } from '../types/Login';
-import { accessTokenService } from '../utils/accessTokenService';
+import { accessTokenService } from '../utils/services/accessTokenService';
 import { User } from '../types/User';
+import { userService } from '../utils/services/userService';
+import { authService } from '../utils/services/authService';
 
 export type AuthContextType = {
   isChecked: boolean;
@@ -12,6 +16,7 @@ export type AuthContextType = {
   activate: (token: string) => Promise<void>;
   login: (login: Login) => Promise<void>;
   logout: () => Promise<void>;
+  authenticate: () => Promise<boolean>;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -21,6 +26,7 @@ export const AuthContext = createContext<AuthContextType>({
   activate: async (_token: string) => {},
   login: async (_user: Login) => {},
   logout: async () => {},
+  authenticate: async (): Promise<boolean> => false,
 });
 
 type Props = {
@@ -31,8 +37,23 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isChecked, setChecked] = useState(true);
 
+  const authenticate = async () => {
+    try {
+      const users = await userService.getAll();
+
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const activate = async (activationToken: string) => {
-    const { accessToken, user } = await authService.activate(activationToken);
+    const {
+      accessToken,
+      user,
+    } = await authService.activate(
+      activationToken,
+    ) as unknown as { accessToken:any, user: any };
 
     accessTokenService.save(accessToken);
     setCurrentUser(user);
@@ -40,7 +61,11 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const { accessToken, user } = await authService.refresh();
+      const {
+        accessToken,
+        user,
+      } = await authService.refresh(
+      ) as unknown as { accessToken:any, user: any };
 
       accessTokenService.save(accessToken);
       setCurrentUser(user);
@@ -52,7 +77,14 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   };
 
   const login = async ({ email, password }: Login) => {
-    const { accessToken, user } = await authService.login({ email, password });
+    const {
+      accessToken,
+      user,
+    } = await authService.login(
+      { email, password },
+    ) as unknown as { accessToken:any, user: any };
+
+    console.log(accessToken, user);
 
     accessTokenService.save(accessToken);
     setCurrentUser(user);
@@ -72,6 +104,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     activate,
     login,
     logout,
+    authenticate,
   }), [currentUser, isChecked]);
 
   return (
