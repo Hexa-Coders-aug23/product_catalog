@@ -32,6 +32,7 @@ const handleButtonClick = (section: string, option: string, color: string) => {
 export const PhonePage: React.FC = () => {
   const navigate = useNavigate();
   const [recommended, setRecommended] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [phone, setPhone] = useState<PhoneDetailed | null>(null);
   const [newColor, setNewColor] = useState('');
@@ -65,6 +66,7 @@ export const PhonePage: React.FC = () => {
     try {
       const data = await phoneService.getRecommendedPhones(phoneLink);
 
+      setIsLoading(false);
       setRecommended(data);
     } catch (error) {
       console.error('Error fetching recommended phones:', error);
@@ -307,7 +309,7 @@ export const PhonePage: React.FC = () => {
         <AboutArticle description={description} />
         <TechSpecsArticle phone={phone} />
       </div>
-      <ProductsSlider sectionTitle="You may also like" phones={recommended} />
+      <ProductsSlider sectionTitle="You may also like" phones={recommended} isLoading={isLoading} />
     </main>
   );
 };
