@@ -1,9 +1,17 @@
 import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Field, Form, Formik } from 'formik';
+import {
+  Field,
+  Form,
+  Formik,
+  FormikHelpers,
+} from 'formik';
 import classNames from 'classnames';
 import styles from './LoginPage.module.scss';
 import { AuthContext } from '../../context/AuthProvider';
+import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
+import iconClose from '../../static/icons/Close.svg';
+import { Login } from '../../types/Login';
 
 const validateEmail = (value: string) => {
   if (!value) {
@@ -38,14 +46,29 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const handleSubmit = (email: string, password: string) => {
+  const handleError = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(''), 3000);
+  };
+
+  const handleSubmit = (
+    email: string,
+    password: string,
+    actions: FormikHelpers<Login>,
+  ) => {
     setErrorMessage('');
 
     login({ email, password })
       .then(() => {
         navigate(state?.pathname || '/', { replace: true });
       })
-      .catch((error: any) => setErrorMessage(error.response?.data?.message));
+      .catch((error: any) => {
+        if (error.message.includes('401')) {
+          handleError('Email or password is wrong');
+        } else {
+          handleError('Internal server error');
+        }
+      }).finally(() => actions.setSubmitting(false));
   };
 
   return (
@@ -56,10 +79,30 @@ export const LoginPage = () => {
           password: '',
         }}
         validateOnChange
-        onSubmit={({ email, password }) => handleSubmit(email, password)}
+        onSubmit={({ email, password }, actions) => {
+          handleSubmit(email, password, actions);
+        }}
       >
-        {({ touched, errors, isSubmitting }) => (
+        {({
+          touched,
+          errors,
+          isSubmitting,
+        }) => (
           <Form className={styles.form}>
+            <button
+              type="button"
+              className={styles.goBackButton}
+              onClick={() => navigate('/cart')}
+            >
+              <img
+                className={styles.goBackButtonIcon}
+                src={iconBack}
+                alt="Icon Back"
+              />
+
+              <p className={styles.goBackButtonText}>Back</p>
+            </button>
+
             <h1 className={styles.title}>Log In</h1>
 
             <div className={styles.field}>
@@ -80,7 +123,7 @@ export const LoginPage = () => {
               </div>
 
               {touched.email && errors.email && (
-                <p className={styles.error}>{errors.email}</p>
+                <p className={styles.verify}>{errors.email}</p>
               )}
             </div>
 
@@ -104,7 +147,7 @@ export const LoginPage = () => {
               </div>
 
               {touched.password && errors.password && (
-                <p className={styles.error}>{errors.password}</p>
+                <p className={styles.verify}>{errors.password}</p>
               )}
             </div>
 
@@ -113,8 +156,8 @@ export const LoginPage = () => {
                 type="submit"
                 className={classNames(styles.button, {
                   [styles.disabled]: isSubmitting
-                    || errors.email
-                    || errors.password,
+                    || !!errors.email
+                    || !!errors.password,
                 })}
                 disabled={isSubmitting
                   || !!errors.email
@@ -132,7 +175,23 @@ export const LoginPage = () => {
       </Formik>
 
       {errorMessage && (
-        <p className={styles.error}>{errorMessage}</p>
+        <div
+          className={styles.error}
+        >
+          <p>{errorMessage}</p>
+          <button
+            type="button"
+            aria-label="hide error"
+            className={styles.cartItemButtonClose}
+            onClick={() => setErrorMessage('')}
+          >
+            <img
+              className={styles.cartItemIconClose}
+              src={iconClose}
+              alt="Icon Close"
+            />
+          </button>
+        </div>
       )}
     </main>
   );
