@@ -1,0 +1,34 @@
+@import '../../../../App.module.scss';
+
+.outOfStockTitle {
+  margin-top: 10px;
+  font-family: 'Mont';
+  font-weight: 700;
+  font-size: 13px;
+
+  @include onTablet {
+    margin-top: 15px;
+    font-size: 17px;
+  }
+
+  @include onDesktop {
+    margin-top: 25px;
+    font-size: 26px;
+  }
+}
+
+.outOfStockText {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 20px;
+
+  @include onTablet {
+    font-size: 14px;
+    line-height: 30px;
+  }
+
+  @include onDesktop {
+    font-size: 18px;
+  }
+}

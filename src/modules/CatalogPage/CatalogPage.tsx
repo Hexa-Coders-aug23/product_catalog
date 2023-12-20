@@ -13,6 +13,7 @@ import { Option } from '../../types/Option';
 import { getSearchWith } from '../../utils/searchWithParams';
 import { Loader } from '../shared/components/Loader';
 import { Breadcrumb } from '../../types/Breadcrumb';
+import { EmptyPageContent } from '../shared/components/EmptyPageContent';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -113,36 +114,44 @@ export const CatalogPage: React.FC = () => {
       <Breadcrumbs items={breadcrumbs} />
       <h1 className={styles.title}>Mobile phones</h1>
       <p className={styles.amount}>{`${totalCount} models`}</p>
-      <div className={styles.selects}>
-        <CustomSelect
-          label="Sort by"
-          options={sortOptions}
-          value={currentSort.label}
-          onSelectSort={onSelectSort}
-        />
-        <CustomSelect
-          label="Items on page"
-          options={amountOptions}
-          value={itemsCount}
-          onSelectAmount={onSelectAmount}
-        />
-      </div>
 
-      {isLoading ? (
-        <Loader times={4} className={styles.loader} />
-      ) : (
-        <ProductsList phones={phones} />
-      )}
+      {!phones.length && !isLoading
+        ? (
+          <EmptyPageContent gadgets="Phones" />
+        ) : (
+          <>
+            <div className={styles.selects}>
+              <CustomSelect
+                label="Sort by"
+                options={sortOptions}
+                value={currentSort.label}
+                onSelectSort={onSelectSort}
+              />
+              <CustomSelect
+                label="Items on page"
+                options={amountOptions}
+                value={itemsCount}
+                onSelectAmount={onSelectAmount}
+              />
+            </div>
 
-      {phones?.length !== totalCount && (
-        <Pagination
-          activePage={page}
-          offset={offset}
-          rows={itemsCount}
-          totalCount={totalCount}
-          onPageChange={onPageChange}
-        />
-      )}
+            {isLoading ? (
+              <Loader times={4} className={styles.loader} />
+            ) : (
+              <ProductsList phones={phones} />
+            )}
+
+            {phones?.length !== totalCount && (
+              <Pagination
+                activePage={page}
+                offset={offset}
+                rows={itemsCount}
+                totalCount={totalCount}
+                onPageChange={onPageChange}
+              />
+            )}
+          </>
+        )}
     </main>
   );
 };
