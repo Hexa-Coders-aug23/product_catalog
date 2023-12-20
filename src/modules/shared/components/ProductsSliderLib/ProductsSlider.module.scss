@@ -1,17 +1,25 @@
 @import './../../../../App.module.scss';
 
 .slider {
-  padding-inline: 16px;
-
-  @include onTablet{
-    padding-inline: 0;
-  }
+  padding-left: 16px;
 }
 
 .slider-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   margin-bottom: 24px;
+
+  padding-right: 16px;
+
+  @include onTablet {
+    padding-right: 24px;
+  }
+
+  @include onDesktop {
+    padding-inline: 0;
+  }
 }
 
 .slider-title{

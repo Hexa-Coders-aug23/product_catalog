@@ -16,6 +16,7 @@ type DefaultValuesType = {
   changeQuantity: (id: number, operation: QuantityOperation) => void;
   favoriteItems: FavoriteItem[];
   handleFavorite: (id: number) => void;
+  setCartItems: (phonesToSet: CartItem[]) => void;
 };
 
 export const PhonesContext = createContext<DefaultValuesType>({
@@ -25,6 +26,7 @@ export const PhonesContext = createContext<DefaultValuesType>({
   changeQuantity: () => {},
   favoriteItems: [],
   handleFavorite: () => {},
+  setCartItems: () => {},
 });
 
 export const PhonesProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -92,6 +94,7 @@ export const PhonesProvider: React.FC<{ children: React.ReactNode }> = ({
     changeQuantity,
     favoriteItems,
     handleFavorite,
+    setCartItems,
   };
 
   return (

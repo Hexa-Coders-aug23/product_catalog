@@ -11,6 +11,8 @@ import styles from './RegisterPage.module.scss';
 import * as authService from '../../api/auth';
 import { AuthContext } from '../../context/AuthProvider';
 import { Register } from '../../types/Register';
+import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
+import iconClose from '../../static/icons/Close.svg';
 
 const validateName = (value: string) => {
   if (!value) {
@@ -57,6 +59,11 @@ export const RegisterPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  const handleError = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(''), 3000);
+  };
+
   const handleSubmit = ({
     name,
     email,
@@ -74,8 +81,10 @@ export const RegisterPage = () => {
           .catch(error => setErrorMessage(error.response?.data?.message));
       })
       .catch((error: any) => {
-        if (error.message) {
-          setErrorMessage(error.message);
+        if (error.message.includes('400')) {
+          handleError('Email is already taken');
+        } else {
+          handleError('Internal server error');
         }
 
         if (!error.response?.data) {
@@ -116,7 +125,21 @@ export const RegisterPage = () => {
       >
         {({ touched, errors, isSubmitting }) => (
           <Form className={styles.form}>
-            <h1 className={styles.title}>Sign In</h1>
+            <button
+              type="button"
+              className={styles.goBackButton}
+              onClick={() => window.history.back()}
+            >
+              <img
+                className={styles.goBackButtonIcon}
+                src={iconBack}
+                alt="Icon Back"
+              />
+
+              <p className={styles.goBackButtonText}>Back</p>
+            </button>
+
+            <h1 className={styles.title}>Sign Up</h1>
 
             <div className={styles.field}>
               <label htmlFor="name" className={styles.label}>Name</label>
@@ -136,7 +159,7 @@ export const RegisterPage = () => {
               </div>
 
               {touched.name && errors.name && (
-                <p className={styles.error}>{errors.name}</p>
+                <p className={styles.verify}>{errors.name}</p>
               )}
             </div>
 
@@ -158,7 +181,7 @@ export const RegisterPage = () => {
               </div>
 
               {touched.email && errors.email && (
-                <p className={styles.error}>{errors.email}</p>
+                <p className={styles.verify}>{errors.email}</p>
               )}
             </div>
 
@@ -182,7 +205,7 @@ export const RegisterPage = () => {
               </div>
 
               {touched.password && errors.password ? (
-                <p className={styles.error}>{errors.password}</p>
+                <p className={styles.verify}>{errors.password}</p>
               ) : (
                 <p className={styles.detail}>At least 8 characters</p>
               )}
@@ -202,7 +225,7 @@ export const RegisterPage = () => {
                   || !!errors.password
                   || !!errors.name}
               >
-                Sign in
+                Sign up
               </button>
             </div>
 
@@ -214,7 +237,23 @@ export const RegisterPage = () => {
       </Formik>
 
       {errorMessage && (
-        <p className={styles.error}>{errorMessage}</p>
+        <div
+          className={styles.error}
+        >
+          <p>{errorMessage}</p>
+          <button
+            type="button"
+            aria-label="hide error"
+            className={styles.cartItemButtonClose}
+            onClick={() => setErrorMessage('')}
+          >
+            <img
+              className={styles.cartItemIconClose}
+              src={iconClose}
+              alt="Icon Close"
+            />
+          </button>
+        </div>
       )}
     </main>
   );

@@ -11,7 +11,6 @@ type Direction = (direction: 'right' | 'left') => void;
 type SlideNumber = (slideNum: number) => void;
 
 export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
-  const [scrollImage, setScrollImage] = useState(0);
   const [slideNumber, setSlideNumber] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
@@ -28,9 +27,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   const handleSlide: SlideNumber = useCallback(
     (slideNum: number) => {
       setSlideNumber(slideNum);
-      setScrollImage(-containerWidth * slideNum);
-    },
-    [containerWidth],
+    }, [],
   );
 
   const handleScroll: Direction = useCallback(
@@ -85,12 +82,13 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [scrollImage, handleScroll]);
+  }, [handleScroll]);
 
   const sliderAnimation = {
     width: containerWidth * NUMBER_OF_SLIDES,
     transition: 'transform 1000ms ease-in-out',
-    transform: `translateX(${scrollImage}px)`,
+    transform: `translateX(${-slideNumber * (100 / NUMBER_OF_SLIDES)}%)`,
+    'transform-box': 'content-box',
   };
 
   return (
