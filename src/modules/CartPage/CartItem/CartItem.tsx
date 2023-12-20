@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import iconClose from '../../../static/icons/Close.svg';
 import iconMinus from '../../../static/icons/Minus.svg';
@@ -11,16 +14,17 @@ import {
   QuantityOperation,
 } from '../../../context/GlobalProvider';
 
-type Props = Pick<Phone, 'id' | 'image' | 'name' | 'price'>;
+type Props = Pick<Phone, 'id' | 'image' | 'name' | 'price' | 'phoneId'>;
 
 export const CartItem: React.FC<Props> = ({
-  id, image, name, price,
+  id, image, name, price, phoneId,
 }) => {
   const { removeFromCart, changeQuantity, cartItems }
     = useContext(PhonesContext);
   const foundItem = cartItems.find((item) => item.id === id);
   const quantity = foundItem ? foundItem.quantity ?? 0 : 0;
   const isDisabled = quantity !== undefined && quantity < 2;
+  const navigate = useNavigate();
 
   return (
     <div className={styles.cartItem}>
@@ -38,10 +42,20 @@ export const CartItem: React.FC<Props> = ({
         </button>
 
         <div className={styles.cartItemImageContainer}>
-          <img className={styles.cartItemImage} src={image} alt="Item" />
+          <img
+            className={styles.cartItemImage}
+            src={image}
+            alt="Item"
+            onClick={() => navigate(`/phones/${phoneId}`)}
+          />
         </div>
 
-        <p className={styles.cartItemName}>{name}</p>
+        <p
+          className={styles.cartItemName}
+          onClick={() => navigate(`/phones/${phoneId}`)}
+        >
+          {name}
+        </p>
       </div>
 
       <div className={styles.secondRow}>

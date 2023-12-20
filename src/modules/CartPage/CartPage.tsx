@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, {
   useCallback, useContext, useEffect, useState,
 } from 'react';
@@ -21,7 +22,7 @@ export const CartPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState(false);
   const { pathname } = useLocation();
-  const { currentUser } = useContext(AuthContext);
+  const { authenticate } = useContext(AuthContext);
   const { cartItems, setCartItems } = useContext(PhonesContext);
   const navigate = useNavigate();
 
@@ -58,8 +59,8 @@ export const CartPage: React.FC = () => {
     fetchData();
   }, [loadPhones]);
 
-  const handleCheckout = () => {
-    if (!currentUser) {
+  const handleCheckout = async () => {
+    if (!await authenticate()) {
       navigate('/login', { state: { pathname }, replace: true });
     }
 
