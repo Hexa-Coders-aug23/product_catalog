@@ -3,13 +3,17 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { useLocation, NavLink, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as phoneService from '../../api/phones';
 
 import heartIcon from '../../static/icons/Favourites_Heart.svg';
 
 import styles from './PhonePage.module.scss';
 import { PhoneDetailed } from '../../types/Phone';
+import { HeaderComponent } from './Header';
+import AboutArticle from './AboutArticle/AboutArticle';
+import TechSpecsArticle from './TechArticle/TechArticle';
+import { ProductsSlider } from '../shared/components/ProductsSliderLib';
 
 const handleButtonClick = (section: string, option: string, color: string) => {
   console.log(
@@ -21,21 +25,18 @@ const addTo = (id: string, place: string) => {
   console.log(`Запит до серверу для додавання продукту з id ${id} в ${place}`);
 };
 
-let num = 1;
-
 export const PhonePage: React.FC = () => {
   const navigate = useNavigate();
+  const [recommended, setRecommended] = useState([]);
+
   const [phone, setPhone] = useState<PhoneDetailed | null>(null);
   const [newColor, setNewColor] = useState('');
   const [newCapacity, setNewCapacity] = useState('');
   const [currentMainPhoto, setCurrentMainPhoto] = useState('');
-  // const [currentSearch, setCurrentSearch] = useState('');
 
   const phonesSlug = useLocation().pathname.slice(8);
 
   const [phoneLink, setPhoneLink] = useState(phonesSlug);
-
-  const phoneLinkBase = phonesSlug.split('-').slice(0, -2).join('-');
 
   const fetchPhoneById = async () => {
     try {
@@ -49,8 +50,19 @@ export const PhonePage: React.FC = () => {
     }
   };
 
+  const fetchRecommended = async () => {
+    try {
+      const data = await phoneService.getRecommendedPhones(phoneLink);
+
+      setRecommended(data);
+    } catch (error) {
+      console.error('Error fetching recommended phones:', error);
+    }
+  };
+
   useEffect(() => {
     fetchPhoneById();
+    fetchRecommended();
   }, [phoneLink]);
 
   useEffect(() => {
@@ -59,18 +71,30 @@ export const PhonePage: React.FC = () => {
     }
   }, [phone, newColor, newCapacity]);
 
-  // useEffect(() => {
-  //   setCurrentSearch(window.location.href);
-  //   console.log('Пошукова строка змінилася:', currentSearch);
-  // }, []);
+  function monitorUrlChange() {
+    let currentUrl = window.location.href;
 
-  // const handleLocationChange = () => {
-  //   console.log('Пошукова строка змінилася:', currentSearch);
-  // };
+    const intervalId = setInterval(() => {
+      const newUrl = window.location.href;
 
-  // useEffect(() => {
-  //   handleLocationChange();
-  // }, [currentSearch]);
+      if (newUrl !== currentUrl) {
+        console.log('Адресная строка изменилась:', window.location.hash.slice(9));
+        setPhoneLink(window.location.hash.slice(9));
+
+        clearInterval(intervalId);
+
+        currentUrl = newUrl;
+
+        monitorUrlChange();
+      }
+    }, 1000);
+  }
+
+  monitorUrlChange();
+
+  if (!phone) {
+    return <div>Loading...</div>;
+  }
 
   const handleAltPhotoClick = (photo: string) => {
     setCurrentMainPhoto(photo);
@@ -82,15 +106,11 @@ export const PhonePage: React.FC = () => {
 
   const handleColorButtonClick = (colorOption: string) => {
     handleButtonClick('color', colorOption, newColor);
-    setNewColor(colorOption);
-    setPhoneLink(
-      `${phoneLinkBase}-${newCapacity.toLowerCase()}-${colorOption}`,
-    );
-    updateUrl(phoneLink);
 
     setPhoneLink((prevPhoneLink) => {
+      setNewColor(colorOption);
       const newPhoneLinkBase = prevPhoneLink.split('-').slice(0, -2).join('-');
-      const newLink = `${newPhoneLinkBase}-${newCapacity.toLowerCase()}-${colorOption}`;
+      const newLink = `${newPhoneLinkBase}-${(newCapacity.toLowerCase()) || (phone.capacity.toLowerCase())}-${colorOption}`;
 
       updateUrl(newLink);
 
@@ -100,10 +120,10 @@ export const PhonePage: React.FC = () => {
 
   const handleCapacityButtonClick = (capacityOption: string) => {
     handleButtonClick('capacity', capacityOption, newCapacity);
-    setNewCapacity(capacityOption);
     setPhoneLink((prevPhoneLink) => {
+      setNewCapacity(capacityOption);
       const newPhoneLinkBase = prevPhoneLink.split('-').slice(0, -2).join('-');
-      const newLink = `${newPhoneLinkBase}-${capacityOption.toLowerCase()}-${newColor}`;
+      const newLink = `${newPhoneLinkBase}-${(capacityOption.toLowerCase())}-${newColor || phone.color}`;
 
       updateUrl(newLink);
 
@@ -111,12 +131,7 @@ export const PhonePage: React.FC = () => {
     });
   };
 
-  if (!phone) {
-    return <div>Loading...</div>;
-  }
-
   const {
-    // id,
     namespaceId,
     name,
     capacityAvailable,
@@ -131,114 +146,14 @@ export const PhonePage: React.FC = () => {
     resolution,
     processor,
     ram,
-    camera,
-    zoom,
-    cell,
   } = phone;
 
-  if (num === 1) {
-    setNewColor(phone.color);
-    setNewCapacity(phone.capacity);
-    num = 0;
-  }
-
   return (
-    <main>
-      <div className={styles.breadcrumbs}>
-        <NavLink to="/" className={styles.homeIcon} />
-        <div className={styles.iconNext} />
-        <NavLink to="phones" className={styles.prevStep}>
-          Phones
-        </NavLink>
-        <div className={styles.iconNext} />
-        <NavLink to="#" className={styles.step}>
-          {name}
-        </NavLink>
-      </div>
-      <h1 className={styles.mainHeader}>{name}</h1>
+    <main className={styles.productPage}>
+      <HeaderComponent name={name} />
       <div className={styles.productCard}>
         <div className={styles.photosBlock}>
           <div className={styles.altPhotos}>
-            {images.map((image, imageNum) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                key={imageNum}
-                className={`${styles.altPhotoBlock} ${
-                  image === currentMainPhoto && styles.activeColor
-                }`}
-                onClick={() => handleAltPhotoClick(image)}
-              >
-                <img
-                  src={image}
-                  alt={namespaceId}
-                  className={styles.altPhoto}
-                />
-              </div>
-            ))}
-            {images.map((image, imageNum) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                key={imageNum}
-                className={`${styles.altPhotoBlock} ${
-                  image === currentMainPhoto && styles.activeColor
-                }`}
-                onClick={() => handleAltPhotoClick(image)}
-              >
-                <img
-                  src={image}
-                  alt={namespaceId}
-                  className={styles.altPhoto}
-                />
-              </div>
-            ))}
-            {images.map((image, imageNum) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                key={imageNum}
-                className={`${styles.altPhotoBlock} ${
-                  image === currentMainPhoto && styles.activeColor
-                }`}
-                onClick={() => handleAltPhotoClick(image)}
-              >
-                <img
-                  src={image}
-                  alt={namespaceId}
-                  className={styles.altPhoto}
-                />
-              </div>
-            ))}
-            {images.map((image, imageNum) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                key={imageNum}
-                className={`${styles.altPhotoBlock} ${
-                  image === currentMainPhoto && styles.activeColor
-                }`}
-                onClick={() => handleAltPhotoClick(image)}
-              >
-                <img
-                  src={image}
-                  alt={namespaceId}
-                  className={styles.altPhoto}
-                />
-              </div>
-            ))}
-            {images.map((image, imageNum) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                key={imageNum}
-                className={`${styles.altPhotoBlock} ${
-                  image === currentMainPhoto && styles.activeColor
-                }`}
-                onClick={() => handleAltPhotoClick(image)}
-              >
-                <img
-                  src={image}
-                  alt={namespaceId}
-                  className={styles.altPhoto}
-                />
-              </div>
-            ))}
             {images.map((image, imageNum) => (
               // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
               <div
@@ -352,78 +267,24 @@ export const PhonePage: React.FC = () => {
           </ul>
         </aside>
       </div>
+      {/* <ProductCard
+        phone={phone}
+        currentMainPhoto={currentMainPhoto}
+        handleAltPhotoClick={handleAltPhotoClick}
+        handleColorButtonClick={handleColorButtonClick}
+        handleCapacityButtonClick={handleCapacityButtonClick}
+        addTo={addTo}
+        heartIcon={heartIcon}
+      /> */}
       <div className={styles.articlesBlock}>
-        <article className={styles.aboutArticle}>
-          <div>
-            <h2 className={styles.articleHeader}>About</h2>
-            <div className={styles.articleLine} />
-          </div>
-          <section className={styles.aboutSection}>
-            <h3 className={styles.aboutSectionHeader}>
-              {description[0].title}
-            </h3>
-            <p className={styles.aboutSectionText}>{description[0].text[0]}</p>
-            <br />
-            <p className={styles.aboutSectionText}>{description[0].text[1]}</p>
-          </section>
-          <section className={styles.aboutSection}>
-            <h3 className={styles.aboutSectionHeader}>
-              {description[1].title}
-            </h3>
-            <p className={styles.aboutSectionText}>{description[1].text}</p>
-          </section>
-          <section className={styles.aboutSection}>
-            <h3 className={styles.aboutSectionHeader}>
-              {description[2].title}
-            </h3>
-            <p className={styles.aboutSectionText}>{description[2].text}</p>
-          </section>
-        </article>
-        <article className={styles.techSpecsArticle}>
-          <div className={styles.techSpecsContainer}>
-            <h2 className={styles.articleHeader}>Tech specs</h2>
-            <div className={styles.articleLine} />
-          </div>
-          <ul className={styles.techInfo}>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Screen</h3>
-              <h3 className={styles.techSpecsValue}>{screen}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Resolution</h3>
-              <h3 className={styles.techSpecsValue}>{resolution}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Processor</h3>
-              <h3 className={styles.techSpecsValue}>{processor}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>RAM</h3>
-              <h3 className={styles.techSpecsValue}>{ram}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Built in memory</h3>
-              <h3 className={styles.techSpecsValue}>{capacity}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Camera</h3>
-              <h3 className={styles.techSpecsValue}>{camera}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Zoom</h3>
-              <h3 className={styles.techSpecsValue}>{zoom}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.techSpecsKey}>Cell</h3>
-              <h3 className={styles.techSpecsValue}>{cell.join(', ')}</h3>
-            </li>
-          </ul>
-        </article>
+        <AboutArticle description={description} />
+        <TechSpecsArticle phone={phone} />
       </div>
-      <article className={styles.recomendsArticle}>
+      {/* <article className={styles.recomendsArticle}>
         <h2 className={styles.articleHeader}>You may also like</h2>
         <div className={styles.cards}>some cards and slider</div>
-      </article>
+      </article> */}
+      <ProductsSlider sectionTitle="You may also like" phones={recommended} />
     </main>
   );
 };

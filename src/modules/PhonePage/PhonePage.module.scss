@@ -1,6 +1,6 @@
 @import './../../App.module.scss';
 
-main {
+.productPage {
   margin: 16px 16px 56px;
   font-family: 'Mont', sans-serif;
   font-size: 12px;
@@ -87,27 +87,23 @@ main {
 }
 
 .mainPhotoSpaceLeft {
-  @include onTablet {
-    min-width: 16px;
-    max-width: 64px;
-  }
+  display: flex;
 
-  @include onDesktop {
+  @include onTablet {
     width: 64px;
   }
 }
 
 .mainPhotoSpaceRight {
-  @include onTablet {
-    min-width: 36px;
-  }
+  display: flex;
 
-  @include onDesktop {
+  @include onTablet {
     width: 64px;
   }
 }
 
 .mainPhoto {
+  display: flex;
   margin: 0 auto 16px;
   max-height: 450px;
 }
@@ -117,6 +113,7 @@ main {
   justify-content: flex-start;
   gap: 8px;
   padding: 2px;
+  flex-shrink: 0;
 
   overflow: scroll;
   -ms-overflow-style: none;
@@ -173,11 +170,15 @@ main {
   max-height: 100%;
 }
 
-aside {
+.asideMenu {
   margin-left: 0;
 
   @include onTablet {
-    max-width: 320px;
+    min-width: 230px;
+  }
+
+  @include onDesktop {
+    min-width: 320px;
   }
 }
 
@@ -213,6 +214,11 @@ aside {
   height: 28px;
   border-radius: 50%;
   border: 1px solid transparent;
+  transition: border-color 0.3s ease; /* Додали перехід для плавності зміни */
+}
+
+.selectColorContainer:hover {
+  border-color: $color__secondary;
 }
 
 .activeColor {
@@ -225,13 +231,22 @@ aside {
   height: 100%;
   border-radius: 50%;
   border: 2px solid $color__white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
 .selectCapacityOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 32px;
   background-color: $color__white;
   border: 1px solid $color__secondary;
   border-radius: 4px;
+  line-height: 21px;
+  padding: 8px 7px 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .activeCapacity {
@@ -369,12 +384,13 @@ aside {
   }
 }
 
+.techSpecsArticle {
+  display: flex;
+  max-width: 100%;
+}
+
 .techSpecsContainer {
   margin-bottom: 30px;
-
-  @include onDesktop {
-    width: 560px;
-  }
 }
 
 .techSpecsKey {
@@ -395,9 +411,7 @@ aside {
   margin-bottom: 56px;
   background-color: burlywood;
 }
-//////////////
-
-//region
+//////////
 .black {
   background-color: black;
 }
@@ -437,4 +451,3 @@ aside {
 .silver {
   background-color: silver;
 }
-//endregion

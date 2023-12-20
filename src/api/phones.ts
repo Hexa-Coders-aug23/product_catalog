@@ -11,3 +11,7 @@ export const getPhones = (
 export const getPhone = (phoneId: string) => {
   return requests.get(`/phones/${phoneId}`);
 };
+
+export const getRecommendedPhones = (phoneId: string) => {
+  return requests.get(`/phones/${phoneId}/recommended`);
+};
