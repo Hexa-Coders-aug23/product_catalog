@@ -17,6 +17,7 @@ export const CartItemsList: React.FC<Props> = ({ phones }) => {
           name={phone.name}
           price={phone.price}
           image={phone.image}
+          phoneId={phone.phoneId}
         />
       ))}
     </div>

@@ -66,6 +66,7 @@
 .cartItemImage {
   height: 66px;
   object-fit: scale-down;
+  cursor: pointer;
 }
 
 .cartItemName {
@@ -73,6 +74,7 @@
   font-weight: 600;
   line-height: 21px;
   color: $color__primary;
+  cursor: pointer;
 }
 
 .secondRow {
