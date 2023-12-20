@@ -20,9 +20,6 @@ export const ProductsSlider: FC<Props> = ({
   phones,
   isLoading,
 }) => {
-  // eslint-disable-next-line no-console
-  console.log(isLoading);
-
   return (
     <section className={styles.slider}>
       <div className={`${styles['slider-header']}`}>
