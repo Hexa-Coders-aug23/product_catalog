@@ -4,17 +4,9 @@ import cn from 'classnames';
 import logo from '../../../../static/logo/Nice_Gadgets_logo_combined.svg';
 import styles from './BurgerMenu.module.scss';
 import { PhonesContext } from '../../../../context/GlobalProvider';
+import { Tabs } from '../../../../types/Tabs';
 
-type Tab = {
-  to: string;
-  title: string;
-};
-
-type Props = {
-  tabs: Tab[];
-};
-
-export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
+export const BurgerMenu: React.FC<Tabs> = ({ tabs }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { favoriteItems, cartItems } = useContext(PhonesContext);
 
@@ -53,6 +45,15 @@ export const BurgerMenu: React.FC<Props> = ({ tabs }) => {
                 <div className={styles.pageName}>{tab.title}</div>
               </NavLink>
             ))}
+            <NavLink
+              to="account"
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) => cn(styles.page, {
+                [styles.active]: isActive,
+              })}
+            >
+              <div className={styles.pageName}>my account</div>
+            </NavLink>
           </div>
 
           <div className={styles.buttonWrapper}>
