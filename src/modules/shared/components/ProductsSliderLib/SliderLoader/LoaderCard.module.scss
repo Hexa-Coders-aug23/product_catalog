@@ -1,0 +1,33 @@
+@import '../../../../../styles/colors';
+@import '../../../../../styles/mixins';
+
+.inner {
+  animation: shimmer 2s infinite linear;
+  position: absolute;
+  inset: 0;
+  transform: translateX(100%);
+  background: linear-gradient(100deg,
+    rgba(255,255,255,0) 20%,
+    rgba(255,255,255,0.5) 50%,
+    rgba(255,255,255,0) 80%);
+
+  @keyframes shimmer {
+    from {transform: translateX(-230%);}
+    to {transform: translateX(230%);}
+  }
+}
+
+.outer {
+  position: relative;
+  overflow: hidden;
+  background-color: $color__elements;
+
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  height: 440px;
+  min-width: 237px;
+
+  @include onTablet {
+    height: 506px;
+  }
+}

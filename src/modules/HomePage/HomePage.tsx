@@ -10,17 +10,21 @@ import { getSliderPhones } from '../../api/sliderApi';
 export const HomePage: React.FC = () => {
   const [newPhones, setNewPhones] = useState<Phone[]>([]);
   const [discountedPhones, setDiscountedPhones] = useState<Phone[]>([]);
+  const [isNewLoading, setIsNewLoading] = useState(true);
+  const [isDiscountedLoading, setIsDiscountedLoading] = useState(true);
 
   useEffect(() => {
     const getNewPhones = async () => {
       const phones = await getSliderPhones(SliderCategory.New);
 
+      setIsNewLoading(false);
       setNewPhones(phones);
     };
 
     const getDiscountedPhones = async () => {
       const phones = await getSliderPhones(SliderCategory.Discount);
 
+      setIsDiscountedLoading(false);
       setDiscountedPhones(phones);
     };
 
@@ -32,9 +36,17 @@ export const HomePage: React.FC = () => {
     <main className={styles.container}>
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
       <BannerSection />
-      <ProductsSlider sectionTitle="Brand new models" phones={newPhones} />
+      <ProductsSlider
+        sectionTitle="Brand new models"
+        phones={newPhones}
+        isLoading={isNewLoading}
+      />
       <CategoriesSection />
-      <ProductsSlider sectionTitle="Hot prices" phones={discountedPhones} />
+      <ProductsSlider
+        sectionTitle="Hot prices"
+        phones={discountedPhones}
+        isLoading={isDiscountedLoading}
+      />
     </main>
   );
 };
