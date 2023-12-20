@@ -64,7 +64,7 @@ export const LoginPage = () => {
             <button
               type="button"
               className={styles.goBackButton}
-              onClick={() => window.history.back()}
+              onClick={() => navigate('/cart')}
             >
               <img
                 className={styles.goBackButtonIcon}

@@ -12,6 +12,7 @@ import * as authService from '../../api/auth';
 import { AuthContext } from '../../context/AuthProvider';
 import { Register } from '../../types/Register';
 import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
+import iconClose from '../../static/icons/Close.svg';
 
 const validateName = (value: string) => {
   if (!value) {
@@ -58,6 +59,11 @@ export const RegisterPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  const handleError = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(''), 3000);
+  };
+
   const handleSubmit = ({
     name,
     email,
@@ -75,8 +81,10 @@ export const RegisterPage = () => {
           .catch(error => setErrorMessage(error.response?.data?.message));
       })
       .catch((error: any) => {
-        if (error.message) {
-          setErrorMessage(error.message);
+        if (error.message.includes('400')) {
+          handleError('Email is already taken');
+        } else {
+          handleError('Internal server error');
         }
 
         if (!error.response?.data) {
@@ -229,7 +237,23 @@ export const RegisterPage = () => {
       </Formik>
 
       {errorMessage && (
-        <p className={styles.error}>{errorMessage}</p>
+        <div
+          className={styles.error}
+        >
+          <p>{errorMessage}</p>
+          <button
+            type="button"
+            aria-label="hide error"
+            className={styles.cartItemButtonClose}
+            onClick={() => setErrorMessage('')}
+          >
+            <img
+              className={styles.cartItemIconClose}
+              src={iconClose}
+              alt="Icon Close"
+            />
+          </button>
+        </div>
       )}
     </main>
   );
