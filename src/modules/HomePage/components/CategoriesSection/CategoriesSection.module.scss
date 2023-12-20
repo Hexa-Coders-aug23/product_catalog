@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 16px;
   padding-inline: 16px;
+  
 
   @include onDesktop {
     max-width: 1200px;
@@ -13,6 +14,7 @@
 
 .blockName {
   @include sectionName;
+  margin-bottom: 24px;
 }
 
 .blockWrapper {

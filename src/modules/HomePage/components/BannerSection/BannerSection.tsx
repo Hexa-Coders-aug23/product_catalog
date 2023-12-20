@@ -33,8 +33,8 @@ const Banners: Banner[] = [
 
 export const BannerSection: React.FC = () => {
   return (
-    <div className={styles.bannerSection}>
+    <section className={styles.bannerSection}>
       <BannerSlider Banners={Banners} />
-    </div>
+    </section>
   );
 };

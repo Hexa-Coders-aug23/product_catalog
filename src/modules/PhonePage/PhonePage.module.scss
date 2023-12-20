@@ -1,21 +1,21 @@
 @import './../../App.module.scss';
 
-main {
-  margin: 16px 16px 56px;
-  font-family: 'Mont', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+// main {
+//   margin: 16px 16px 56px;
+//   font-family: 'Mont', sans-serif;
+//   font-size: 12px;
+//   font-weight: 600;
 
-  @include onTablet {
-    margin: 16px 24px 64px;
-  }
+//   @include onTablet {
+//     margin: 16px 24px 64px;
+//   }
 
-  @include onDesktop {
-    padding-inline: 24px;
-    margin: 16px auto 81px;
-    max-width: 1200px;
-  }
-}
+//   @include onDesktop {
+//     padding-inline: 24px;
+//     margin: 16px auto 81px;
+//     max-width: 1200px;
+//   }
+// }
 
 .breadcrumbs {
   display: flex;
