@@ -7,13 +7,22 @@ import 'swiper/css';
 import styles from './ProductsSlider.module.scss';
 import { Card } from '../Card';
 import { Phone } from '../../../../types/Phone';
+import { LoaderCard } from './SliderLoader';
 
 type Props = {
   sectionTitle: string;
   phones: Phone[];
+  isLoading: boolean;
 };
 
-export const ProductsSlider: FC<Props> = ({ sectionTitle, phones }) => {
+export const ProductsSlider: FC<Props> = ({
+  sectionTitle,
+  phones,
+  isLoading,
+}) => {
+  // eslint-disable-next-line no-console
+  console.log(isLoading);
+
   return (
     <section className={styles.slider}>
       <div className={`${styles['slider-header']}`}>
@@ -77,22 +86,30 @@ export const ProductsSlider: FC<Props> = ({ sectionTitle, phones }) => {
           },
         }}
       >
-        {phones.map((phone) => (
-          <SwiperSlide key={phone.id}>
-            <Card
-              key={phone.id}
-              itemId={phone.itemId}
-              id={phone.id}
-              image={phone.image}
-              capacity={phone.capacity}
-              screen={phone.screen}
-              ram={phone.ram}
-              fullPrice={phone.fullPrice}
-              price={phone.price}
-              name={phone.name}
-            />
-          </SwiperSlide>
-        ))}
+        {isLoading
+          ? (
+            [1, 2, 3, 4].map((index) => (
+              <SwiperSlide key={index}>
+                <LoaderCard />
+              </SwiperSlide>
+            ))
+          )
+          : (phones.map((phone) => (
+            <SwiperSlide key={phone.id}>
+              <Card
+                key={phone.id}
+                itemId={phone.itemId}
+                id={phone.id}
+                image={phone.image}
+                capacity={phone.capacity}
+                screen={phone.screen}
+                ram={phone.ram}
+                fullPrice={phone.fullPrice}
+                price={phone.price}
+                name={phone.name}
+              />
+            </SwiperSlide>
+          )))}
       </Swiper>
     </section>
   );
