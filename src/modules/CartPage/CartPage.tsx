@@ -51,8 +51,8 @@ export const CartPage: React.FC = () => {
     const fetchData = async () => {
       const phonesData = await loadPhones();
 
-      setIsLoading(true);
       setPhones(phonesData);
+      setIsLoading(false);
     };
 
     fetchData();
@@ -70,6 +70,7 @@ export const CartPage: React.FC = () => {
     setCartItems([]);
     localStorage.removeItem('cart');
     setModal(false);
+    navigate('/');
   };
 
   return (
