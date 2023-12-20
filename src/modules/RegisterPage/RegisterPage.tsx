@@ -159,7 +159,7 @@ export const RegisterPage = () => {
               </div>
 
               {touched.name && errors.name && (
-                <p className={styles.error}>{errors.name}</p>
+                <p className={styles.verify}>{errors.name}</p>
               )}
             </div>
 
@@ -181,7 +181,7 @@ export const RegisterPage = () => {
               </div>
 
               {touched.email && errors.email && (
-                <p className={styles.error}>{errors.email}</p>
+                <p className={styles.verify}>{errors.email}</p>
               )}
             </div>
 
@@ -205,7 +205,7 @@ export const RegisterPage = () => {
               </div>
 
               {touched.password && errors.password ? (
-                <p className={styles.error}>{errors.password}</p>
+                <p className={styles.verify}>{errors.password}</p>
               ) : (
                 <p className={styles.detail}>At least 8 characters</p>
               )}
