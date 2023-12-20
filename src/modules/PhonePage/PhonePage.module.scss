@@ -1,6 +1,7 @@
 @import './../../App.module.scss';
 
 .productPage {
+  position: relative;
   margin: 16px 16px 56px;
   font-family: 'Mont', sans-serif;
   font-size: 12px;
@@ -40,14 +41,47 @@
   height: 16px;
 }
 
+.iconBack {
+  background-image: url(../../static/icons/Chevron_Arrow_Left.svg);
+  width: 16px;
+  height: 16px;
+  filter: brightness(0);
+}
+
 .prevStep {
   color: $color__primary;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .step {
   color: $color__secondary;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.step:hover {
+  color: $color__primary;
+}
+
+.backButtonContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.backButton {
+  background-color: transparent;
+  border: none;
+  color: $color__secondary;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  line-height: 16px;
+}
+
+.backButton:hover {
+  color: $color__primary;
 }
 
 .mainHeader {
@@ -179,6 +213,13 @@
 
   @include onDesktop {
     min-width: 320px;
+  }
+}
+
+.asideId {
+  @include onDesktop {
+    position: absolute;
+    right: 0;
   }
 }
 
@@ -385,8 +426,9 @@
 }
 
 .techSpecsArticle {
-  display: flex;
-  max-width: 100%;
+  @include onDesktop {
+    width: 512px;
+  }
 }
 
 .techSpecsContainer {

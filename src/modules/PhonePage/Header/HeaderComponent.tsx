@@ -25,9 +25,17 @@ export const HeaderComponent: React.FC<Props> = ({ name }) => {
           {name}
         </NavLink>
       </div>
-      <button type="button" onClick={handleGoBack}>
-        back
-      </button>
+      <div className={styles.backButtonContainer}>
+        <div className={styles.iconBack} />
+        <button
+          type="button"
+          onClick={handleGoBack}
+          className={styles.backButton}
+        >
+          Back
+        </button>
+      </div>
+
       <h1 className={styles.mainHeader}>{name}</h1>
     </>
   );

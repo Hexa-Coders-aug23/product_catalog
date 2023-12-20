@@ -178,12 +178,12 @@ export const PhonePage: React.FC = () => {
           <img src={currentMainPhoto} alt={name} className={styles.mainPhoto} />
           <div className={styles.mainPhotoSpaceRight} />
         </div>
-        <aside>
+        <aside className={styles.asideMenu}>
           <div className={styles.productSelect}>
             <section className={styles.selectParametrs}>
               <div className={styles.selectParametrsHeader}>
                 <h3>Avalible colors</h3>
-                <h3>id: 802390</h3>
+                <h3 className={styles.asideId}>id: 802390</h3>
               </div>
               <div className={styles.selectParametrsOptions}>
                 {colorsAvailable.map((colorOption) => (
