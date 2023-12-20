@@ -1,21 +1,22 @@
 @import './../../App.module.scss';
 
-// main {
-//   margin: 16px 16px 56px;
-//   font-family: 'Mont', sans-serif;
-//   font-size: 12px;
-//   font-weight: 600;
+.productPage {
+  position: relative;
+  margin: 16px 16px 56px;
+  font-family: 'Mont', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
 
-//   @include onTablet {
-//     margin: 16px 24px 64px;
-//   }
+  @include onTablet {
+    margin: 16px 24px 64px;
+  }
 
-//   @include onDesktop {
-//     padding-inline: 24px;
-//     margin: 16px auto 81px;
-//     max-width: 1200px;
-//   }
-// }
+  @include onDesktop {
+    padding-inline: 24px;
+    margin: 16px auto 81px;
+    max-width: 1200px;
+  }
+}
 
 .breadcrumbs {
   display: flex;
@@ -40,14 +41,48 @@
   height: 16px;
 }
 
+.iconBack {
+  background-image: url(../../static/icons/Chevron_Arrow_Left.svg);
+  width: 16px;
+  height: 16px;
+  filter: brightness(0);
+}
+
 .prevStep {
   color: $color__primary;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .step {
   color: $color__secondary;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.step:hover {
+  color: $color__primary;
+}
+
+.backButtonContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.backButton {
+  background-color: transparent;
+  border: none;
+  color: $color__secondary;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.backButton:hover {
+  color: $color__primary;
 }
 
 .mainHeader {
@@ -87,27 +122,23 @@
 }
 
 .mainPhotoSpaceLeft {
-  @include onTablet {
-    min-width: 16px;
-    max-width: 64px;
-  }
+  display: flex;
 
-  @include onDesktop {
+  @include onTablet {
     width: 64px;
   }
 }
 
 .mainPhotoSpaceRight {
-  @include onTablet {
-    min-width: 36px;
-  }
+  display: flex;
 
-  @include onDesktop {
+  @include onTablet {
     width: 64px;
   }
 }
 
 .mainPhoto {
+  display: flex;
   margin: 0 auto 16px;
   max-height: 450px;
 }
@@ -117,6 +148,7 @@
   justify-content: flex-start;
   gap: 8px;
   padding: 2px;
+  flex-shrink: 0;
 
   overflow: scroll;
   -ms-overflow-style: none;
@@ -173,11 +205,27 @@
   max-height: 100%;
 }
 
-aside {
+.asideMenu {
   margin-left: 0;
 
   @include onTablet {
-    max-width: 320px;
+    min-width: 230px;
+  }
+
+  @include onDesktop {
+    min-width: 320px;
+  }
+}
+
+.asideId {
+  @include onTablet {
+    position: absolute;
+    right: 0;
+  }
+
+  @include onTablet {
+    position: absolute;
+    right: 24px;
   }
 }
 
@@ -213,6 +261,11 @@ aside {
   height: 28px;
   border-radius: 50%;
   border: 1px solid transparent;
+  transition: border-color 0.3s ease; /* Додали перехід для плавності зміни */
+}
+
+.selectColorContainer:hover {
+  border-color: $color__secondary;
 }
 
 .activeColor {
@@ -225,13 +278,22 @@ aside {
   height: 100%;
   border-radius: 50%;
   border: 2px solid $color__white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
 }
 
 .selectCapacityOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 32px;
   background-color: $color__white;
   border: 1px solid $color__secondary;
   border-radius: 4px;
+  line-height: 21px;
+  padding: 8px 7px 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .activeCapacity {
@@ -261,6 +323,7 @@ aside {
 
 .buySectionButtons {
   display: flex;
+  gap: 8px;
   margin-bottom: 32px;
 }
 
@@ -369,12 +432,14 @@ aside {
   }
 }
 
+.techSpecsArticle {
+  @include onDesktop {
+    width: 530px;
+  }
+}
+
 .techSpecsContainer {
   margin-bottom: 30px;
-
-  @include onDesktop {
-    width: 560px;
-  }
 }
 
 .techSpecsKey {
@@ -395,9 +460,7 @@ aside {
   margin-bottom: 56px;
   background-color: burlywood;
 }
-//////////////
-
-//region
+//////////
 .black {
   background-color: black;
 }
@@ -437,4 +500,3 @@ aside {
 .silver {
   background-color: silver;
 }
-//endregion

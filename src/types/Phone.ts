@@ -22,6 +22,7 @@ export interface PhoneDetailed {
   camera: string;
   zoom: string;
   cell: string[];
+  phoneId: number;
 }
 
 export interface Phone {
