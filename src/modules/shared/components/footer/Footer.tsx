@@ -15,10 +15,6 @@ export const Footer: React.FC = () => {
   };
 
   return (
-  // <div>
-  //   <div className={styles.topLine} />
-
-    // </div>
     <footer>
       <div className={styles.topLine} />
 
