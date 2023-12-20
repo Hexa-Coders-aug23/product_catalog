@@ -51,7 +51,7 @@ export const CartPage: React.FC = () => {
     const fetchData = async () => {
       const phonesData = await loadPhones();
 
-      setIsLoading(false);
+      setIsLoading(true);
       setPhones(phonesData);
     };
 

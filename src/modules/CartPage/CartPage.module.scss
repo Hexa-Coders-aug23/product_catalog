@@ -5,8 +5,17 @@
 @import '../../styles/blocks/container';
 
 .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 53vh;
   @include onTablet {
+    height: 85vh;
     padding-top: 40px;
+  }
+
+  @include onDesktop {
+    height: 75vh;
   }
 }
 

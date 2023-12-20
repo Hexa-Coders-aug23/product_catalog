@@ -10,22 +10,24 @@
   border: 8px solid $color__accent;
   border-radius: 50%;
   position: absolute;
-  top: 40%;
-  left: 45%;
-  animation: loader 1.5s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
   height: 100px;
+  flex: 1;
 }
 
 .loader_img {
   width: 75px;
+  animation: loader 1.5s linear infinite;
 }
 
 @keyframes loader {
   100% {
-    transform: rotate(360deg);
+    transform: rotate(360deg) translate(0, 0);
   }
 }
