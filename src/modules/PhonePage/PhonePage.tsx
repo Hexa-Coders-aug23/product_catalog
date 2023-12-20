@@ -80,6 +80,8 @@ export const PhonePage: React.FC = () => {
       if (newUrl !== currentUrl) {
         console.log('Адресная строка изменилась:', window.location.hash.slice(9));
         setPhoneLink(window.location.hash.slice(9));
+        setNewCapacity('');
+        setNewColor('');
 
         clearInterval(intervalId);
 
@@ -280,10 +282,6 @@ export const PhonePage: React.FC = () => {
         <AboutArticle description={description} />
         <TechSpecsArticle phone={phone} />
       </div>
-      {/* <article className={styles.recomendsArticle}>
-        <h2 className={styles.articleHeader}>You may also like</h2>
-        <div className={styles.cards}>some cards and slider</div>
-      </article> */}
       <ProductsSlider sectionTitle="You may also like" phones={recommended} />
     </main>
   );
