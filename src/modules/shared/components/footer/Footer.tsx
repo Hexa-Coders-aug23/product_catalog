@@ -15,9 +15,10 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <div>
+    <footer>
       <div className={styles.topLine} />
-      <footer className={styles.footer}>
+
+      <div className={styles.footer}>
         <div>
           <NavLink to="/">
             <img src={logoImg} alt="Logo" className={styles.footerLogo} />
@@ -58,7 +59,7 @@ export const Footer: React.FC = () => {
             <img src={iconImg} alt="Chevrone" />
           </button>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
