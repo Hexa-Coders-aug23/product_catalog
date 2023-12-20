@@ -8,12 +8,16 @@ type Props = {
 };
 
 export const HeaderComponent: React.FC<Props> = ({ name }) => {
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
   return (
     <>
       <div className={styles.breadcrumbs}>
         <NavLink to="/" className={styles.homeIcon} />
         <div className={styles.iconNext} />
-        <NavLink to="phones" className={styles.prevStep}>
+        <NavLink to="../" className={styles.prevStep}>
           Phones
         </NavLink>
         <div className={styles.iconNext} />
@@ -21,6 +25,9 @@ export const HeaderComponent: React.FC<Props> = ({ name }) => {
           {name}
         </NavLink>
       </div>
+      <button type="button" onClick={handleGoBack}>
+        back
+      </button>
       <h1 className={styles.mainHeader}>{name}</h1>
     </>
   );
