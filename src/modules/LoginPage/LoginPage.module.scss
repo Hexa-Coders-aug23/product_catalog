@@ -109,3 +109,31 @@
   background-color: $color__icons;
   pointer-events: none;
 }
+
+.goBackButton {
+  display: flex;
+  align-items: center;
+  background-color: $color__hover-and-bg;
+  border: none;
+  gap: 4px;
+  padding-right: 15px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.goBackButtonIcon {
+  display: block;
+  filter: invert(4%) sepia(45%) saturate(25%) hue-rotate(202deg) brightness(0%)
+    contrast(95%);
+}
+
+.goBackButtonText {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: $color__secondary;
+
+  &:hover {
+    color: $color__primary;
+  }
+}

@@ -11,6 +11,7 @@ import styles from './RegisterPage.module.scss';
 import * as authService from '../../api/auth';
 import { AuthContext } from '../../context/AuthProvider';
 import { Register } from '../../types/Register';
+import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
 
 const validateName = (value: string) => {
   if (!value) {
@@ -116,7 +117,21 @@ export const RegisterPage = () => {
       >
         {({ touched, errors, isSubmitting }) => (
           <Form className={styles.form}>
-            <h1 className={styles.title}>Sign In</h1>
+            <button
+              type="button"
+              className={styles.goBackButton}
+              onClick={() => window.history.back()}
+            >
+              <img
+                className={styles.goBackButtonIcon}
+                src={iconBack}
+                alt="Icon Back"
+              />
+
+              <p className={styles.goBackButtonText}>Back</p>
+            </button>
+
+            <h1 className={styles.title}>Sign Up</h1>
 
             <div className={styles.field}>
               <label htmlFor="name" className={styles.label}>Name</label>
@@ -202,7 +217,7 @@ export const RegisterPage = () => {
                   || !!errors.password
                   || !!errors.name}
               >
-                Sign in
+                Sign up
               </button>
             </div>
 

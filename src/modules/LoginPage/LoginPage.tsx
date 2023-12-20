@@ -4,6 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import classNames from 'classnames';
 import styles from './LoginPage.module.scss';
 import { AuthContext } from '../../context/AuthProvider';
+import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
 
 const validateEmail = (value: string) => {
   if (!value) {
@@ -60,6 +61,20 @@ export const LoginPage = () => {
       >
         {({ touched, errors, isSubmitting }) => (
           <Form className={styles.form}>
+            <button
+              type="button"
+              className={styles.goBackButton}
+              onClick={() => window.history.back()}
+            >
+              <img
+                className={styles.goBackButtonIcon}
+                src={iconBack}
+                alt="Icon Back"
+              />
+
+              <p className={styles.goBackButtonText}>Back</p>
+            </button>
+
             <h1 className={styles.title}>Log In</h1>
 
             <div className={styles.field}>
