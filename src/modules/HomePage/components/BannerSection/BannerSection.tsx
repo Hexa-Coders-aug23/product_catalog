@@ -4,7 +4,7 @@ import { BannerSlider } from '../Banner/BannerSlider';
 import { Banner } from '../../../../types/Banner';
 
 import banner1Mob from '../../../../static/banner/Now_Avaliable_mobile.png';
-import banner1Dsk from '../../../../static/banner/Now_Avaliable_desktop.png';
+import banner1Dsk from '../../../../static/banner/Now_Avaliable_desktop1.png';
 import banner2Mob from '../../../../static/banner/i_Watch_banner_mobile.jpg';
 import banner2Dsk from '../../../../static/banner/i_Watch_banner_tablet.jpg';
 import banner3Mob from '../../../../static/banner/iPad_Pro_banner_mobile.png';
