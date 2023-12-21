@@ -11,21 +11,24 @@ type Direction = (direction: 'right' | 'left') => void;
 type SlideNumber = (slideNum: number) => void;
 
 export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
-  const [slideNumber, setSlideNumber] = useState(0);
+  const [transitionSpeed, setTransitionSpeed] = useState(1000);
+  const [transitioning, setTransitioning] = useState(false);
+  const [slideNumber, setSlideNumber] = useState(1);
   const [containerWidth, setContainerWidth] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  const NUMBER_OF_SLIDES = Banners.length;
+  const NUMBER_OF_SLIDES = Banners.length + 2;
   const windowWidth = useRef(window.innerWidth);
   const elementRef = useRef<HTMLDivElement | null>(null);
 
   const isActiveDot = (slide: number) => {
-    return slide === slideNumber;
+    return slide === slideNumber - 1;
   };
 
   const handleSlide: SlideNumber = useCallback(
     (slideNum: number) => {
+      setTransitioning(true);
       setSlideNumber(slideNum);
     }, [],
   );
@@ -43,15 +46,15 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
     [slideNumber, handleSlide, NUMBER_OF_SLIDES],
   );
 
-  function handleTouchStart(e: React.TouchEvent<HTMLLIElement>) {
+  const handleTouchStart = (e: React.TouchEvent<HTMLLIElement>) => {
     setTouchStart(e.targetTouches[0].clientX);
-  }
+  };
 
-  function handleTouchMove(e: React.TouchEvent<HTMLLIElement>) {
+  const handleTouchMove = (e: React.TouchEvent<HTMLLIElement>) => {
     setTouchEnd(e.targetTouches[0].clientX);
-  }
+  };
 
-  function handleTouchEnd() {
+  const handleTouchEnd = () => {
     if (touchStart - touchEnd > 75) {
       handleScroll('right');
     }
@@ -59,7 +62,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
     if (touchStart - touchEnd < -75) {
       handleScroll('left');
     }
-  }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,12 +87,31 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
     return () => clearInterval(interval);
   }, [handleScroll]);
 
+  const handleTransitionEnd = () => {
+    if (slideNumber === NUMBER_OF_SLIDES - 1) {
+      setTransitionSpeed(1);
+      handleSlide(1);
+    } else if (slideNumber === 0) {
+      setTransitionSpeed(1);
+      handleSlide(NUMBER_OF_SLIDES - 2);
+    } else {
+      setTransitionSpeed(1000);
+    }
+
+    setTransitioning(false);
+  };
+
   const sliderAnimation = {
     width: containerWidth * NUMBER_OF_SLIDES,
-    transition: 'transform 1000ms ease-in-out',
+    transition: `transform ${transitionSpeed}ms ease-in-out`,
     transform: `translateX(${-slideNumber * (100 / NUMBER_OF_SLIDES)}%)`,
-    'transform-box': 'content-box',
   };
+
+  const newBanners = [
+    { ...Banners[2], id: -1 },
+    ...Banners,
+    { ...Banners[0], id: NUMBER_OF_SLIDES },
+  ];
 
   return (
     <div className={styles.bannerSlider}>
@@ -98,12 +120,17 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
           type="button"
           className={styles.sliderBtn}
           onClick={() => handleScroll('left')}
+          disabled={transitioning}
         >
           <img src={arrowLeft} alt="button left" />
         </button>
         <div className={styles.imagesContainer} ref={elementRef}>
-          <ul className={styles.imagesList} style={sliderAnimation}>
-            {Banners.map((banner) => (
+          <ul
+            className={styles.imagesList}
+            style={sliderAnimation}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            {newBanners.map((banner) => (
               <li
                 className={styles.imagesItem}
                 key={banner.id}
@@ -128,6 +155,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
           type="button"
           className={styles.sliderBtn}
           onClick={() => handleScroll('right')}
+          disabled={transitioning}
         >
           <img src={arrowRight} alt="button right" />
         </button>
@@ -141,7 +169,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
               className={cn([styles.dot], {
                 [styles.dotActive]: isActiveDot(banner.id),
               })}
-              onClick={() => handleSlide(banner.id)}
+              onClick={() => handleSlide(banner.id + 1)}
             />
           </li>
         ))}
