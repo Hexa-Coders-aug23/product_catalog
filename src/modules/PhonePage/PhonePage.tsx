@@ -48,7 +48,7 @@ export const PhonePage: React.FC = () => {
       console.error('Error fetching recommended phones:', error);
       navigate('/page-not-found');
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
