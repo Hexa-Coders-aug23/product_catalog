@@ -74,7 +74,7 @@ export const CartPage: React.FC = () => {
   };
 
   return (
-    <main className={styles.container}>
+    <main className={`${styles.container} ${isLoading ? styles.containerLoading : ''}`}>
       <button
         type="button"
         className={styles.goBackButton}
