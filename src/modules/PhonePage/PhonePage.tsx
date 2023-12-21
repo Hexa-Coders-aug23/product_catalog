@@ -52,8 +52,6 @@ export const PhonePage: React.FC = () => {
     }
   };
 
-  console.log(isLoading);
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchPhoneById();
