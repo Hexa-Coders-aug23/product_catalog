@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.4906eda4.css",
-    "main.js": "/product_catalog/static/js/main.6ad158d4.js",
+    "main.css": "/product_catalog/static/css/main.ef751cb2.css",
+    "main.js": "/product_catalog/static/js/main.3a3bb719.js",
     "static/media/Now_Avaliable_desktop1.png": "/product_catalog/static/media/Now_Avaliable_desktop1.75ad39672404df1a0b61.png",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
     "static/media/iPad_Pro_banner_desktop.jpg": "/product_catalog/static/media/iPad_Pro_banner_desktop.f57b8b3c2bb04392593f.jpg",
@@ -23,6 +23,7 @@
     "static/media/Svytoslav.jpeg": "/product_catalog/static/media/Svytoslav.4917513a8b3108fec5d1.jpeg",
     "static/media/robot_error.png": "/product_catalog/static/media/robot_error.e2ca4e8a30bac14d22b3.png",
     "static/media/Dmytro.jpeg": "/product_catalog/static/media/Dmytro.fd101da6923844f93662.jpeg",
+    "static/media/wifi.png": "/product_catalog/static/media/wifi.9ffd4b8143c3fcdb34e7.png",
     "static/media/Git.svg": "/product_catalog/static/media/Git.3ecf27711255ef69c6785f9440457d46.svg",
     "static/media/Telegram.svg": "/product_catalog/static/media/Telegram.04cf4804f41145386b50aed7306f8116.svg",
     "static/media/Gmail.svg": "/product_catalog/static/media/Gmail.e6ddfac94aadca00d41c5070fc24f187.svg",
@@ -43,11 +44,11 @@
     "static/media/prev-button.svg": "/product_catalog/static/media/prev-button.55d6debc0b6023a16d6d.svg",
     "static/media/Minus.svg": "/product_catalog/static/media/Minus.6147cb5db4c975f91de08b377dc8a814.svg",
     "index.html": "/product_catalog/index.html",
-    "main.4906eda4.css.map": "/product_catalog/static/css/main.4906eda4.css.map",
-    "main.6ad158d4.js.map": "/product_catalog/static/js/main.6ad158d4.js.map"
+    "main.ef751cb2.css.map": "/product_catalog/static/css/main.ef751cb2.css.map",
+    "main.3a3bb719.js.map": "/product_catalog/static/js/main.3a3bb719.js.map"
   },
   "entrypoints": [
-    "static/css/main.4906eda4.css",
-    "static/js/main.6ad158d4.js"
+    "static/css/main.ef751cb2.css",
+    "static/js/main.3a3bb719.js"
   ]
 }
