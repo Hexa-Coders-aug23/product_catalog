@@ -17,6 +17,7 @@
   @include displayPosition;
   background-color: $color__white;
   border-bottom: 1px solid $color__elements;
+  overflow: hidden;
 
   @include onDesktop {
     height: 64px;
@@ -114,6 +115,10 @@
   background-position: center;
   align-items: center;
   @include displayPosition;
+}
+
+.account {
+  background-image: url(../../../../static/icons/User.svg);
 }
 
 .favourites {

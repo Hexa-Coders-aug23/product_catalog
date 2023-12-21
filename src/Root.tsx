@@ -30,6 +30,7 @@ export const Root: React.FC = () => (
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="sign-up" element={<RegisterPage />} />
+            <Route path="account" element={<RegisterPage />} />
 
             <Route path="phones">
               <Route index element={<CatalogPage />} />

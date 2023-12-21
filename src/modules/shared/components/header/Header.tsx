@@ -42,6 +42,14 @@ export const Header: React.FC = () => {
 
       <div className={styles.buttonWrapper}>
         <NavLink
+          to="account"
+          className={({ isActive }) => cn([styles.fullscreen], {
+            [styles.active]: isActive,
+          })}
+        >
+          <i className={`${styles.wrapper} ${styles.account}`} />
+        </NavLink>
+        <NavLink
           to="favourites"
           className={({ isActive }) => cn([styles.fullscreen], {
             [styles.active]: isActive,
