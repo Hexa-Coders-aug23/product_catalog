@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.7f21e59a.css",
-    "main.js": "/product_catalog/static/js/main.335f17dc.js",
-    "static/media/Now_Avaliable_desktop.png": "/product_catalog/static/media/Now_Avaliable_desktop.dbf2b4c89ac87688554d.png",
+    "main.css": "/product_catalog/static/css/main.64a180c3.css",
+    "main.js": "/product_catalog/static/js/main.fbe2fe6f.js",
+    "static/media/Now_Avaliable_desktop1.png": "/product_catalog/static/media/Now_Avaliable_desktop1.75ad39672404df1a0b61.png",
     "static/media/Nice_Gadgets_logo_combined.svg": "/product_catalog/static/media/Nice_Gadgets_logo_combined.429f4a35ad8f2e1132551276355149a6.svg",
     "static/media/iPad_Pro_banner_desktop.jpg": "/product_catalog/static/media/iPad_Pro_banner_desktop.f57b8b3c2bb04392593f.jpg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
@@ -33,6 +33,7 @@
     "static/media/Close.svg": "/product_catalog/static/media/Close.cdfb6ae506fe360c9ad495bfc61f521d.svg",
     "static/media/Menu.svg": "/product_catalog/static/media/Menu.73ddde2c093f9fb313b9.svg",
     "static/media/Plus.svg": "/product_catalog/static/media/Plus.d886cbead86167dad78ed7d08416c466.svg",
+    "static/media/User.svg": "/product_catalog/static/media/User.46a79a18b8716e3f115d.svg",
     "static/media/Chevron_Arrow_Left.svg": "/product_catalog/static/media/Chevron_Arrow_Left.7460d67936be8c4491a8997e5e905650.svg",
     "static/media/Chevron_Arrow_Right.svg": "/product_catalog/static/media/Chevron_Arrow_Right.e028d3889646e0b5e56cf54f47bb701a.svg",
     "static/media/next-button-active.svg": "/product_catalog/static/media/next-button-active.c88b21ea4346cb754e9d.svg",
@@ -42,11 +43,11 @@
     "static/media/prev-button.svg": "/product_catalog/static/media/prev-button.55d6debc0b6023a16d6d.svg",
     "static/media/Minus.svg": "/product_catalog/static/media/Minus.6147cb5db4c975f91de08b377dc8a814.svg",
     "index.html": "/product_catalog/index.html",
-    "main.7f21e59a.css.map": "/product_catalog/static/css/main.7f21e59a.css.map",
-    "main.335f17dc.js.map": "/product_catalog/static/js/main.335f17dc.js.map"
+    "main.64a180c3.css.map": "/product_catalog/static/css/main.64a180c3.css.map",
+    "main.fbe2fe6f.js.map": "/product_catalog/static/js/main.fbe2fe6f.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f21e59a.css",
-    "static/js/main.335f17dc.js"
+    "static/css/main.64a180c3.css",
+    "static/js/main.fbe2fe6f.js"
   ]
 }
