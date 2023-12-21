@@ -73,9 +73,10 @@
 .actions {
   display: flex;
   justify-content: flex-end;
+  margin-top: 25px;
 
-  @include onDesktop {
-    padding-right: 50px;
+  @include onTablet {
+    justify-content: center;
   }
 }
 

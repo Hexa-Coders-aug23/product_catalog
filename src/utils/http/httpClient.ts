@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 import { createClient } from './index';
-import * as authService from '../../api/auth';
 import { accessTokenService } from '../services/accessTokenService';
+import { authService } from '../services/authService';
 
 export const httpClient = createClient();
 
@@ -28,7 +28,8 @@ async function onResponseError(error: any) {
   }
 
   try {
-    const { data: { accessToken } } = await authService.refresh();
+    const { accessToken } = await authService.refresh(
+    ) as unknown as { accessToken: string };
 
     accessTokenService.save(accessToken);
 

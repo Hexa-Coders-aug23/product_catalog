@@ -22,7 +22,7 @@ export const CartPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState(false);
   const { pathname } = useLocation();
-  const { authenticate } = useContext(AuthContext);
+  const { checkAuth } = useContext(AuthContext);
   const { cartItems, setCartItems } = useContext(PhonesContext);
   const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ export const CartPage: React.FC = () => {
   }, [loadPhones]);
 
   const handleCheckout = async () => {
-    if (!await authenticate()) {
+    if (!await checkAuth()) {
       navigate('/login', { state: { pathname }, replace: true });
     }
 

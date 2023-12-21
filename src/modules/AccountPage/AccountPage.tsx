@@ -1,7 +1,23 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import styles from './AccountPage.module.scss';
+import { AuthContext } from '../../context/AuthProvider';
 
 export const AccountPage = () => {
+  const { logout } = useContext(AuthContext);
+  const isLoggedIn = localStorage.getItem('accessToken') !== null;
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (isLoggedIn) {
+      logout();
+      navigate('/');
+    } else {
+      navigate('/login', { state: { pathname }, replace: true });
+    }
+  };
+
   return (
     <main className={styles.container}>
       <section className={styles.page}>
@@ -34,8 +50,11 @@ export const AccountPage = () => {
           <button
             type="button"
             className={styles.logout}
+            onClick={handleClick}
           >
-            Logout
+            {isLoggedIn
+              ? 'Logout'
+              : 'Login'}
           </button>
         </div>
       </section>
