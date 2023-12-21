@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Field,
   Form,
@@ -228,10 +228,6 @@ export const RegisterPage = () => {
                 Sign up
               </button>
             </div>
-
-            Forgot password?
-            {' '}
-            <Link to="/" className={styles.signup}>Change password</Link>
           </Form>
         )}
       </Formik>

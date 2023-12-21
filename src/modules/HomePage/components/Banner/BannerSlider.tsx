@@ -12,6 +12,7 @@ type SlideNumber = (slideNum: number) => void;
 
 export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
   const [transitionSpeed, setTransitionSpeed] = useState(1000);
+  const [transitioning, setTransitioning] = useState(false);
   const [slideNumber, setSlideNumber] = useState(1);
   const [containerWidth, setContainerWidth] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
@@ -27,6 +28,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
 
   const handleSlide: SlideNumber = useCallback(
     (slideNum: number) => {
+      setTransitioning(true);
       setSlideNumber(slideNum);
     }, [],
   );
@@ -95,6 +97,8 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
     } else {
       setTransitionSpeed(1000);
     }
+
+    setTransitioning(false);
   };
 
   const sliderAnimation = {
@@ -116,6 +120,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
           type="button"
           className={styles.sliderBtn}
           onClick={() => handleScroll('left')}
+          disabled={transitioning}
         >
           <img src={arrowLeft} alt="button left" />
         </button>
@@ -150,6 +155,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
           type="button"
           className={styles.sliderBtn}
           onClick={() => handleScroll('right')}
+          disabled={transitioning}
         >
           <img src={arrowRight} alt="button right" />
         </button>
@@ -163,7 +169,7 @@ export const BannerSlider: React.FC<{ Banners: Banner[] }> = ({ Banners }) => {
               className={cn([styles.dot], {
                 [styles.dotActive]: isActiveDot(banner.id),
               })}
-              onClick={() => handleSlide(banner.id)}
+              onClick={() => handleSlide(banner.id + 1)}
             />
           </li>
         ))}
