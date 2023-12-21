@@ -2,32 +2,20 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
-import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import cn from 'classnames';
-import * as phoneService from '../../api/phones';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
+import * as phoneService from '../../api/phones';
 import { PhoneDetailed } from '../../types/Phone';
+
 import { HeaderComponent } from './Header';
+import { ProductCard } from './ProductCard';
 import AboutArticle from './AboutArticle/AboutArticle';
 import TechSpecsArticle from './TechArticle/TechArticle';
 import { ProductsSlider } from '../shared/components/ProductsSliderLib';
 
-import cartStyles from '../shared/components/Card/Card.module.scss';
 import styles from './PhonePage.module.scss';
-import defaultIcon from '../shared/components/Card/Favourites.png';
-import favoritedIcon from '../shared/components/Card/Union.png';
-import { PhonesContext } from '../../context/GlobalProvider';
-
-const handleButtonClick = (section: string, option: string, color: string) => {
-  console.log(
-    `Запит до серверу для розділу ${section} та опції ${option}/ ${color}`,
-  );
-};
-
-// const addTo = (id: string, place: string) => {
-//   console.log(`Запит до серверу для додавання продукту з id ${id} в ${place}`);
-// };
+import loadingIcon from './wifi.png';
 
 export const PhonePage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,24 +25,13 @@ export const PhonePage: React.FC = () => {
   const [phone, setPhone] = useState<PhoneDetailed | null>(null);
   const [newColor, setNewColor] = useState('');
   const [newCapacity, setNewCapacity] = useState('');
-  const [currentMainPhoto, setCurrentMainPhoto] = useState('');
+  const [, setCurrentMainPhoto] = useState('');
 
-  const phonesSlug = useLocation().pathname.slice(8);
-
-  const [phoneLink, setPhoneLink] = useState(phonesSlug);
-
-  const {
-    addToCart,
-    handleFavorite,
-    favoriteItems,
-    cartItems,
-  } = useContext(PhonesContext);
+  const [phoneLink, setPhoneLink] = useState(window.location.hash.slice(9));
 
   const fetchPhoneById = async () => {
     try {
       const data = await phoneService.getPhone(phoneLink);
-
-      console.log(data);
 
       setPhone(data);
     } catch (error) {
@@ -66,12 +43,16 @@ export const PhonePage: React.FC = () => {
     try {
       const data = await phoneService.getRecommendedPhones(phoneLink);
 
-      setIsLoading(false);
       setRecommended(data);
     } catch (error) {
       console.error('Error fetching recommended phones:', error);
+      navigate('/page-not-found');
+    } finally {
+      setIsLoading(true);
     }
   };
+
+  console.log(isLoading);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -85,231 +66,70 @@ export const PhonePage: React.FC = () => {
     }
   }, [phone, newColor, newCapacity]);
 
-  function monitorUrlChange() {
-    let currentUrl = window.location.href;
-
-    const intervalId = setInterval(() => {
-      const newUrl = window.location.href;
-
-      if (newUrl !== currentUrl) {
-        console.log('Адресная строка изменилась:', window.location.hash.slice(9));
-        setPhoneLink(window.location.hash.slice(9));
-        setNewCapacity('');
-        setNewColor('');
-
-        clearInterval(intervalId);
-
-        currentUrl = newUrl;
-
-        monitorUrlChange();
-      }
-    }, 1000);
-  }
-
-  monitorUrlChange();
+  useEffect(() => {
+    setPhoneLink(window.location.hash.slice(9));
+    setNewCapacity('');
+    setNewColor('');
+  }, [window.location.href]);
 
   if (!phone) {
-    return <div>Loading...</div>;
+    return (
+      <div className={styles.loading}>
+        <img
+          className={styles.loadingIcon}
+          src={loadingIcon}
+          alt="loading Icon"
+        />
+        <NavLink to="/" className={styles.loadingText}>
+          Check your link please or click me and go home
+        </NavLink>
+      </div>
+    );
   }
-
-  const handleAltPhotoClick = (photo: string) => {
-    setCurrentMainPhoto(photo);
-  };
 
   const updateUrl = (newLink: string) => {
     navigate(`/phones/${newLink}`);
   };
 
-  const handleColorButtonClick = (colorOption: string) => {
-    handleButtonClick('color', colorOption, newColor);
-
-    setPhoneLink((prevPhoneLink) => {
-      setNewColor(colorOption);
-      const newPhoneLinkBase = prevPhoneLink.split('-').slice(0, -2).join('-');
-      const newLink = `${newPhoneLinkBase}-${(newCapacity.toLowerCase()) || (phone.capacity.toLowerCase())}-${colorOption}`;
-
-      updateUrl(newLink);
-
-      return newLink;
-    });
-  };
-
-  const handleCapacityButtonClick = (capacityOption: string) => {
-    handleButtonClick('capacity', capacityOption, newCapacity);
-    setPhoneLink((prevPhoneLink) => {
-      setNewCapacity(capacityOption);
-      const newPhoneLinkBase = prevPhoneLink.split('-').slice(0, -2).join('-');
-      const newLink = `${newPhoneLinkBase}-${(capacityOption.toLowerCase())}-${newColor || phone.color}`;
-
-      updateUrl(newLink);
-
-      return newLink;
-    });
-  };
-
   const {
-    namespaceId,
     name,
-    capacityAvailable,
-    capacity,
-    priceRegular,
-    priceDiscount,
-    colorsAvailable,
-    color,
-    images,
     description,
-    screen,
-    resolution,
-    processor,
-    ram,
-    phoneId,
   } = phone;
-
-  const isAlreadyAddedToCart = cartItems.some((item) => item.id === phoneId);
-  const isAlreadyFavorited = favoriteItems.includes(phoneId);
-
-  console.log(phoneId);
 
   return (
     <main className={styles.productPage}>
-      <HeaderComponent name={name} />
-      <div className={styles.productCard}>
-        <div className={styles.photosBlock}>
-          <div className={styles.altPhotos}>
-            {images.map((image, imageNum) => (
-              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-              <div
-                key={imageNum}
-                className={`${styles.altPhotoBlock} ${
-                  image === currentMainPhoto && styles.activeColor
-                }`}
-                onClick={() => handleAltPhotoClick(image)}
-              >
-                <img
-                  src={image}
-                  alt={namespaceId}
-                  className={styles.altPhoto}
-                />
-              </div>
-            ))}
+      {isLoading
+        ? (
+          <div className={styles.loading}>
+            <img
+              className={styles.loadingIcon}
+              src={loadingIcon}
+              alt="loading Icon"
+            />
+            <NavLink to="/" className={styles.loadingText}>
+              Check your link please or click me and go home
+            </NavLink>
           </div>
-
-          <div className={styles.mainPhotoSpaceLeft} />
-          <img src={currentMainPhoto} alt={name} className={styles.mainPhoto} />
-          <div className={styles.mainPhotoSpaceRight} />
-        </div>
-        <aside className={styles.asideMenu}>
-          <div className={styles.productSelect}>
-            <section className={styles.selectParametrs}>
-              <div className={styles.selectParametrsHeader}>
-                <h3>Avalible colors</h3>
-                <h3 className={styles.asideId}>id: 802390</h3>
-              </div>
-              <div className={styles.selectParametrsOptions}>
-                {colorsAvailable.map((colorOption) => (
-                  <div
-                    key={colorOption}
-                    className={`${styles.selectColorContainer} ${
-                      colorOption === color && styles.activeColor
-                    }`}
-                  >
-                    <button
-                      className={`${styles.selectColorOption} ${styles[colorOption]}`}
-                      type="button"
-                      onClick={() => handleColorButtonClick(colorOption)}
-                    />
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className={styles.selectParametrs}>
-              <h3 className={styles.selectParametrsHeader}>Select capacity</h3>
-              <div className={styles.selectParametrsOptions}>
-                {capacityAvailable.map((capacityOption) => (
-                  <button
-                    key={capacityOption}
-                    className={`${styles.selectCapacityOption} ${
-                      capacityOption === capacity && styles.activeCapacity
-                    }`}
-                    type="button"
-                    onClick={() => handleCapacityButtonClick(capacityOption)}
-                  >
-                    {capacityOption}
-                  </button>
-                ))}
-              </div>
-            </section>
-          </div>
-          <div className={styles.buySection}>
-            <div className={styles.prices}>
-              <h1 className={styles.currentPrice}>{`$${priceDiscount}`}</h1>
-              {priceDiscount !== priceRegular && (
-                <h2 className={styles.previousPrice}>{`$${priceRegular}`}</h2>
-              )}
+        )
+        : (
+          <>
+            <HeaderComponent name={name} />
+            <ProductCard
+              phone={phone}
+              newColor={newColor}
+              setNewColor={setNewColor}
+              newCapacity={newCapacity}
+              setNewCapacity={setNewCapacity}
+              setPhoneLink={setPhoneLink}
+              updateUrl={updateUrl}
+            />
+            <div className={styles.articlesBlock}>
+              <AboutArticle description={description} />
+              <TechSpecsArticle phone={phone} />
             </div>
-            <div className={styles.buySectionButtons}>
-              <button
-                type="button"
-                className={cn(cartStyles.addToCartButton, {
-                  [cartStyles.alreadyAddedToCartButton]: isAlreadyAddedToCart,
-                })}
-                onClick={
-                  !isAlreadyAddedToCart
-                    ? () => addToCart(phoneId)
-                    : () => navigate('/cart')
-                }
-                data-qa="hover"
-              >
-                {isAlreadyAddedToCart ? 'Added to cart' : 'Add to cart'}
-              </button>
-              <button
-                className={cartStyles.addToCompareButton}
-                type="button"
-                onClick={() => handleFavorite(phoneId)}
-              >
-                <img
-                  className={cartStyles.addToCompareIcon}
-                  src={isAlreadyFavorited ? favoritedIcon : defaultIcon} // Checks if added to favorites and conditional render
-                  alt="iconToCompare"
-                />
-              </button>
-            </div>
-          </div>
-          <ul className={styles.techInfo}>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.asideInfoKey}>Screen</h3>
-              <h3 className={styles.asideInfoValue}>{screen}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.asideInfoKey}>Resolution</h3>
-              <h3 className={styles.asideInfoValue}>{resolution}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.asideInfoKey}>Processor</h3>
-              <h3 className={styles.asideInfoValue}>{processor}</h3>
-            </li>
-            <li className={styles.techInfoParametr}>
-              <h3 className={styles.asideInfoKey}>RAM</h3>
-              <h3 className={styles.asideInfoValue}>{ram}</h3>
-            </li>
-          </ul>
-        </aside>
-      </div>
-      {/* <ProductCard
-        phone={phone}
-        currentMainPhoto={currentMainPhoto}
-        handleAltPhotoClick={handleAltPhotoClick}
-        handleColorButtonClick={handleColorButtonClick}
-        handleCapacityButtonClick={handleCapacityButtonClick}
-        addTo={addTo}
-        heartIcon={heartIcon}
-      /> */}
-      <div className={styles.articlesBlock}>
-        <AboutArticle description={description} />
-        <TechSpecsArticle phone={phone} />
-      </div>
-      <ProductsSlider sectionTitle="You may also like" phones={recommended} isLoading={isLoading} />
+            <ProductsSlider sectionTitle="You may also like" phones={recommended} isLoading={isLoading} />
+          </>
+        )}
     </main>
   );
 };

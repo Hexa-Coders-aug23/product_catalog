@@ -1,0 +1,283 @@
+@import '../../../App.module.scss';
+@import './ProductColors.module.scss';
+
+.productCard {
+  padding-bottom: 30px;
+  @include onTablet {
+    max-height: 460px;
+    display: flex;
+  }
+}
+
+.photosBlock {
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include onTablet {
+    flex-direction: row;
+    min-width: 280px;
+  }
+
+  @include onDesktop {
+    width: 560px;
+    margin-right: 64px;
+  }
+}
+
+.mainPhotoSpaceLeft {
+  display: flex;
+
+  @include onTablet {
+    width: 64px;
+  }
+}
+
+.mainPhotoSpaceRight {
+  display: flex;
+
+  @include onTablet {
+    width: 64px;
+  }
+}
+
+.mainPhoto {
+  display: flex;
+  margin: 0 auto 16px;
+  max-height: 450px;
+}
+
+.altPhotos {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 2px;
+  flex-shrink: 0;
+
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  @include onTablet {
+    display: flex;
+    justify-content: flex-start;
+    width: 40px;
+    flex-direction: column;
+  }
+
+  @include onDesktop {
+    width: 85px;
+  }
+}
+
+.altPhotos::-webkit-scrollbar {
+  display: none;
+}
+
+.altPhotoBlock {
+  border: 1px solid $color__secondary;
+  border-radius: 4px;
+  background-color: $color__white;
+
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding: 2px;
+  margin-bottom: 40px;
+  flex-shrink: 0;
+
+  width: 50px;
+  height: 50px;
+
+  @include onTablet {
+    margin-bottom: 0px;
+    width: 35px;
+    height: 35px;
+  }
+
+  @include onDesktop {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.altPhotoBlock:hover {
+  border: 1px solid $color__primary;
+}
+
+.altPhoto {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.asideMenu {
+  margin-left: 0;
+
+  @include onTablet {
+    min-width: 230px;
+  }
+
+  @include onDesktop {
+    min-width: 320px;
+  }
+}
+
+.asideId {
+  @include onTablet {
+    position: absolute;
+    right: 0;
+  }
+
+  @include onTablet {
+    position: absolute;
+    right: 24px;
+  }
+}
+
+.selectParametrsHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: $color__secondary;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.selectParametrsHeader > h3 {
+  color: $color__secondary;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.productSelect {
+  margin: 0 auto 8px;
+}
+
+.selectParametrsOptions {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $color__secondary;
+  margin-bottom: 24px;
+}
+
+.selectColorContainer {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease; /* Додали перехід для плавності зміни */
+}
+
+.selectColorContainer:hover {
+  border-color: $color__secondary;
+}
+
+.activeColor {
+  border-color: $color__primary;
+}
+
+.selectColorOption {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid $color__white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.selectCapacityOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  background-color: $color__white;
+  border: 1px solid $color__secondary;
+  border-radius: 4px;
+  line-height: 21px;
+  padding: 8px 7px 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.activeCapacity {
+  background-color: $color__primary;
+  border-color: $color__primary;
+  color: $color__white;
+}
+
+.prices {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.currentPrice {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.previousPrice {
+  font-size: 22px;
+  font-weight: 500;
+  color: $color__secondary;
+  text-decoration: line-through;
+}
+
+.buySectionButtons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.addToCartButton {
+  flex: 1;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 0px;
+  color: $color__white;
+  background-color: $color__accent;
+  transition: background-color 0.3s ease;
+}
+
+.addToCartButton:hover {
+  background-color: darken($color__accent, 10%);
+}
+
+.addToFavouriteButton {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 1px solid $color__secondary;
+  align-items: center;
+  line-height: 48px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.addToFavouriteButton:hover {
+  background-color: lighten($color__secondary, 10%);
+  transform: scale(1.1);
+}
+
+.techInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 56px;
+}
+
+.techInfoParametr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.asideInfoKey {
+  color: $color__secondary;
+}
+
+.asideInfoValue {
+  font-weight: 700;
+}
