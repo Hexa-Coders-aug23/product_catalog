@@ -12,7 +12,7 @@ import * as authService from '../../api/auth';
 import { AuthContext } from '../../context/AuthProvider';
 import { Register } from '../../types/Register';
 import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
-import iconClose from '../../static/icons/Close.svg';
+import { Error } from '../shared/components/Error/Error';
 
 const validateName = (value: string) => {
   if (!value) {
@@ -237,23 +237,10 @@ export const RegisterPage = () => {
       </Formik>
 
       {errorMessage && (
-        <div
-          className={styles.error}
-        >
-          <p>{errorMessage}</p>
-          <button
-            type="button"
-            aria-label="hide error"
-            className={styles.cartItemButtonClose}
-            onClick={() => setErrorMessage('')}
-          >
-            <img
-              className={styles.cartItemIconClose}
-              src={iconClose}
-              alt="Icon Close"
-            />
-          </button>
-        </div>
+        <Error
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
       )}
     </main>
   );

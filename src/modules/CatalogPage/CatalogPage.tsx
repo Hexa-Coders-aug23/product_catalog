@@ -13,6 +13,8 @@ import { Option } from '../../types/Option';
 import { getSearchWith } from '../../utils/searchWithParams';
 import { Loader } from '../shared/components/Loader';
 import { Breadcrumb } from '../../types/Breadcrumb';
+import { EmptyPageContent } from '../shared/components/EmptyPageContent';
+import { Error } from '../shared/components/Error';
 
 const sortOptions: Option[] = [
   { value: 'age', label: 'Newest' },
@@ -39,6 +41,7 @@ export const CatalogPage: React.FC = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isAllPhones, setIsAllPhones] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const pageQuery = +(searchParams.get('page') || 0);
   const perPage = searchParams.get('perPage') || 16;
@@ -51,15 +54,20 @@ export const CatalogPage: React.FC = () => {
     || sortOptions[0];
 
   const getPhones = useCallback(async () => {
-    const { count, rows } = await phoneService.getPhones(
-      page + 1,
-      itemsCount,
-      sortBy,
-    );
+    try {
+      const { count, rows } = await phoneService.getPhones(
+        page + 1,
+        itemsCount,
+        sortBy,
+      );
 
-    setIsLoading(false);
-    setTotalCount(count);
-    setPhones(rows);
+      setTotalCount(count);
+      setPhones(rows);
+    } catch (error) {
+      setErrorMessage('Something went wrong');
+    } finally {
+      setIsLoading(false);
+    }
   }, [itemsCount, page, sortBy]);
 
   useEffect(() => {
@@ -108,41 +116,56 @@ export const CatalogPage: React.FC = () => {
     }
   };
 
+  const fetchedContent = !errorMessage ? (
+    <ProductsList phones={phones} />
+  ) : (
+    <Error
+      errorMessage={errorMessage}
+      setErrorMessage={setErrorMessage}
+    />
+  );
+
   return (
     <main className={styles.container}>
       <Breadcrumbs items={breadcrumbs} />
       <h1 className={styles.title}>Mobile phones</h1>
       <p className={styles.amount}>{`${totalCount} models`}</p>
-      <div className={styles.selects}>
-        <CustomSelect
-          label="Sort by"
-          options={sortOptions}
-          value={currentSort.label}
-          onSelectSort={onSelectSort}
-        />
-        <CustomSelect
-          label="Items on page"
-          options={amountOptions}
-          value={itemsCount}
-          onSelectAmount={onSelectAmount}
-        />
-      </div>
 
-      {isLoading ? (
-        <Loader times={4} className={styles.loader} />
-      ) : (
-        <ProductsList phones={phones} />
-      )}
+      {!phones.length && !isLoading
+        ? (
+          <EmptyPageContent gadgets="Phones" />
+        ) : (
+          <>
+            <div className={styles.selects}>
+              <CustomSelect
+                label="Sort by"
+                options={sortOptions}
+                value={currentSort.label}
+                onSelectSort={onSelectSort}
+              />
+              <CustomSelect
+                label="Items on page"
+                options={amountOptions}
+                value={itemsCount}
+                onSelectAmount={onSelectAmount}
+              />
+            </div>
 
-      {phones?.length !== totalCount && (
-        <Pagination
-          activePage={page}
-          offset={offset}
-          rows={itemsCount}
-          totalCount={totalCount}
-          onPageChange={onPageChange}
-        />
-      )}
+            {isLoading ? (
+              <Loader times={4} className={styles.loader} />
+            ) : fetchedContent}
+
+            {phones?.length !== totalCount && (
+              <Pagination
+                activePage={page}
+                offset={offset}
+                rows={itemsCount}
+                totalCount={totalCount}
+                onPageChange={onPageChange}
+              />
+            )}
+          </>
+        )}
     </main>
   );
 };

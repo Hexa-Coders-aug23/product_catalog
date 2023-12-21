@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import styles from './LoginPage.module.scss';
 import { AuthContext } from '../../context/AuthProvider';
 import iconBack from '../../static/icons/Chevron_Arrow_Left.svg';
-import iconClose from '../../static/icons/Close.svg';
+import { Error } from '../shared/components/Error/Error';
 import { Login } from '../../types/Login';
 
 const validateEmail = (value: string) => {
@@ -175,23 +175,10 @@ export const LoginPage = () => {
       </Formik>
 
       {errorMessage && (
-        <div
-          className={styles.error}
-        >
-          <p>{errorMessage}</p>
-          <button
-            type="button"
-            aria-label="hide error"
-            className={styles.cartItemButtonClose}
-            onClick={() => setErrorMessage('')}
-          >
-            <img
-              className={styles.cartItemIconClose}
-              src={iconClose}
-              alt="Icon Close"
-            />
-          </button>
-        </div>
+        <Error
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
       )}
     </main>
   );
