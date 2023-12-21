@@ -8,10 +8,6 @@ type Props = {
 };
 
 export const HeaderComponent: React.FC<Props> = ({ name }) => {
-  const handleGoBack = () => {
-    window.history.back();
-  };
-
   return (
     <>
       <div className={styles.breadcrumbs}>
@@ -29,7 +25,7 @@ export const HeaderComponent: React.FC<Props> = ({ name }) => {
         <div className={styles.iconBack} />
         <button
           type="button"
-          onClick={handleGoBack}
+          onClick={() => window.history.back()}
           className={styles.backButton}
         >
           Back

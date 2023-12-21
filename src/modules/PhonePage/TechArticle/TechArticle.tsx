@@ -1,5 +1,3 @@
-// TechSpecsArticle.tsx
-
 import React from 'react';
 import styles from '../PhonePage.module.scss';
 
