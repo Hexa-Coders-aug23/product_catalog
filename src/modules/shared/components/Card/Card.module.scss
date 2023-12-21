@@ -126,6 +126,10 @@
   color: white;
   width: 100%;
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 3px 13px 0px $color__secondary;
+  }
 }
 
 .alreadyAddedToCartButton {
@@ -146,6 +150,10 @@
   border-radius: 48px;
   background-color: white;
   cursor: pointer;
+
+  &:hover {
+    border-color: $color__primary;
+  }
 }
 
 .addToCompareIcon {
