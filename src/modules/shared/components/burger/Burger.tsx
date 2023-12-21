@@ -18,7 +18,11 @@ export const BurgerMenu: React.FC<Tabs> = ({ tabs }) => {
       {isOpen ? (
         <aside className={styles.menu}>
           <div className={styles.header}>
-            <NavLink to="/" className={styles.logo}>
+            <NavLink
+              to="/"
+              className={styles.logo}
+              onClick={() => setIsOpen(false)}
+            >
               <img src={logo} alt="nice_gadgets_logo" />
             </NavLink>
 
